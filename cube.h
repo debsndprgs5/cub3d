@@ -38,6 +38,7 @@ typedef struct s_frames
 
 char	**readmap(char *pathtofile);
 void	freetab(char **str);
+void	split_map(char** map, char*** part1, char*** part2);
 
 // RENDERING FUNCTIONS //
 
