@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cube.h"
+
 int	linecount(char *pathtofile)
 {
 	int		linecount;

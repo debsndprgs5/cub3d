@@ -1,5 +1,4 @@
-#include ¨Cube.h¨
-
+#include "cube.h"
 
 int main(int ac, char** av){
 
@@ -49,7 +48,7 @@ char *trim_fisrt_spaces(char *line){
 	int 	i;
 	int		y;
 
-	while(line [i] == ¨ ¨ ){
+	while(line [i] == " " ){
 		
 		i++;
 	}
