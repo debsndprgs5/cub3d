@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ysebban <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 15:39:24 by zfavere           #+#    #+#             */
-/*   Updated: 2022/11/16 15:39:26 by zfavere          ###   ########.fr       */
+/*   Created: 2022/11/15 15:03:06 by ysebban           #+#    #+#             */
+/*   Updated: 2022/11/19 17:49:12 by ysebban          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,29 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*subs;
+	char	*dest;
 	size_t	i;
+	size_t	j;
 
-	if (ft_strlen((char *) s) < (int) start)
-	{
-		subs = malloc(sizeof(*s));
-		if (!subs)
-			return (0);
-		subs[0] = 0;
-		return (subs);
-	}
-	if ((start + len) > (unsigned long)ft_strlen((char *) s))
-		len = ft_strlen((char *) s) - start;
-	subs = malloc(sizeof(*s) * (len + 1));
 	i = 0;
-	if (!subs)
+	j = 0;
+	if (!s)
+		return (0);
+	if ((int)start > ft_strlen(s))
+		dest = malloc(sizeof(char));
+	else if ((int)len > ft_strlen(s))
+		dest = malloc((ft_strlen(s) - start) * sizeof(char));
+	else
+		dest = malloc(sizeof(char) * (len + 1));
+	if (!dest)
 		return (NULL);
-	while (i < len)
+	while ((int)i <= ft_strlen(s))
 	{
-		subs[i] = s[start + i];
-		i++;
+		if (i >= (size_t)start && j < len)
+			dest[j++] = s[i++];
+		else
+			i++;
 	}
-	subs[i] = 0;
-	return (subs);
-}
-
-/*if len < start return \0*/
+	dest[j] = '\0';
+	return (dest);
+}		

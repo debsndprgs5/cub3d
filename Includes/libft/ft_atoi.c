@@ -3,62 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ysebban <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 16:01:07 by zfavere           #+#    #+#             */
-/*   Updated: 2022/11/15 16:01:09 by zfavere          ###   ########.fr       */
+/*   Created: 2022/11/14 16:10:03 by ysebban           #+#    #+#             */
+/*   Updated: 2023/02/02 05:19:56 by ysebban          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static int	ft_is_space(char c)
+{
+	if ((c == '\t' )
+		|| (c == '\n' )
+		|| (c == '\r' )
+		|| (c == ' ' )
+		|| (c == '\v' )
+		|| (c == '\f' ))
+		return (1);
+	else
+		return (0);
+}
+
 int	ft_atoi(const char *str)
 {
 	int	i;
-	int	j;
-	int	n;
+	int	nb;
+	int	sign;
 
-	n = 1;
 	i = 0;
-	j = 0;
-	while (str[i] == '\t' || str[i] == '\r' || str[i] == '\n'
-		|| str[i] == ' ' || str[i] == '\v' || str[i] == '\f')
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	nb = 0;
+	sign = 1;
+	while (ft_is_space(str[i]) == 1)
+		i ++;
+	if ((str[i] == '+') || (str[i] == '-'))
 	{
 		if (str[i] == '-')
-			n = -n;
-		i++;
+			sign = -1;
+		i ++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		j = 10 * j + (str[i] - '0');
-		i++;
+		nb = (nb * 10) + (str[i] - 48);
+		i ++;
 	}
-	return (j * n);
-}
-
-long long	ps_atoll(char *s)
-{
-	int			i;
-	int			neg;
-	long long	ret;
-
-	i = 0;
-	ret = 0;
-	neg = 1;
-	while (s[i] == '\t' || s[i] == '\n' || s[i] == '\r' || s[i] == '\v'
-		|| s[i] == '\f' || s[i] == ' ')
-		i++;
-	if (s[i] == '-')
-		neg = -1;
-	if (s[i] == '-' || s[i] == '+')
-		i++;
-	while (s[i] >= '0' && s[i] <= '9')
-	{
-		ret = 10 * ret + s[i] - '0';
-		i++;
-	}
-	ret = ret * neg;
-	return (ret);
+	if (sign == -1)
+		return (-nb);
+	return (nb);
 }

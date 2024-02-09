@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ysebban <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 15:34:57 by zfavere           #+#    #+#             */
-/*   Updated: 2022/11/22 15:34:58 by zfavere          ###   ########.fr       */
+/*   Created: 2022/12/19 14:15:08 by ysebban           #+#    #+#             */
+/*   Updated: 2022/12/21 18:16:23 by ysebban          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(int))
+void	red(void)
 {
-	if (!lst || !f)
-		return ;
-	while (lst)
-	{
-		(*f)(lst->value);
-		lst = lst->next;
-	}
+	ft_printf("\033[0;31m");
+}
+
+void	green(void)
+{
+	ft_printf("\033[0;32m");
+}
+
+void	yellow(void)
+{
+	ft_printf("\033[0;33m");
+}
+
+void	blue(void)
+{
+	ft_printf("\033[0;34m");
+}
+
+void	reset_col(void)
+{
+	ft_printf("\033[0m");
 }

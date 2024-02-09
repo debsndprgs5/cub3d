@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ysebban <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 12:18:32 by zfavere           #+#    #+#             */
-/*   Updated: 2022/11/15 12:18:35 by zfavere          ###   ########.fr       */
+/*   Created: 2022/11/14 13:10:40 by ysebban           #+#    #+#             */
+/*   Updated: 2022/11/14 13:18:40 by ysebban          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
+	int		n;
+	char	tofind;
 
-	i = ft_strlen((char *) s);
-	while (i >= 0)
+	n = ft_strlen((char *)s);
+	tofind = (char)c;
+	while (n > 0)
 	{
-		if (s[i] == (char) c)
-		{
-			return ((char *)s + i);
-		}
-		i--;
+		if (tofind == s[n])
+			return (((char *)s + n));
+		n --;
 	}
+	if (tofind == s[n])
+		return (((char *)s + n));
 	return (NULL);
 }

@@ -3,101 +3,80 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ysebban <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 14:38:01 by zfavere           #+#    #+#             */
-/*   Updated: 2022/11/18 14:38:03 by zfavere          ###   ########.fr       */
+/*   Created: 2022/11/15 20:11:36 by ysebban           #+#    #+#             */
+/*   Updated: 2023/02/19 21:10:43 by ysebban          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	wordlen(const char *s, char charset)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] && s[i] != charset)
-		i++;
-	return (i);
-}
-
-static int	wordcount(const char *s, char charset)
+static int	count_word(const char *s, char c)
 {
 	int	i;
 	int	count;
+	int	clue;
 
+	i = 0;
 	count = 0;
-	while (*s)
+	clue = 0;
+	while (s[i])
 	{
-		while (*s && *s == charset)
-			s++;
-		i = wordlen(s, charset);
-		s += i;
-		if (i != 0)
-			count++;
+		if (s[i] != c && clue == 0)
+		{
+			count ++;
+			clue = 1;
+		}
+		else if (s[i] == c)
+			clue = 0;
+		i++;
 	}
 	return (count);
 }
 
-static char	*wordcpy(const char *src, int n)
+static char	*get_word(const char *src, int start, int end)
 {
+	int		i;
 	char	*dest;
 
-	dest = malloc((n + 1) * sizeof(char));
-	if (!dest)
+	i = 0;
+	dest = ft_calloc((end - start + 1), sizeof(char));
+	if (!dest || !src)
 		return (NULL);
-	dest[n] = '\0';
-	while (n--)
-		dest[n] = src[n];
+	while (start < end)
+	{
+		dest[i++] = src[start++];
+	}
+	dest[i] = '\0';
 	return (dest);
 }
 
-char	**ft_split(const char *s, char charset)
+char	**ft_split(char const *s, char c)
 {
-	char	**result;
-	int		size;
+	char	**dest;
 	int		i;
-	int		n;
+	int		j;
+	int		clue;
 
-	size = wordcount(s, charset);
-	result = malloc((size + 1) * sizeof(char *));
-	if (!result)
+	i = 0;
+	j = 0;
+	clue = -1;
+	dest = ft_calloc((count_word(s, c) + 1), sizeof (char *));
+	if (!dest || !s)
 		return (NULL);
-	i = 0;
-	while (i < size)
+	while (i <= ft_strlen(s))
 	{
-		while (*s && *s == charset)
-			s++;
-		n = wordlen(s, charset);
-		result[i] = wordcpy(s, n);
-		if (!(result[i]))
-			return (NULL);
-		s += n;
+		if (s[i] != c && clue < 0)
+			clue = i;
+		else if ((s[i] == c || i == ft_strlen(s)) && clue >= 0)
+		{
+			dest[j] = get_word(s, clue, i);
+			clue = -1;
+			j ++;
+		}
 		i++;
 	}
-	result[size] = 0;
-	return (result);
+	dest[j++] = NULL;
+	return (dest);
 }
-
-/*#include <stdio.h>
-
-int main()
-{
-	int i;
-	i = 0;
-	char 	*s = "Hello your computer has a virus";
-	char 	c = 32;
-	char	**result;
-
-	printf("Before : %s\n", s);
-	result = ft_split(s, c);
-	printf("After : ");
-	i = 0;
-	while (result[i])
-	{
-		printf(" %d = %s |", i, result[i]);
-		i++;
-	}
-	return(0);
-}*/

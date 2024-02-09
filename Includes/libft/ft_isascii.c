@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ysebban <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 15:30:24 by zfavere           #+#    #+#             */
-/*   Updated: 2022/11/07 15:30:28 by zfavere          ###   ########.fr       */
+/*   Created: 2022/11/07 14:57:49 by ysebban           #+#    #+#             */
+/*   Updated: 2022/11/09 11:05:13 by ysebban          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@ int	ft_isascii(int c)
 {
 	if (c >= 0 && c <= 127)
 		return (1);
-	return (0);
+	else
+		return (0);
 }
-
-/*int	main(void)
-{
-	int	c = 'q';
-	printf("%d", ft_isascii(c));
-}
-*/

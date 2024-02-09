@@ -3,32 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ysebban <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/21 15:54:35 by zfavere           #+#    #+#             */
-/*   Updated: 2022/09/21 15:54:36 by zfavere          ###   ########.fr       */
+/*   Created: 2022/11/11 11:05:17 by ysebban           #+#    #+#             */
+/*   Updated: 2022/11/11 16:37:39 by ysebban          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst,
-				const char *src,
-				size_t size)
+/*
+size_t	ft_strlcpy(char *dest, const char *src, size_t n)
 {
+	char	*s;
 	size_t	i;
 
+	s = (char*)src;
+	i = ft_strlen(s);
+	if (n == 0)
+		return (i);
+	if (!dest && !src)
+		return (0);
+	if (n < i)
+		return (n);
+	return (ft_strlen(ft_memmove(dest, src, n)));
+}
+*/
+size_t	ft_strlcpy(char *dest, const char *src, size_t n)
+{
+	size_t	i;
+	size_t	slen;
+
 	i = 0;
-	if (size > 0)
+	slen = ft_strlen((char *)src);
+	if (slen + 1 < n)
 	{
-		while (src[i] && i < (size - 1))
+		while (i < slen +1)
 		{
-			dst[i] = src[i];
+			dest[i] = src[i];
+			i ++;
+		}
+	}
+	else if (n > 0)
+	{
+		while (i < n -1)
+		{
+			dest [i] = src[i];
 			i++;
 		}
-		dst[i] = 0;
+	dest [i] = 0;
 	}
-	while (src[i])
-		i++;
-	return (i);
+	return (slen);
 }

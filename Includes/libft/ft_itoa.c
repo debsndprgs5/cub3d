@@ -3,92 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ysebban <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 17:54:05 by zfavere           #+#    #+#             */
-/*   Updated: 2022/11/18 17:54:06 by zfavere          ###   ########.fr       */
+/*   Created: 2022/11/18 12:00:20 by ysebban           #+#    #+#             */
+/*   Updated: 2022/11/19 14:55:13 by ysebban          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	nbchiff(int nb)
-{
-	int		len;
+static int	get_len(long long n);
 
-	len = 1;
-	while (nb != 0)
+static char	*get_num(long long n, int len)
+{
+	char	*dest;
+	int		fed_up;
+
+	dest = ft_calloc(get_len(n) + 2, sizeof(*dest));
+	if (!dest)
+		return (NULL);
+	fed_up = -1;
+	if (n < 0)
 	{
-		nb = nb / 10;
-		len++;
+		n *= -1;
+		dest[0] = '-';
+		fed_up = 0;
+	}
+	while (len > fed_up)
+	{
+		dest[len] = '0' + (n % 10);
+		n /= 10;
+		len --;
+	}
+	return (dest);
+}
+
+static int	get_len(long long n)
+{
+	int	len;
+
+	len = 0;
+	if (n == 0)
+		return (len);
+	if (n < 0)
+	{
+		n *= -1;
+		len ++;
+	}
+	while (n > 9)
+	{
+		n /= 10;
+		len ++;
 	}
 	return (len);
 }
 
-static int	ft_revnb(int nb)
-{
-	if (nb < 0)
-		return (-nb);
-	return (nb);
-}
-
-static void	ft_strrev(char *s)
-{
-	size_t	length;
-	size_t	i;
-	char	tmp;
-
-	length = ft_strlen(s);
-	i = 0;
-	while (i < length / 2)
-	{
-		tmp = s[i];
-		s[i] = s[length - i - 1];
-		s[length - i - 1] = tmp;
-		i++;
-	}
-}
-
 char	*ft_itoa(int n)
 {
-	char	*res;
-	int		i;
-	int		neg;
+	int			len;
+	char		*dest;
+	long long	nbr;
 
-	i = 0;
-	neg = 0;
-	if (n < 0)
-		neg = 1;
-	res = ft_calloc(nbchiff(n) + 1, sizeof(*res));
-	if (!res)
-		return (NULL);
-	if (n == 0)
-	{
-		res[0] = '0';
-	}
-	while (n != 0)
-	{
-		res[i++] = ft_revnb(n % 10) + '0';
-		n = (n / 10);
-	}
-	if (neg == 1)
-		res[i] = '-';
-	ft_strrev (res);
-	return (res);
+	nbr = (long long )n;
+	len = get_len(nbr);
+	dest = get_num(nbr, len);
+	return (dest);
 }
-
-/*int main()
-{
-	int n = -13345;
-	int i;
-	char *result;
-
-	result = ft_itoa(n);
-	i = 0;
-	while (result[i])
-	{
-		printf("%d = %c\n", i, result[i]);
-		i++;
-	}
-	return(0);
-}*/

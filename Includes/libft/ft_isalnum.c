@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ysebban <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 15:20:46 by zfavere           #+#    #+#             */
-/*   Updated: 2022/11/07 15:20:49 by zfavere          ###   ########.fr       */
+/*   Created: 2022/11/07 14:12:28 by ysebban           #+#    #+#             */
+/*   Updated: 2022/11/09 14:15:40 by ysebban          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,8 @@
 
 int	ft_isalnum(int c)
 {
-	if ((c >= '0' && c <= '9')
-		|| (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+	if ((ft_isalpha(c) == 1) || (ft_isdigit(c) == 1))
 		return (1);
-	return (0);
+	else
+		return (0);
 }
-
-/*int	main(void)
-{
-	int	c = 'q';
-	printf("%d", ft_isalpha(c));
-}
-*/

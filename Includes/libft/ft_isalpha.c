@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                  :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ysebban <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/20 16:38:45 by zfavere           #+#    #+#             */
-/*   Updated: 2022/09/20 16:38:53 by zfavere          ###   ########.fr       */
+/*   Created: 2022/11/07 14:07:30 by ysebban           #+#    #+#             */
+/*   Updated: 2022/11/09 11:03:56 by ysebban          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,22 @@
 
 int	ft_isalpha(int c)
 {
-	if (c < 'A' || c > 'z' || (c > 'Z' && c < 'a'))
+	if ((c >= 65 && c <= 90)
+		|| (c >= 97 && c <= 122))
+		return (1);
+	else
 		return (0);
-	return (1);
 }
 
-/*int	main(void)
+/*
+#include <stdio.h>
+#include <ctype.h>
+int	main(void)
 {
-	int	c = 'q';
-	printf("%d", ft_isalpha(c));
+	printf("%d\n", ft_isalpha('z'));
+	printf("%d\n", isalpha('z'));
+	printf("%d\n", ft_isalpha(' '));
+	printf("%d\n", isalpha(' '));
+	return(0);
 }
 */

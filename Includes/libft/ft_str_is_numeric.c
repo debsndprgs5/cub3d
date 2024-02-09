@@ -1,21 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_str_is_numeric.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysebban <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 15:02:44 by ysebban           #+#    #+#             */
-/*   Updated: 2022/11/14 16:50:26 by ysebban          ###   ########.fr       */
+/*   Created: 2022/09/20 18:48:06 by ysebban           #+#    #+#             */
+/*   Updated: 2022/09/22 15:35:06 by ysebban          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_isprint(int c)
+int	ft_str_is_numeric(char *str)
 {
-	if (c > 31 && c < 127)
-		return (1);
-	else
-		return (0);
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] >= 48 && str[i] <= 57)
+		{
+			i ++;
+		}
+		else
+		{
+			return (0);
+		}
+	}	
+	return (1);
 }
+
+/*
+#include <stdio.h>
+
+int main(void)
+{
+	printf("%d", ft_str_is_numeric("/:"));
+	return (0);
+}
+*/

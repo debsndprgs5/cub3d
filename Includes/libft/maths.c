@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   maths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ysebban <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 15:22:03 by zfavere           #+#    #+#             */
-/*   Updated: 2022/11/22 15:22:04 by zfavere          ###   ########.fr       */
+/*   Created: 2023/02/13 10:36:10 by ysebban           #+#    #+#             */
+/*   Updated: 2023/02/19 22:37:05 by ysebban          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(int))
+int	ft_abs(int val)
 {
-	t_list	*tmp;
+	if (val < 0)
+		val = -val;
+	return (val);
+}
 
-	if (!lst || !*lst || !del)
-		return ;
-	while (lst && *lst)
-	{
-		tmp = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		*lst = tmp;
-	}
+int	ft_val_abs(int ref, int val)
+{
+	int	abs_val;
+	int	abs_ref;
+
+	abs_ref = ref;
+	abs_val = val;
+	return (abs_ref - abs_val);
 }
