@@ -13,15 +13,15 @@
 #ifndef CUBE_H
 #define CUBE_H
 
-// Main struct
-
-typedef struct s_game
-{
-	t_frames *frames;
-	int groundcol[4];
-	int skycol[4];
-	double float ppos;
-}	t_game;
+# include "./Includes/libft/libft.h"
+# include <mlx.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+# include <unistd.h>
+# include <stdbool.h>
+# include <fcntl.h>
 
 // Walls/Ground raw images
 
@@ -33,13 +33,23 @@ typedef struct s_frames
 	void **w_we_img;
 }	t_frames;
 
+// Main struct
+
+typedef struct s_game
+{
+	t_frames *frames;
+	int groundcol[4];
+	int skycol[4];
+	double ppos;
+}	t_game;
+
 
 // PARSING FUNCTIONS //
 
 char	**readmap(char *pathtofile);
 void	freetab(char **str);
 int		get_param(char **config_file, t_game game);
-
+void	split_map(char** map, char*** part1, char*** part2);
 
 // RENDERING FUNCTIONS //
 
