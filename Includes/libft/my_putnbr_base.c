@@ -14,8 +14,13 @@
 
 int	my_putnbr_base(int nbr, char *base)
 {
+<<<<<<< HEAD
 	int	i;
 	int	len;
+=======
+	int				i;
+	int				len;
+>>>>>>> f1c38accf7d31b41c3094064fb8d2e99ed3ac1ed
 
 	i = ft_strlen(base);
 	len = 0;
