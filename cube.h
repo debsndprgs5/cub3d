@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#define CUBE_H
 #ifndef CUBE_H
+#define CUBE_H
 
 // Main struct
 
@@ -38,11 +38,14 @@ typedef struct s_frames
 
 char	**readmap(char *pathtofile);
 void	freetab(char **str);
+int		get_param(char **config_file, t_game game);
+
 
 // RENDERING FUNCTIONS //
 
 // ERROR CHECKING //
-
+void	error_color_parsing(int ref);
+void	error_parse_line(int ref);
 // METH //
 
 #endif
