@@ -12,10 +12,10 @@
 
 #include "libft.h"
 
-int	my_putnbr_base(unsigned int nbr, char *base)
+int	my_putnbr_base(int nbr, char *base)
 {
-	unsigned int	i;
-	int				len;
+	int	i;
+	int	len;
 
 	i = ft_strlen(base);
 	len = 0;

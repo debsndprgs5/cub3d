@@ -14,7 +14,7 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -g
 
-SRC =	check_map.c \
+SRC =	get_param.c \
 		cube.c \
 		main.c \
 		map_reader.c \

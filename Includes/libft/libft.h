@@ -72,7 +72,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 int		ft_printf(const char *str, ...);
 int		sort_type(va_list a_voir, char c);
-int		my_putnbr_base(unsigned int nbr, char *base);
+int		my_putnbr_base(int nbr, char *base);
 int		my_unsigned_putnbr(unsigned int nb);
 int		my_putchar(char c);
 int		my_putstr(char *str);

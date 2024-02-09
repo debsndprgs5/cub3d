@@ -75,7 +75,7 @@ int	my_putstr(char *str)
 	int	i;
 
 	i = 0;
-	if (str == '\0' || str == NULL)
+	if (str[0] == '\0' || str == NULL)
 	{
 		write(1, "(null)", 6);
 		return (6);
