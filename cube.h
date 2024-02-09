@@ -10,18 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#define CUBE_H
 #ifndef CUBE_H
-
-// Main struct
-
-typedef struct s_game
-{
-	t_frames *frames;
-	int groundcol[4];
-	int skycol[4];
-	double float ppos;
-}	t_game;
+#define CUBE_H
+# include "./Includes/libft/libft.h"
+# include <mlx.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+# include <unistd.h>
+# include <stdbool.h>
+# include <fcntl.h>
 
 // Walls/Ground raw images
 
@@ -32,6 +31,16 @@ typedef struct s_frames
 	void **w_ea_img;
 	void **w_we_img;
 }	t_frames;
+
+// Main struct
+
+typedef struct s_game
+{
+	t_frames *frames;
+	int groundcol[4];
+	int skycol[4];
+	double ppos;
+}	t_game;
 
 
 // PARSING FUNCTIONS //
