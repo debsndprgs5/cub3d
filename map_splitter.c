@@ -16,54 +16,89 @@
 #include <string.h>
 #include <ctype.h>
 
-// Utility function to check if a string consists only of spaces and numbers
-static int is_spaces_and_numbers_only(const char* str)
+static int notempty(char *str)
 {
-	while (*str)
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
-		if (!isspace((unsigned char)*str) && !isdigit((unsigned char)*str))
-			return (0); // Contains more than spaces and numbers
-		str++;
+		if (str[i] != '\0' && str[i] != '\n' && str[i] != ' ')
+			return (1);
+		else
+			i++;
 	}
-	return (1); // Only spaces and numbers
+	return(0);
 }
 
-void split_map(char** map, char*** part1, char*** part2)
+static int is_map(char *str)
 {
-	int totalLines = 0;
-	while (map[totalLines])
-		totalLines++; // Count total lines
+	int	i;
 
-	// Temporary solution to estimate sizes, exact allocation will vary
-	*part1 = malloc(sizeof(char*) * (totalLines + 1));
-	*part2 = malloc(sizeof(char*) * (totalLines + 1));
-
-	if (!*part1 || !*part2)
+	i = 0;
+	if (!notempty(str))
+		return(0);
+	while (str[i])
 	{
-		printf("Memory allocation failed.\n");
-		return;
+		if ((str[i] >= '0' && str[i] <= '9') || str[i] == 'W' || str[i] == 'N' || str[i] == 'E' || str[i] == 'S' || str[i] == ' ' || str[i] == '\n')
+			i++;
+		else
+			return (0);
 	}
+	return (1);
+}
 
-	int i = 0;
-	int j = 0;
-	int splittingPointFound = 0;
-	while (i < totalLines)
+
+static int findsplitpoint(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
 	{
-		if (!splittingPointFound && is_spaces_and_numbers_only(map[i]))
-		{
-			splittingPointFound = 1; // Found the split point
-		}
-
-		if (!splittingPointFound) 
-		{
-			(*part1)[i] = strdup(map[i]);
-		}
-		else 
-		{
-			(*part2)[j++] = strdup(map[i]);
-		}
+		if (is_map(map[i]))
+			return (i);
 		i++;
 	}
-	(*part1)[i] = NULL; // Null-terminate part1 array
-	(*part2)[j] = NULL; // Null-terminate part2 array
+	return (0);
 }
+
+
+void split_map(char **map, char ***part1, char ***part2)
+{
+	int lines_tot;
+	int	splitline;
+	int	i;
+	int	j;
+
+	lines_tot = 0;
+	while (map[lines_tot])
+		lines_tot++;
+	printf("lines = %d\n", lines_tot);
+	splitline = findsplitpoint(map);
+	if (!splitline)
+	{
+		printf("ERROR - Invalid Map\n");
+		return;
+	}
+	*part1 = malloc(sizeof(char *) * splitline + 1);
+	*part2 = malloc(sizeof(char *) * lines_tot - splitline + 1);
+	if (!*part1 || !*part2)
+	{
+		printf("ERROR - Memory allocation error\n");
+		return;
+	}
+	i = -1;
+	while (++i < splitline)
+		(*part1)[i] = ft_strdup(map[i]);
+    (*part1)[splitline] = NULL;
+	j = 0;
+	while (i < lines_tot)
+	{
+		(*part2)[j] = ft_strdup(map[i]);
+		i++;
+		j++;
+	}
+    (*part2)[lines_tot - splitline] = NULL;
+}
+
