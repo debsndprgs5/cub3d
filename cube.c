@@ -3,28 +3,25 @@
 int main(int ac, char** path)
 {
 	char **map;
-	char **part1;
-	char **part2;
+	char **configfile;
+	char **parsedmap;
 	t_game	game;
 
 	if (ac > 1)
 	{
 		map = readmap(path[1]);
-		printf("MAP AVANT DECOUPAGE --------------------\n");
-		for (int i = 0; map[i]; i++)
-			printf("%s", map[i]);
-		printf("MAP APRES DECOUPAGE --------------------\n");
-		split_map(map, &part1, &part2);
-		printf("----- PART 1 -----\n");
-		for (int i = 0; part1[i]; i++)
-			printf("%s", part1[i]);
-		printf("----- PART 2 -----\n");
-		for (int i = 0; part2[i]; i++)
-			printf("%s", part2[i]);
-		init_struct(&game);
-		return (0);
+		split_map(map, &configfile, &parsedmap);
+		if (!init_struct(&game, configfile))
+		{
+			ft_printf("- ERROR -\nInvalid Map\n");
+			return (1);
+		}
+		//renderft();
+		freetab(map);
+		freetab(configfile);
+		freetab(parsedmap);
 	}
-	return(1);
+	return(0);
 }
 
 

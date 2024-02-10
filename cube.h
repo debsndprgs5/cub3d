@@ -51,11 +51,11 @@ typedef struct s_game
 
 char	**readmap(char *pathtofile);
 void	freetab(char **str);
-void	get_param(char **config_file,  t_game game);
-void	split_map(char** map, char*** part1, char*** part2);
+int		get_param(char **config_file,  t_game *game);
+void	split_map(char **map, char ***part1, char ***part2);
 void 	get_color(char **line, int *res);
 int		check_split_col(char **split);
-void	init_struct(t_game *game);
+int		init_struct(t_game *game, char **config_file);
 
 // RENDERING FUNCTIONS //
 
