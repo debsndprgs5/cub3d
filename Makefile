@@ -18,6 +18,7 @@ SRC = cube.c \
 	  map_splitter.c \
 	  parsing.c
 
+
 OBJ = $(SRC:.c=.o)
 NAME = cub3d
 
