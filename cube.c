@@ -5,6 +5,7 @@ int main(int ac, char** path)
 	char **map;
 	char **part1;
 	char **part2;
+	t_game	game;
 
 	if (ac > 1)
 	{
@@ -20,6 +21,7 @@ int main(int ac, char** path)
 		printf("----- PART 2 -----\n");
 		for (int i = 0; part2[i]; i++)
 			printf("%s", part2[i]);
+		init_struct(&game);
 		return (0);
 	}
 	return(1);
