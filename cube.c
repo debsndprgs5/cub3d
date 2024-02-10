@@ -14,6 +14,7 @@ int main(int ac, char** path)
 		if (!init_struct(&game, configfile))
 		{
 			ft_printf("- ERROR -\nInvalid Map\n");
+			//free game
 			return (1);
 		}
 		//renderft();
