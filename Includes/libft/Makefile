@@ -22,7 +22,7 @@ SRC = ft_isdigit.c ft_itoa.c       ft_putnbr_fd.c  ft_strlcpy.c    ft_tolower.c 
 	ft_isprint.c    ft_putendl_fd.c ft_strlcat.c    ft_substr.c \
 	ft_printf.c 	my_putnbr_base.c get_next_line.c colors.c \
 	ft_lstnew.c		ft_lstadd_front.c	ft_lstsize.c	ft_lstlast.c \
-	ft_lstadd_back.c ft_str_is_numeric.c  maths.c 
+	ft_lstadd_back.c ft_str_is_numeric.c  maths.c		ft_double_split.c 
 
 SRC_bonus = ft_lstnew.c		ft_lstadd_front.c	ft_lstsize.c	ft_lstlast.	ft_lstadd_back.c 
 

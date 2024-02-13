@@ -13,96 +13,191 @@
 #include "cube.h"
 
 
-int is_good_num(char *str)
+void free_split(char **split)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(str[i])
+	while(split[i])
+		free(split[i++]);
+}
+
+
+char *removes_spaces(char *spc_line)
+{
+	char	*new_line;
+	int		spc_count;
+	int		i;
+	int		j;
+
+	i = 0;
+	spc_count = 0;
+	while(spc_line[i])
 	{
-		if(str[i] == ',' && (ft_strlen(str) == 1))
-			return (1);
-		if(str[i] >= '0' && str[i] <= '9')
-			i ++;
-		else
-			return(2);
+		if(spc_line[i] == ' ' || '	')
+			spc_count ++;
+		i ++;
 	}
-	if (i > 4)
-		return (2);
+	new_line = malloc(sizeof(char)* (i - spc_count) +1);
+	i = 0;
+	j = 0;
+	while(spc_line[i])
+	{
+		if (spc_line[i] != ' ' && spc_line[i] != '	')
+			new_line[j++] = spc_line[i++];
+		else
+			i++;
+	}
+	return(new_line);
+}
+
+int get_til_next_coma(char *parse_line, int start)
+{
+	int	res;
+
+	res = start;
+	while (parse_line[res])
+	{
+		if (parse_line[res] == ',')
+			return (res+1);
+		res ++;
+	}
+	return (ft_strlen(parse_line));
+
+}
+
+char	*cut_till_next_coma(char *parse_line, int start)
+{
+	char	*new_str;
+	int		next_stop;
+	int		i;
+
+	i = 0;
+	next_stop = get_til_next_coma(parse_line, start);
+	if (next_stop == 0 || next_stop == 1)
+		return (NULL);
+	new_str = malloc(sizeof(char)* (next_stop - start)+1);
+	while(start <= next_stop)
+	{
+		new_str[i]= parse_line[start];
+		i++;
+		start ++;
+	}
+	return (new_str);
+}
+
+int	check_color_line(char *parse_line)
+{
+	int	i;
+	int	check;
+
+	i = 1;
+	check = 0;
+	while(parse_line[i])
+	{
+		if((parse_line[i] < '0' || parse_line[i] > '9') 
+			&& parse_line[i] != ',' && parse_line[i] != '\n')
+					return (1);
+		if(parse_line[i] == ',')
+			check ++;
+		i ++;
+	}
+	if (check > 2)
+		return(1);
 	return (0);
 }
 
-
-
-void get_color(char **line, int *res)
+int	get_color(char *parse_line, int *stack)
 {
 	int i;
-	int number;
-
+	int	j;
+	char	*str_to_int;
+	int		temp;
+	
 	i = 1;
-	if (check_split_col(line) != 0)
-		error_color_parsing(check_split_col(line));
-	res = (int *)malloc(sizeof(int*)*3 + 1);
-	while(line[i])
+	j = 0;
+	if(check_color_line(parse_line))
 	{
-		number = ft_atoi(line[i]);
-		if (line[i][0] == ',' && (ft_strlen(line[i]) == 1))
-			i ++;
-		if (number >= 0 && number <= 255)
-		{	
-			res[i] = number;
-			i++;
-		}
-		else
-			error_color_parsing(1);
+			error_color_parsing(2);
+			return(0) ;
 	}
-	free (line);
+	while(parse_line[i])
+	{
+		str_to_int = cut_till_next_coma(parse_line, i);
+		i = get_til_next_coma(parse_line, i);
+		if (str_to_int == NULL)
+		{
+			free(str_to_int);
+			error_color_parsing(2);
+			return(0);
+		}
+		temp = ft_atoi(str_to_int);
+		if(temp < 0 || temp > 255)
+		{
+			free(str_to_int);
+			error_color_parsing(1);
+			return(0);
+		}
+		stack[j] = temp;
+		free(str_to_int);
+		j++;
+	}
+	return (1);
 }
 
 
-void get_param(char **config_file, t_game game)
+int get_param(char **config_file, t_game *game)
 {
 	int	i;
-	char **parse_line;
+	char *parse_line;
 
 	i = 0;
 	while(config_file[i])
 	{
-		parse_line =  ft_split(config_file[i], ' ');
-		//if (ft_strncmp(parse_line[0]), "NO", 3)
-		//if (ft_strncmp(parse_line[0]), "SO", 3)
-		//if (ft_strncmp(parse_line[0]), "EA", 3)
-	//	if (ft_strncmp(parse_line[0]), "WE", 3)
-		if (!ft_strncmp(parse_line[0], "F", 2))
-			get_color(parse_line, game.groundcol);
-		if (ft_strncmp(parse_line[0], "C", 2))
-			get_color(parse_line, game.skycol);
-		else 
-			error_parse_line(1);
+		parse_line = removes_spaces(config_file[i]);
+		//if (ft_strncmp(parse_line), "NO", 3)
+		// (ft_strncmp(parse_line[0]), "SO", 3)
+		// (ft_strncmp(parse_line[0]), "EA", 3)
+	//	(ft_strncmp(parse_line[0]), "WE", 3)
+
+		if (parse_line[0] == 'F')
+		{
+			if(!get_color(parse_line, game->groundcol))
+			{
+				free(parse_line);
+				return(1);
+			}
+		}
+		if (parse_line [0] == 'C')
+		{
+			if (!get_color(parse_line, game->skycol))
+			{
+				free(parse_line);
+				return(1);
+			}
+		}
+		//else 
+		//	error_parse_line(1);
 		free(parse_line);
 		i++;
 	}
+	return (0);
 }
 
-
-
-
-int	check_split_col(char **split)
+void	print_param(t_game *game)
 {
 	int i;
-	int check;
 
-	i = 1;
-	check = 0;
-	while (split[i])
+	i = 0;
+	while(game->groundcol[i])
 	{
-		if (is_good_num(split[i]) == 0)
-			check ++;
-		else if(is_good_num(split[i]) == 2)
-			return (1);
+		printf("GAmE COL : %d\n", game->groundcol[i]);
 		i ++;
 	}
-	if (check > 2)
-		return (2);
-	return (0);
+	i = 0;
+	while(game->skycol[i])
+	{
+		printf("GAME COL : %d\n", game->skycol[i]);
+		i ++;
+	}
 }

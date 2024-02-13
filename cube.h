@@ -47,9 +47,9 @@ typedef struct s_game
 
 char	**readmap(char *pathtofile);
 void	freetab(char **str);
-void	get_param(char **config_file,  t_game game);
+int		get_param(char **config_file,  t_game *game);
 void	split_map(char** map, char*** part1, char*** part2);
-void 	get_color(char **line, int *res);
+int 	get_color(char *parse_line, int *stack);
 int		check_split_col(char **split);
 
 // RENDERING FUNCTIONS //
@@ -57,6 +57,7 @@ int		check_split_col(char **split);
 // ERROR CHECKING //
 void	error_color_parsing(int ref);
 void	error_parse_line(int ref);
+void	print_param(t_game *game);
 // METH //
 
 #endif

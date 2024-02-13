@@ -97,4 +97,6 @@ int		ft_str_is_numeric(char *str);
 int		ft_abs(int val);
 int		ft_val_abs(int ref, int val);
 char	*my_strjoin(char *all, char *line_read);
+int     ft_strcmp(char *s1, char *s2);
+char	**ft_double_split(char const *s, char c, char d);
 #endif  

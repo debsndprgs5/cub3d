@@ -7,7 +7,7 @@ void error_color_parsing(int ref)
 		ft_printf("Error with RGB range, [0 ... 255]\n");
 
 	if (ref == 2)
-		ft_printf("Error with RGB arguments needs 3\n")
+		ft_printf("Error with RGB arguments\n");
 }
 
 void error_parse_line(int ref)
