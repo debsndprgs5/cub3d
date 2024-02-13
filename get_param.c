@@ -134,7 +134,6 @@ int	get_color(char *parse_line, int *stack)
 			return(0);
 		}
 		stack[j] = temp;
-		printf(" TEMP : %d\n", stack[j]);
 		free(str_to_int);
 		j++;
 	}
@@ -144,37 +143,92 @@ int	get_color(char *parse_line, int *stack)
 
 int get_param(char **config_file, t_game *game)
 {
-	int	i;
-	char *parse_line;
+	int		i;
+	char	*parse_line;
+	char	*unspace_line;
 
 	i = 0;
 	while(config_file[i])
 	{
-		parse_line = removes_spaces(config_file[i]);
-		//if (ft_strncmp(parse_line), "NO", 3)
-		// (ft_strncmp(parse_line[0]), "SO", 3)
-		// (ft_strncmp(parse_line[0]), "EA", 3)
-	//	(ft_strncmp(parse_line[0]), "WE", 3)
+		parse_line = removes_first_spaces(config_file[i], 0);
+		red();
+		printf("%s\n", parse_line);
+		reset_col();
+		if (!ft_strncmp(parse_line, "NO", 2))
+		{
+			unspace_line = removes_first_spaces(parse_line, 2);
+			if(!get_dir_path(unspace_line, game->paths,0))
+			{
+				free(unspace_line);
+				free(parse_line);
+				return (0);
+			}
+			free(unspace_line);
+		}
+		else if (!ft_strncmp(parse_line, "SO", 2))
+		{
+			unspace_line = removes_first_spaces(parse_line, 2);
+			if(!get_dir_path(unspace_line, game->paths,1))
+			{
+				free(unspace_line);
+				free(parse_line);
+				return (0);
+			}
+			free(unspace_line);
+		}
+		else if (!ft_strncmp(parse_line, "EA", 2))
+		{
+			unspace_line = removes_first_spaces(parse_line, 2);
+			if(!get_dir_path(unspace_line, game->paths, 2))
+			{
+				free(unspace_line);
+				free(parse_line);
+				return (0);
+			}
+			free(unspace_line);
+		}
+	    else if (!ft_strncmp(parse_line, "WE", 2))
+		{
+			unspace_line = removes_first_spaces(parse_line, 2);
+			if(!get_dir_path(unspace_line, game->paths, 3))
+			{
+				free(unspace_line);
+				free(parse_line);
+				return (0);
+			}
+			free(unspace_line);
+		}
 
-		if (parse_line[0] == 'F')
+		else if (parse_line[0] == 'F')
 		{
-			if(!get_color(parse_line, game->groundcol))
+			unspace_line = removes_spaces(parse_line);
+			if(!get_color(unspace_line, game->groundcol))
 			{
+				free(unspace_line);
 				free(parse_line);
 				return(0);
 			}
+			free(unspace_line);
 		}
-		if (parse_line [0] == 'C')
+		else if (parse_line [0] == 'C')
 		{
-			if (!get_color(parse_line, game->skycol))
+			unspace_line = removes_spaces(parse_line);
+			if (!get_color(unspace_line, game->skycol))
 			{
+				free(unspace_line);
 				free(parse_line);
 				return(0);
 			}
+			free(unspace_line);
 		}
-		//else 
-		//	error_parse_line(1);
-		free(parse_line);
+		else if (parse_line[0] != '\n')
+		{	
+			error_parse_line(1);
+			free(parse_line);
+			return (0);
+		}
+		if (parse_line)
+			free(parse_line);
 		i++;
 	}
 	print_param(game);
@@ -196,5 +250,27 @@ void	print_param(t_game *game)
 		printf("GROUND COL : %d\n", game->groundcol[i]);
 		i ++;
 	}
+	i = 0;
+	while(i < 3)
+	{
+		if (i == 0)
+		{
+			ft_printf("NORTH TEXTURE IN GAME DATA : %s\n", game->paths[i]);
+		}
+		if (i == 1)
+		{
+			ft_printf("SOUTH TEXTURE IN GAME DATA : %s\n", game->paths[i]);
+		}
+		if (i == 2)
+		{
+			ft_printf("EAST TEXTURE IN GAME DATA : %s\n", game->paths[i]);
+		}
+		if (i == 3)
+		{
+			ft_printf("WEST TEXTURE IN GAME DATA : %s\n", game->paths[i]);
+		}
+		i ++;
+	}
+
 	
 }
