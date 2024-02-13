@@ -56,8 +56,12 @@ void	split_map(char** map, char*** part1, char*** part2);
 int 	get_color(char *parse_line, int *stack);
 int		check_split_col(char **split);
 int		init_struct(t_game *game, char **config_file);
+<<<<<<< HEAD
 char    *removes_first_spaces(char *str, int i);
 int 	get_dir_path(char *path, char **stack, int index);
+=======
+int		enclosed_check(char **map);
+>>>>>>> 37a5546af2ab5b5a5e3db0041a736d0c67506b33
 
 // RENDERING FUNCTIONS //
 

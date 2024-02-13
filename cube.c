@@ -11,14 +11,18 @@ int main(int ac, char** path)
 	{
 		map = readmap(path[1]);
 		split_map(map, &configfile, &parsedmap);
+		for (int i = 0; parsedmap[i]; i++)
+			printf("%s", parsedmap[i]);
+		freetab(map);
 		if (!init_struct(&game, configfile))
 		{
-			ft_printf("- ERROR -\nInvalid Map\n");
+			ft_printf("- ERROR -\nInvalid Config\n");
 			//free game
 			return (1);
 		}
+		if (!enclosed_check(parsedmap))
+			return (1);
 		//renderft();
-		freetab(map);
 		freetab(configfile);
 		freetab(parsedmap);
 	}
