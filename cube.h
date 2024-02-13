@@ -56,6 +56,7 @@ void	split_map(char** map, char*** part1, char*** part2);
 int 	get_color(char *parse_line, int *stack);
 int		check_split_col(char **split);
 int		init_struct(t_game *game, char **config_file);
+int		enclosed_check(char **map);
 
 // RENDERING FUNCTIONS //
 

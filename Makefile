@@ -19,6 +19,7 @@ SRC = cube.c \
 	  parsing.c \
 	  get_param.c \
 	  error_parsing.c \
+	  parse_map.c \
 
 
 OBJ = $(SRC:.c=.o)
