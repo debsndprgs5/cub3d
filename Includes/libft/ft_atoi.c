@@ -34,6 +34,8 @@ int	ft_atoi(const char *str)
 	i = 0;
 	nb = 0;
 	sign = 1;
+	if(str[i] == '0')
+		return (0);
 	while (ft_is_space(str[i]) == 1)
 		i ++;
 	if ((str[i] == '+') || (str[i] == '-'))

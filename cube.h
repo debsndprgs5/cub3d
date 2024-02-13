@@ -21,6 +21,7 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <fcntl.h>
+#include <mlx.h>
 
 // Walls/Ground raw images
 
@@ -33,13 +34,16 @@ typedef struct s_frames
 }	t_frames;
 
 // Main struct
-
+// Paths are N->0 S->1 E->2 W->3 in this order
 typedef struct s_game
 {
-	t_frames *frames;
-	int groundcol[4];
-	int skycol[4];
-	double ppos;
+	t_frames	*frames;
+	char		**paths;
+	void		*mlx_session;
+	void		*mlx_window;
+	int			groundcol[4];
+	int			skycol[4];
+	double		ppos;
 }	t_game;
 
 
@@ -51,6 +55,7 @@ int		get_param(char **config_file,  t_game *game);
 void	split_map(char** map, char*** part1, char*** part2);
 int 	get_color(char *parse_line, int *stack);
 int		check_split_col(char **split);
+int		init_struct(t_game *game, char **config_file);
 
 // RENDERING FUNCTIONS //
 

@@ -3,17 +3,24 @@
 int main(int ac, char** path)
 {
 	char **map;
+	char **configfile;
+	char **parsedmap;
 	t_game	game;
 
-
-    if (ac > 1)
-    {
-    	map = readmap(path[1]);
-    	for (int i = 0; map[i]; i++)
-    		printf("%s\n", map[i]);
-    	get_param(map, &game);
-    	print_param(&game);
-        return (0);
-    }
-    return(1);
+	if (ac > 1)
+	{
+		map = readmap(path[1]);
+		split_map(map, &configfile, &parsedmap);
+		if (!init_struct(&game, configfile))
+		{
+			ft_printf("- ERROR -\nInvalid Map\n");
+			//free game
+			return (1);
+		}
+		//renderft();
+		freetab(map);
+		freetab(configfile);
+		freetab(parsedmap);
+	}
+	return(0);
 }

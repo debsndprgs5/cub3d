@@ -102,7 +102,7 @@ int	check_color_line(char *parse_line)
 			check ++;
 		i ++;
 	}
-	if (check > 2)
+	if (check != 2)
 		return(1);
 	return (0);
 }
@@ -125,20 +125,16 @@ int	get_color(char *parse_line, int *stack)
 	{
 		str_to_int = cut_till_next_coma(parse_line, i);
 		i = get_til_next_coma(parse_line, i);
-		if (str_to_int == NULL)
+		temp = ft_atoi(str_to_int);
+		
+		if (str_to_int == NULL || temp < 0 || temp > 255)
 		{
 			free(str_to_int);
 			error_color_parsing(2);
 			return(0);
 		}
-		temp = ft_atoi(str_to_int);
-		if(temp < 0 || temp > 255)
-		{
-			free(str_to_int);
-			error_color_parsing(1);
-			return(0);
-		}
 		stack[j] = temp;
+		printf(" TEMP : %d\n", stack[j]);
 		free(str_to_int);
 		j++;
 	}
@@ -165,7 +161,7 @@ int get_param(char **config_file, t_game *game)
 			if(!get_color(parse_line, game->groundcol))
 			{
 				free(parse_line);
-				return(1);
+				return(0);
 			}
 		}
 		if (parse_line [0] == 'C')
@@ -173,7 +169,7 @@ int get_param(char **config_file, t_game *game)
 			if (!get_color(parse_line, game->skycol))
 			{
 				free(parse_line);
-				return(1);
+				return(0);
 			}
 		}
 		//else 
@@ -181,23 +177,24 @@ int get_param(char **config_file, t_game *game)
 		free(parse_line);
 		i++;
 	}
-	return (0);
+	print_param(game);
+	return (1);
 }
 
 void	print_param(t_game *game)
 {
 	int i;
-
 	i = 0;
-	while(game->groundcol[i])
+	while(i <= 2)
 	{
-		printf("GAmE COL : %d\n", game->groundcol[i]);
+		printf("SKY COL : %d\n", game->skycol[i]);
 		i ++;
 	}
 	i = 0;
-	while(game->skycol[i])
+	while(i <= 2)
 	{
-		printf("GAME COL : %d\n", game->skycol[i]);
+		printf("GROUND COL : %d\n", game->groundcol[i]);
 		i ++;
 	}
+	
 }
