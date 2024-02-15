@@ -38,7 +38,10 @@ typedef struct s_frames
 typedef struct s_game
 {
 	t_frames	*frames;
+	int			xdiff;
+	int			ydiff;
 	char		**paths;
+	char		**map;
 	void		*mlx_session;
 	void		*mlx_window;
 	int			groundcol[4];
@@ -57,6 +60,7 @@ int 	get_color(char *parse_line, int *stack);
 int		check_split_col(char **split);
 int		init_struct(t_game *game, char **config_file);
 int		enclosed_check(char **map);
+void	get_format(char ***parsedmap);
 
 // RENDERING FUNCTIONS //
 

@@ -60,7 +60,9 @@ int enclosed_check(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == '0')
+			if (map[i][j] == '0' || map[i][j] == 'W' ||
+				map[i][j] == 'E' || map[i][j] == 'S' ||
+				map[i][j] == 'N')
 			{
 				if (!multi_check(j, i, map))
 					return (0);
