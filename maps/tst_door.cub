@@ -1,0 +1,25 @@
+NO  sprites/zouindowsXP.xpm
+SO  sprites/zouindowsXP.xpm
+EA  sprites/helian_floor_no_motif.xpm
+WE  sprites/helian_floor_no_motif.xpm
+
+CR	sprites/crosshair_ME1.xpm
+
+DO forcefield_green.xpm
+DC forcefield_red.xpm
+
+C  #c930cf
+F  #36cf30
+
+111111111111
+100010000001
+10001000D001
+11D11000D001
+100000000001
+100D000DD001
+100000000001
+100111000001
+10111D0000E1
+100111000001
+1001010000D1
+111111111111
