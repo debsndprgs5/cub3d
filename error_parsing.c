@@ -28,8 +28,6 @@ int error_path(int ref)
 		ft_printf(" | FATAL | Can't open path for East textures");
 	if (ref == 3)
 		ft_printf(" | FATAL | Can't open path for West textures");
-<<<<<<< HEAD
-
 
 }
 
