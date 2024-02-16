@@ -49,7 +49,7 @@ static int multi_check(int x, int y, char **map)
 	return (1);
 }
 
-int enclosed_check(char **map)
+static int enclosed_check(char **map)
 {
 	int	i;
 	int	j;
@@ -72,4 +72,38 @@ int enclosed_check(char **map)
 		i++;
 	}
 	return (1);
+}
+
+static int letter_check(char **map)
+{
+	int	i;
+	int	j;
+	int	lettercount;
+
+	i = 0;
+	lettercount = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'W' || map[i][j] == 'E' ||
+				map[i][j] == 'S' || map[i][j] == 'N')
+				lettercount++;
+			j++;
+		}
+		i++;
+	}
+	if (lettercount != 1)
+		return (0);
+	return (1);
+}
+
+int map_check(char **map)
+{
+	if (!(letter_check(map)))
+		return (1);
+	if (!(enclosed_check(map)))
+		return (2);
+	return(0);
 }

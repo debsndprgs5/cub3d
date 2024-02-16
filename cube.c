@@ -17,6 +17,7 @@ int	main(int ac, char **path)
 	char	**map;
 	char	**configfile;
 	char	**parsedmap;
+	int		err;
 	t_game	game;
 
 	if (ac > 1)
@@ -26,8 +27,12 @@ int	main(int ac, char **path)
 		freetab(map);
 		get_format(&parsedmap);
 		game.map = parsedmap;
-		if (!enclosed_check(parsedmap))
+		err = map_check(parsedmap);
+		if (err != 0)
+		{
+			printerror();
 			return (1);
+		}
 		if (!init_struct(&game, configfile))
 		{
 			ft_printf("- ERROR -\nInvalid Config\n");

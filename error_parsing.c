@@ -29,3 +29,19 @@ void error_path(int ref)
 
 
 }
+
+
+/*
+1 = lettercheck
+2 = enclosedcheck
+3 = can't open north
+4 = can't open south
+5 = can't open east
+6 = can't open west
+*/
+
+
+void printerror(int err)
+{
+
+}

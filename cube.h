@@ -61,7 +61,7 @@ int		check_split_col(char **split);
 int		init_struct(t_game *game, char **config_file);
 char    *removes_first_spaces(char *str, int i);
 int 	get_dir_path(char *path, char **stack, int index);
-int		enclosed_check(char **map);
+int		map_check(char **map);
 void	get_format(char ***parsedmap);
 
 // RENDERING FUNCTIONS //
