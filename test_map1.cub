@@ -1,12 +1,13 @@
-                F                 0,255 , 255
-                                  SO ./Makefile
+        
+        F                 0,255 , 255				   
+                                  SO Makefile
 
 NO     Makefile
 
                 EA  Makefile
 
-                C 120,0,1
-                WE                  Makefile
+                C 120     ,           0,      1                          
+                WE                  Makefile			
 
 
                                    11111111111111111111111111111111111         

@@ -19,12 +19,10 @@ SRC = cube.c \
 	  parsing.c \
 	  get_param.c \
 	  error_parsing.c \
-<<<<<<< HEAD
 	  get_dir_path.c \
 	  param_utils.c \
-=======
 	  parse_map.c \
->>>>>>> 37a5546af2ab5b5a5e3db0041a736d0c67506b33
+	  rgb_param.c \
 
 
 OBJ = $(SRC:.c=.o)

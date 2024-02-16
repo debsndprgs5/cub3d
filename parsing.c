@@ -12,6 +12,18 @@
 
 #include "cube.h"
 
+
+int init_first_game(t_game *game)
+{
+	game->paths = malloc(sizeof(char*) * 4);
+	if(!game->paths)
+	{
+		ft_printf("FATAL CANNOT ALLOCATE MEMORY\n");
+		return (0);
+	}
+	return (1);
+}
+
 static void ft_init_mlx(t_game *game)
 {
 	game->mlx_session = mlx_init();
@@ -24,7 +36,8 @@ int init_struct(t_game *game, char **config_file)
 	// t_frames	frames;
 	// int width;
 	// int height;
-
+	if (!init_first_game(game))
+		return (0);
 	if (!get_param(config_file, game))
 		return (0);
 	ft_init_mlx(game);

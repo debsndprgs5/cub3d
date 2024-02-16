@@ -56,19 +56,19 @@ void	split_map(char** map, char*** part1, char*** part2);
 int 	get_color(char *parse_line, int *stack);
 int		check_split_col(char **split);
 int		init_struct(t_game *game, char **config_file);
-<<<<<<< HEAD
 char    *removes_first_spaces(char *str, int i);
+char	*removes_last_stuff(char *old_str);
+char	*removes_spaces(char *spc_line);
+int		is_good_char(char* parse_line);
 int 	get_dir_path(char *path, char **stack, int index);
-=======
 int		enclosed_check(char **map);
->>>>>>> 37a5546af2ab5b5a5e3db0041a736d0c67506b33
 
 // RENDERING FUNCTIONS //
 
 // ERROR CHECKING //
-void	error_color_parsing(int ref);
-void	error_parse_line(int ref);
-void 	error_path(int ref);
+int		error_color_parsing(int ref);
+int		error_parse_line(int ref);
+int 	error_path(int ref);
 void	print_param(t_game *game);
 // METH //
 
