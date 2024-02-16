@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 18:37:22 by zfavere           #+#    #+#             */
-/*   Updated: 2024/02/08 18:37:27 by zfavere          ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   parsing.c										  :+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: zfavere <marvin@42.fr>					 +#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2024/02/08 18:37:22 by zfavere		   #+#	#+#			 */
+/*   Updated: 2024/02/08 18:37:27 by zfavere		  ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
 #include "cube.h"
@@ -100,15 +100,15 @@ int	check_asset_three(char *parse_line, t_game *game)
 
 int get_dir_path(char *path, char **stack, int index)
 {
-    
-    int fd;
+	
+	int fd;
 
-    fd = open(path, O_RDONLY);
-    if (fd < 0)
-        return (0);
-    stack[index] = ft_strdup(path);
-    close(fd);
-    return (1);
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (printerror(index + 3));
+	stack[index] = ft_strdup(path);
+	close(fd);
+	return (1);
 }
 
 int	get_param(char **config_file, t_game *game)
@@ -130,7 +130,7 @@ int	get_param(char **config_file, t_game *game)
 		else if (!is_good_char(parse_line))
 		{
 			free(parse_line);
-			return (error_parse_line(1));
+			return (printerror(ARGS_UNDEFINED));
 		}
 		if (parse_line)
 			free(parse_line);

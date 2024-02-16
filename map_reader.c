@@ -45,13 +45,13 @@ static char	**allocdata(char *pathtofile)
 	line_count = linecount(pathtofile);
 	if (line_count <= 0)
 	{
-		ft_printf("\033[0;31m ⚠ Error, file may not exist ⚠ \033[0m");
+		printerror(FILE_NOT_EXIST);
 		return (NULL);
 	}
 	map = malloc(sizeof(char *) * line_count + 1);
 	if (map == NULL)
 	{
-		ft_printf("\033[0;31m ⚠ Malloc error ⚠ \033[0m");
+		printerror(MEM_FAIL);
 		freetab(map);
 		return (NULL);
 	}

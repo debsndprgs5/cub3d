@@ -49,6 +49,21 @@ typedef struct s_game
 	double		ppos;
 }	t_game;
 
+typedef enum ErrorCode {
+    MORE_THAN_ONE_DIRECTION = 1,
+    MAP_NOT_ENCLOSED_BY_WALLS,
+    CANNOT_OPEN_NORTH_ASSET,
+    CANNOT_OPEN_SOUTH_ASSET,
+    CANNOT_OPEN_EAST_ASSET,
+    CANNOT_OPEN_WEST_ASSET,
+    ARGS_UNDEFINED,
+    RGB_RANGE,
+    RGB_ARGS,
+    INVALID_MAP,
+    MEM_FAIL,
+    FILE_NOT_EXIST,
+} ErrorCode;
+
 
 // PARSING FUNCTIONS //
 
@@ -66,6 +81,7 @@ int		is_good_char(char* parse_line);
 int 	get_dir_path(char *path, char **stack, int index);
 int		map_check(char **map);
 void	get_format(char ***parsedmap);
+int		printerror(ErrorCode err);
 
 // RENDERING FUNCTIONS //
 

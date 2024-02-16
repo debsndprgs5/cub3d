@@ -74,18 +74,17 @@ void split_map(char **map, char ***part1, char ***part2)
 	lines_tot = 0;
 	while (map[lines_tot])
 		lines_tot++;
-	printf("lines = %d\n", lines_tot);
 	splitline = findsplitpoint(map);
 	if (!splitline)
 	{
-		printf("ERROR - Invalid Map\n");
+		printerror(INVALID_MAP);
 		return;
 	}
 	*part1 = malloc(sizeof(char *) * splitline + 1);
 	*part2 = malloc(sizeof(char *) * lines_tot - splitline + 1);
 	if (!*part1 || !*part2)
 	{
-		printf("ERROR - Memory allocation error\n");
+		printerror(MEM_FAIL);
 		return;
 	}
 	i = -1;
