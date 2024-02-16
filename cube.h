@@ -60,6 +60,9 @@ int 	get_color(char *parse_line, int *stack);
 int		check_split_col(char **split);
 int		init_struct(t_game *game, char **config_file);
 char    *removes_first_spaces(char *str, int i);
+char	*removes_last_stuff(char *old_str);
+char	*removes_spaces(char *spc_line);
+int		is_good_char(char* parse_line);
 int 	get_dir_path(char *path, char **stack, int index);
 int		map_check(char **map);
 void	get_format(char ***parsedmap);
@@ -67,9 +70,9 @@ void	get_format(char ***parsedmap);
 // RENDERING FUNCTIONS //
 
 // ERROR CHECKING //
-void	error_color_parsing(int ref);
-void	error_parse_line(int ref);
-void 	error_path(int ref);
+int		error_color_parsing(int ref);
+int		error_parse_line(int ref);
+int 	error_path(int ref);
 void	print_param(t_game *game);
 // METH //
 

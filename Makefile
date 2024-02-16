@@ -22,6 +22,7 @@ SRC = cube.c \
 	  get_dir_path.c \
 	  param_utils.c \
 	  parse_map.c \
+	  rgb_param.c \
 
 
 OBJ = $(SRC:.c=.o)
