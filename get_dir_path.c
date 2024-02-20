@@ -22,19 +22,19 @@ void	print_param(t_game *game)
 	{
 		if (i == 0)
 		{
-			ft_printf("NORTH TEXTURE IN GAME DATA : %s\n", game->paths[i]);
+			printf("NORTH TEXTURE IN GAME DATA : %s\n", game->paths[i]);
 		}
 		if (i == 1)
 		{
-			ft_printf("SOUTH TEXTURE IN GAME DATA : %s\n", game->paths[i]);
+			printf("SOUTH TEXTURE IN GAME DATA : %s\n", game->paths[i]);
 		}
 		if (i == 2)
 		{
-			ft_printf("EAST TEXTURE IN GAME DATA : %s\n", game->paths[i]);
+			printf("EAST TEXTURE IN GAME DATA : %s\n", game->paths[i]);
 		}
 		if (i == 3)
 		{
-			ft_printf("WEST TEXTURE IN GAME DATA : %s\n", game->paths[i]);
+			printf("WEST TEXTURE IN GAME DATA : %s\n", game->paths[i]);
 		}
 		i ++;
 	}

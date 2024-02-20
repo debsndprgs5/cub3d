@@ -22,7 +22,8 @@ int	main(int ac, char **path)
 	if (ac > 1)
 	{
 		map = readmap(path[1]);
-		split_map(map, &configfile, &parsedmap);
+		if (!split_map(map, &configfile, &parsedmap))
+			return (1);
 		freetab(map);
 		get_format(&parsedmap);
 		game.map = parsedmap;
@@ -36,7 +37,7 @@ int	main(int ac, char **path)
 		// for (int i = 0; parsedmap[i]; i++)
 		// 	printf("sz = %d  | %s", ft_strlen(parsedmap[i]), parsedmap[i]);
 		//renderft();
-		freetab(configfile);
+		// freetab(configfile);
 		freetab(parsedmap);
 	}
 	return(0);

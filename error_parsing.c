@@ -22,12 +22,13 @@ int error_path(int ref)
 10 = Invalid map format
 11 = Memory alloc failed
 12 = File may not exist
+13 = Map contains forbidden characters
 */
 
 const char* ErrorMsg[] =
 {
     "",
-    "More than one W,S,E,N characters at once !",
+    "More/Less than one W,S,E,N characters at once !",
     "Map is not enclosed by walls",
     "Can't open the North asset file",
     "Can't open the South asset file",
@@ -36,9 +37,11 @@ const char* ErrorMsg[] =
     "Error with arguments, undefined characters founds",
     "Error with RGB range, [0 ... 255]",
     "Error with RGB arguments",
-    "Invalid Map Format",
+    "Invalid config format, loading default config...",
     "Memory alloc failed",
-    "File may not exist"
+    "File may not exist",
+    "Map contains forbidden characters",
+    "Map missing"
 };
 
 int printerror(ErrorCode err)
