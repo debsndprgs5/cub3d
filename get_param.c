@@ -110,10 +110,11 @@ int	get_param(char **config_file, t_game *game)
 			return (0);
 		else if (!is_good_char(parse_line))
 		{
-			free(parse_line);
+			//free(parse_line);
 			return (printerror(ARGS_UNDEFINED));
 		}
-		free(parse_line);
+		if(parse_line)
+			free(parse_line);
 		i ++;
 	}
 	if (!check_game(game))

@@ -36,7 +36,7 @@ char	*cut_till_next_coma(char *parse_line, int start)
 	next_stop = get_til_next_coma(parse_line, start);
 	if (next_stop == 0 || next_stop == 1)
 		return (NULL);
-	new_str = malloc(sizeof (char) * (next_stop - start) + 1);
+	new_str = ft_calloc(sizeof (char) ,(size_t)(next_stop - start+1));
 	while (start <= next_stop)
 		new_str[i++] = parse_line[start++];
 	return (new_str);
