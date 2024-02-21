@@ -27,7 +27,7 @@ char	*removes_spaces(char *spc_line)
 			spc_count ++;
 		i ++;
 	}
-	new_line = malloc(sizeof (char) * (i - spc_count) + 1);
+	new_line = ft_calloc(sizeof (char) , (size_t)(i - spc_count+1));
 	i = 0;
 	j = 0;
 	while (spc_line[i])
@@ -37,7 +37,6 @@ char	*removes_spaces(char *spc_line)
 		else
 			i ++;
 	}
-	new_line[j] = '\0';
 	return (new_line);
 }
 
@@ -55,13 +54,13 @@ char	*removes_first_spaces(char *str, int i)
 	}
 	if (i >= ft_strlen(str))
 		return (NULL);
-	new_str = malloc(sizeof(char) * (ft_strlen(str) - i) + 1);
-	while (i <= ft_strlen(str))
+	new_str = ft_calloc(sizeof(char) , (size_t)(ft_strlen(str) - i+1));
+	while (i < ft_strlen(str))
 		new_str[j ++] = str[i ++];
 	if (new_str[j - 1] == '\n')
 		new_str[j - 1] = '\0';
-	else
-		new_str[j] = '\0';
+	// else
+	// 	new_str[j--] = '\0';
 	return (new_str);
 }
 
@@ -81,14 +80,14 @@ char	*removes_last_stuff(char *old_str)
 		new_size --;
 	}
 	new_size ++;
-	new_str = malloc(sizeof(char) * new_size +1);
+	new_str = ft_calloc(sizeof(char), (size_t)(new_size +1));
 	i = 0;
 	while (i != new_size)
 	{
 		new_str[i] = old_str[i];
 		i ++;
 	}
-	new_str[i] = '\0';
+	//new_str[i] = '\0';
 	return (new_str);
 }
 

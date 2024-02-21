@@ -15,15 +15,17 @@
 int	check_extention(char *path, char *ext, int len)
 {
 	int	i;
+	int	fd;
 
+	fd = open(path, O_DIRECTORY);
+	if (fd > 0)
+		return (0);
 	i = ft_strlen(path);
 	i --;
 	while (ext[len] && len >= 0)
 	{
 		if (path[i] != ext[len])
-		{
 			return (0);
-		}
 		len --;
 		i --;
 	}
@@ -43,8 +45,10 @@ char	*parse_config_line(char *line)
 
 int	free_used_lines(char *a, char *b)
 {
-	free (a);
-	free (b);
+	if (a)
+		free(a);
+	if(b)
+		free(b);
 	return (0);
 }
 
