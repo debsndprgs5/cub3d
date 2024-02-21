@@ -43,8 +43,10 @@ char	*parse_config_line(char *line)
 
 int	free_used_lines(char *a, char *b)
 {
-	free (a);
-	free (b);
+	if (a)
+		free (a);
+	if (b)
+		return(0);
 	return (0);
 }
 

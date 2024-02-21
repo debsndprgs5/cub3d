@@ -134,8 +134,8 @@ int split_map(char **map, char ***part1, char ***part2)
 	}
 	else
 	{
-		*part1 = malloc(sizeof(char *) * splitline + 1);
-		*part2 = malloc(sizeof(char *) * lines_tot - splitline + 1);
+		*part1 = malloc(sizeof(char *) * (splitline + 1));
+		*part2 = malloc(sizeof(char *) * ((lines_tot - splitline) + 1));
 		if (!*part1 || !*part2)
 		{
 			printerror(MEM_FAIL);

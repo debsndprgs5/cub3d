@@ -12,6 +12,14 @@
 
 #include "cube.h"
 
+static int terminate(char **part1, char **part2)
+{
+	freetab(part1);
+	freetab(part2);
+	return (1);
+}
+
+
 int	main(int ac, char **path)
 {
 	char	**map;
@@ -23,22 +31,22 @@ int	main(int ac, char **path)
 	{
 		map = readmap(path[1]);
 		if (!split_map(map, &configfile, &parsedmap))
-			return (1);
+			return (terminate(configfile, parsedmap));
 		freetab(map);
 		get_format(&parsedmap);
 		game.map = parsedmap;
 		if (!(map_check(parsedmap)))
-			return (1);
+			return (terminate(configfile, parsedmap));
 		if (!init_struct(&game, configfile))
 		{
 			//free game
-			return (1);
+			return (terminate(configfile, parsedmap));
 		}
 		// for (int i = 0; parsedmap[i]; i++)
 		// 	printf("sz = %d  | %s", ft_strlen(parsedmap[i]), parsedmap[i]);
 		//renderft();
 		// freetab(configfile);
-		freetab(parsedmap);
+		terminate(configfile, parsedmap);
 	}
 	else
 		printerror(FILE_NOT_EXIST);
