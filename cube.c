@@ -20,7 +20,7 @@ int	main(int ac, char **path)
 	int		err;
 	t_game	game;
 
-	if (ac > 1)
+	if (ac == 2 && check_extention(path[1], ".cub", 4))
 	{
 		map = readmap(path[1]);
 		split_map(map, &configfile, &parsedmap);
@@ -30,7 +30,8 @@ int	main(int ac, char **path)
 		err = map_check(parsedmap);
 		if (err != 0)
 		{
-			printerror();
+			//printerror();
+			printf("EROROR\n");
 			return (1);
 		}
 		if (!init_struct(&game, configfile))
@@ -45,6 +46,8 @@ int	main(int ac, char **path)
 		freetab(configfile);
 		freetab(parsedmap);
 	}
+	else
+		printf("Error with file path\n");
 	return(0);
 }
 

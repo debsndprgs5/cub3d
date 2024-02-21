@@ -67,10 +67,11 @@ int	check_color_line(char *parse_line)
 
 int	get_color(char *parse_line, int *stack)
 {
-	int		i;
-	int		j;
-	char	*str_to_int;
-	int		temp;
+	int			i;
+	int			j;
+	char		*str_to_int;
+	int			temp;
+	static int	count;
 
 	i = 1;
 	j = 0;
@@ -84,11 +85,24 @@ int	get_color(char *parse_line, int *stack)
 		if (str_to_int == NULL || temp < 0 || temp > 255)
 		{
 			free(str_to_int);
-			return (error_color_parsing(2));
+			return (error_color_parsing(1));
 		}
 		stack[j] = temp;
 		free(str_to_int);
 		j++;
 	}
+	count ++;
+	if (count > 2)
+	{
+		printf("ERROR DUPLICATES RGB PARAM %d\n", count);
+		return (0);
+	}
 	return (1);
+}
+
+int	free_used_lines(char *a, char *b)
+{
+	free (a);
+	free (b);
+	return (0);
 }

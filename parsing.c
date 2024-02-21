@@ -15,11 +15,19 @@
 
 int init_first_game(t_game *game)
 {
+	int i;
+
+	i = 0;
 	game->paths = malloc(sizeof(char*) * 4);
 	if(!game->paths)
 	{
 		ft_printf("FATAL CANNOT ALLOCATE MEMORY\n");
 		return (0);
+	}
+	while (i < 4)
+	{
+		game->paths[i] = NULL;
+		i ++;
 	}
 	return (1);
 }
@@ -60,13 +68,14 @@ int init_struct(t_game *game, char **config_file)
 	// t_frames	frames;
 	// int width;
 	// int height;
-	if (!init_first_game(game))
-		return (0);
+	
 	int	x;
 	int	y;
 
 	x = 0;
 	y = 0;
+	if (!init_first_game(game))
+		return (0);
 	if (!get_param(config_file, game))
 		return (0);
 	get_player_pos(&x, &y, game);

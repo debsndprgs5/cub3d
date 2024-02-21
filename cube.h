@@ -45,7 +45,9 @@ typedef struct s_game
 	void		*mlx_session;
 	void		*mlx_window;
 	int			groundcol[4];
+	int 		ground_check;
 	int			skycol[4];
+	int			sky_check;
 	double		ppos;
 }	t_game;
 
@@ -62,7 +64,8 @@ int		init_struct(t_game *game, char **config_file);
 char    *removes_first_spaces(char *str, int i);
 char	*removes_last_stuff(char *old_str);
 char	*removes_spaces(char *spc_line);
-int		is_good_char(char* parse_line);
+char 	*parse_config_line(char *line);
+
 int 	get_dir_path(char *path, char **stack, int index);
 int		map_check(char **map);
 void	get_format(char ***parsedmap);
@@ -74,6 +77,10 @@ int		error_color_parsing(int ref);
 int		error_parse_line(int ref);
 int 	error_path(int ref);
 void	print_param(t_game *game);
+int		is_good_char(char* parse_line);
+int		check_extention(char *path, char *ext, int len);
+int		check_game(t_game *game);
+int		free_used_lines(char *a, char *b);
 // METH //
 
 #endif

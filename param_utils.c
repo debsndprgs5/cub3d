@@ -37,7 +37,8 @@ char	*removes_spaces(char *spc_line)
 		else
 			i ++;
 	}
-	return (new_line);
+	new_line[j] = '\0';
+	return (removes_last_stuff(new_line));
 }
 
 char	*removes_first_spaces(char *str, int i)
@@ -72,10 +73,7 @@ char	*removes_last_stuff(char *old_str)
 
 	new_size = ft_strlen(old_str);
 	if (new_size <= 1)
-	{
-		new_str = ft_strdup(old_str);
-		return (new_str);
-	}
+		return (ft_strdup(old_str));
 	while (new_size >= 0)
 	{
 		if (old_str[new_size] != ' ' && ft_isprint(old_str[new_size]))
@@ -84,10 +82,14 @@ char	*removes_last_stuff(char *old_str)
 	}
 	new_size ++;
 	new_str = malloc(sizeof(char) * new_size +1);
-	i = -1;
-	while (++i!= new_size)
+	i = 0;
+	while (i != new_size)
+	{
 		new_str[i] = old_str[i];
+		i ++;
+	}
 	new_str[i] = '\0';
+	//free(old_str);
 	return (new_str);
 }
 
@@ -100,6 +102,25 @@ int	is_good_char(char* parse_line)
 	&& ft_strncmp(parse_line, "EA", 2)
 	&& ft_strncmp(parse_line, "SO", 2)
 	&& ft_strncmp(parse_line, "NO", 2))
-		return(0);
+	{	
+		free(parse_line);
+		return (0);
+	}
+	return (1);
+}
+
+int	check_game(t_game *game)
+{
+	int i;
+
+	i = 0;
+	while (game->paths[i])
+	{
+		if(game->paths[i] == NULL)
+			return (0);
+		i ++;
+	}
+	if (!game->ground_check || !game->sky_check)
+		return (0);
 	return (1);
 }
