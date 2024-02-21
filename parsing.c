@@ -20,10 +20,7 @@ int init_first_game(t_game *game)
 	i = 0;
 	game->paths = malloc(sizeof(char*) * 4);
 	if(!game->paths)
-	{
-		ft_printf("FATAL CANNOT ALLOCATE MEMORY\n");
-		return (0);
-	}
+		return (printerror(MEM_FAIL));
 	while (i < 4)
 	{
 		game->paths[i] = NULL;
@@ -65,9 +62,9 @@ void get_player_pos(int *x, int *y, t_game *game)
 
 int init_struct(t_game *game, char **config_file)
 {
-	// t_frames	frames;
-	// int width;
-	// int height;
+	t_frames	frames;
+	int width;
+	int height;
 	
 	int	x;
 	int	y;
@@ -82,14 +79,14 @@ int init_struct(t_game *game, char **config_file)
 	game->xdiff = -x;
 	game->ydiff = -y;
 	ft_init_mlx(game);
-	// frames.w_no_img = mlx_xpm_file_to_image(game->mlx_session,
-	// 	game->paths[0], &width, &height);
-	// frames.w_so_img = mlx_xpm_file_to_image(game->mlx_session,
-	// 	game->paths[1], &width, &height);
-	// frames.w_ea_img = mlx_xpm_file_to_image(game->mlx_session,
-	// 	game->paths[2], &width, &height);
-	// frames.w_we_img = mlx_xpm_file_to_image(game->mlx_session,
-	// 	game->paths[3], &width, &height);
-	// game->frames = &frames;
+	frames.w_no_img = mlx_xpm_file_to_image(game->mlx_session,
+		game->paths[0], &width, &height);
+	frames.w_so_img = mlx_xpm_file_to_image(game->mlx_session,
+		game->paths[1], &width, &height);
+	frames.w_ea_img = mlx_xpm_file_to_image(game->mlx_session,
+		game->paths[2], &width, &height);
+	frames.w_we_img = mlx_xpm_file_to_image(game->mlx_session,
+		game->paths[3], &width, &height);
+	game->frames = &frames;
 	return(1);
 }

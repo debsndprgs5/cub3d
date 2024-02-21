@@ -17,37 +17,31 @@ int	main(int ac, char **path)
 	char	**map;
 	char	**configfile;
 	char	**parsedmap;
-	int		err;
 	t_game	game;
 
-	if (ac == 2 && check_extention(path[1], ".cub", 4))
+	if (ac == 2 && check_extention(path[1], ".cub", 3))
 	{
 		map = readmap(path[1]);
-		split_map(map, &configfile, &parsedmap);
+		if (!split_map(map, &configfile, &parsedmap))
+			return (1);
 		freetab(map);
 		get_format(&parsedmap);
 		game.map = parsedmap;
-		err = map_check(parsedmap);
-		if (err != 0)
-		{
-			//printerror();
-			printf("EROROR\n");
+		if (!(map_check(parsedmap)))
 			return (1);
-		}
 		if (!init_struct(&game, configfile))
 		{
-			ft_printf("- ERROR -\nInvalid Config\n");
 			//free game
 			return (1);
 		}
 		// for (int i = 0; parsedmap[i]; i++)
 		// 	printf("sz = %d  | %s", ft_strlen(parsedmap[i]), parsedmap[i]);
 		//renderft();
-		freetab(configfile);
+		// freetab(configfile);
 		freetab(parsedmap);
 	}
 	else
-		printf("Error with file path\n");
+		printerror(FILE_NOT_EXIST);
 	return(0);
 }
 

@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 18:37:22 by zfavere           #+#    #+#             */
-/*   Updated: 2024/02/08 18:37:27 by zfavere          ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   parsing.c										  :+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: zfavere <marvin@42.fr>					 +#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2024/02/08 18:37:22 by zfavere		   #+#	#+#			 */
+/*   Updated: 2024/02/08 18:37:27 by zfavere		  ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
 #include "cube.h"
@@ -79,21 +79,15 @@ int	check_asset_three(char *parse_line, t_game *game)
 
 int	get_dir_path(char *path, char **stack, int index)
 {
-	int		fd;
+	int	fd;
 
 	fd = open(path, O_RDONLY);
-	if (fd < 0 || path == NULL)
-		return (0);
-	if (!check_extention(path, ".xpm", 4))
-	{
-		printf("ERROR with texture path\n");
-		return (0);
-	}
+	if (fd < 0)
+		return (printerror(index + 3));
+	if (!check_extention(path, ".xpm", 3))
+		return (printerror(WRONG_EXTENT));
 	else if (stack[index] != NULL)
-	{
-		printf("ERROR DUPLICATES PATH\n");
-		return (0);
-	}
+		return (printerror(DUP_ARGS));
 	stack[index] = ft_strdup(path);
 	close(fd);
 	return (1);
@@ -115,15 +109,15 @@ int	get_param(char **config_file, t_game *game)
 		else if (!check_asset_three(parse_line, game))
 			return (0);
 		else if (!is_good_char(parse_line))
-			return (error_parse_line(1));
+		{
+			free(parse_line);
+			return (printerror(ARGS_UNDEFINED));
+		}
 		free(parse_line);
 		i ++;
 	}
 	if (!check_game(game))
-	{
-		printf("MISSING CONFIG ARG\n");
-		return (0);
-	}
+		get_dflt_setting(game);
 	print_param(game);
 	return (1);
 }

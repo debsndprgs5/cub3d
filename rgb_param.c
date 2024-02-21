@@ -42,7 +42,6 @@ char	*cut_till_next_coma(char *parse_line, int start)
 	return (new_str);
 }
 
-
 int	check_color_line(char *parse_line)
 {
 	int	i;
@@ -64,6 +63,15 @@ int	check_color_line(char *parse_line)
 	return (0);
 }
 
+int	is_good_rgb(char *str_to_int, int temp)
+{
+	if (str_to_int == NULL || temp < 0 || temp > 255)
+	{
+		free(str_to_int);
+		return (0);
+	}
+	return (1);
+}
 
 int	get_color(char *parse_line, int *stack)
 {
@@ -76,33 +84,20 @@ int	get_color(char *parse_line, int *stack)
 	i = 1;
 	j = 0;
 	if (check_color_line(parse_line))
-		return (error_color_parsing(2));
+		return (printerror(RGB_ARGS));
 	while (parse_line[i])
 	{
 		str_to_int = cut_till_next_coma(parse_line, i);
 		i = get_til_next_coma(parse_line, i);
 		temp = ft_atoi(str_to_int);
-		if (str_to_int == NULL || temp < 0 || temp > 255)
-		{
-			free(str_to_int);
-			return (error_color_parsing(1));
-		}
+		if (!is_good_rgb(str_to_int, temp))
+			return (printerror(RGB_RANGE));
 		stack[j] = temp;
 		free(str_to_int);
 		j++;
 	}
 	count ++;
 	if (count > 2)
-	{
-		printf("ERROR DUPLICATES RGB PARAM %d\n", count);
-		return (0);
-	}
+		return (printerror(DUP_ARGS));
 	return (1);
-}
-
-int	free_used_lines(char *a, char *b)
-{
-	free (a);
-	free (b);
-	return (0);
 }

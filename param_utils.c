@@ -38,7 +38,7 @@ char	*removes_spaces(char *spc_line)
 			i ++;
 	}
 	new_line[j] = '\0';
-	return (removes_last_stuff(new_line));
+	return (new_line);
 }
 
 char	*removes_first_spaces(char *str, int i)
@@ -89,20 +89,17 @@ char	*removes_last_stuff(char *old_str)
 		i ++;
 	}
 	new_str[i] = '\0';
-	//free(old_str);
 	return (new_str);
 }
 
-int	is_good_char(char* parse_line)
+int	is_good_char(char *parse_line)
 {
-	if(parse_line[0] != '\n' && 
-	parse_line [0] != 'C'&&
-	parse_line[0] != 'F' &&
-	ft_strncmp(parse_line, "WE", 2)
-	&& ft_strncmp(parse_line, "EA", 2)
-	&& ft_strncmp(parse_line, "SO", 2)
-	&& ft_strncmp(parse_line, "NO", 2))
-	{	
+	if (parse_line[0] != '\n' && parse_line [0] != 'C'
+		&& parse_line[0] != 'F' && ft_strncmp(parse_line, "WE", 2)
+		&& ft_strncmp(parse_line, "EA", 2)
+		&& ft_strncmp(parse_line, "SO", 2)
+		&& ft_strncmp(parse_line, "NO", 2))
+	{
 		free(parse_line);
 		return (0);
 	}
@@ -111,12 +108,12 @@ int	is_good_char(char* parse_line)
 
 int	check_game(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (game->paths[i])
+	while (i <= 3)
 	{
-		if(game->paths[i] == NULL)
+		if (game->paths[i] == NULL)
 			return (0);
 		i ++;
 	}

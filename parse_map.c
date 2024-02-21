@@ -30,10 +30,10 @@ static int multi_check(int x, int y, char **map)
 	maxrow = ft_strlen(map[y]);
 	while (map[maxcol])
 		maxcol++;
-	maxcol -= 2;
+	maxcol -= 1;
 	if (y >= maxcol || y == 0 || x >= maxrow || x == 0)
 	{
-		printf("ERROR on map cell %d;%d\n", x, y);
+		printf("\e[1;36m--> On map cell \033[0m\033[32m%d;%d\033[0m\n", x, y);
 		return  (0);
 	}
 	if ((!mini_check(map[y][x+1])) ||
@@ -43,7 +43,7 @@ static int multi_check(int x, int y, char **map)
 		(map[y][x+1] == ' ' || map[y][x-1] == ' ' ||
 			map[y+1][x] == ' ' || map[y-1][x] == ' '))
 	{
-		printf("ERROR on map cell %d;%d\n", x, y);
+		printf("\e[1;36m--> On map cell \033[0m\033[32m%d;%d\033[0m\n", x, y);
 		return (0);
 	}
 	return (1);
@@ -101,9 +101,27 @@ static int letter_check(char **map)
 
 int map_check(char **map)
 {
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (!ft_strchr("SNEW01\n\t \0", map[i][j]))
+			{
+				printf("\e[1;36m--> On map cell \033[0m\033[32m%d;%d\033[0m\n", j, i);
+				return(printerror(13));
+			}
+			j++;
+		}
+		i++;
+	}
 	if (!(letter_check(map)))
-		return (1);
+		return (printerror(1));
 	if (!(enclosed_check(map)))
-		return (2);
-	return(0);
+		return (printerror(2));
+	return (1);
 }

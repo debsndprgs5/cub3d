@@ -51,13 +51,33 @@ typedef struct s_game
 	double		ppos;
 }	t_game;
 
+typedef enum ErrorCode {
+    MORE_THAN_ONE_DIRECTION = 1,
+    MAP_NOT_ENCLOSED_BY_WALLS,
+    CANNOT_OPEN_NORTH_ASSET,
+    CANNOT_OPEN_SOUTH_ASSET,
+    CANNOT_OPEN_EAST_ASSET,
+    CANNOT_OPEN_WEST_ASSET,
+    ARGS_UNDEFINED,
+    RGB_RANGE,
+    RGB_ARGS,
+    INVALID_CONFIG,
+    MEM_FAIL,
+    FILE_NOT_EXIST,
+    INVALID_MAP,
+    MAP_NOT_EXIST,
+	WRONG_EXTENT,
+	DUP_ARGS , 
+	MISSING_ARGS
+} ErrorCode;
+
 
 // PARSING FUNCTIONS //
 
 char	**readmap(char *pathtofile);
 void	freetab(char **str);
 int		get_param(char **config_file,  t_game *game);
-void	split_map(char** map, char*** part1, char*** part2);
+int		split_map(char** map, char*** part1, char*** part2);
 int 	get_color(char *parse_line, int *stack);
 int		check_split_col(char **split);
 int		init_struct(t_game *game, char **config_file);
@@ -65,10 +85,11 @@ char    *removes_first_spaces(char *str, int i);
 char	*removes_last_stuff(char *old_str);
 char	*removes_spaces(char *spc_line);
 char 	*parse_config_line(char *line);
-
+void 	get_dflt_setting(t_game *game);
 int 	get_dir_path(char *path, char **stack, int index);
 int		map_check(char **map);
 void	get_format(char ***parsedmap);
+int		printerror(ErrorCode err);
 
 // RENDERING FUNCTIONS //
 
@@ -81,6 +102,7 @@ int		is_good_char(char* parse_line);
 int		check_extention(char *path, char *ext, int len);
 int		check_game(t_game *game);
 int		free_used_lines(char *a, char *b);
+
 // METH //
 
 #endif
