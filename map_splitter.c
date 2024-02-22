@@ -68,24 +68,20 @@ static int tabemptycheck(char ***tab)
 {
 	int	i;
 	int	j;
-	int	charcount;
 	if (!(*tab) || !(*tab)[0])
 		return (1);
 	i = 0;
-	charcount = 0;
 	while ((*tab)[i])
 	{
 		j = 0;
 		while ((*tab)[i][j])
 		{
 			if (!ft_strchr("\t\n ", (*tab)[i][j]))
-				charcount++;
+				return (1);
 			j++;
 		}
 		i++;
 	}
-	if (!charcount)
-		return (1);
 	return (0);
 }
 
