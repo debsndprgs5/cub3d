@@ -68,24 +68,20 @@ static int tabemptycheck(char ***tab)
 {
 	int	i;
 	int	j;
-	int	charcount;
 	if (!(*tab) || !(*tab)[0])
 		return (1);
 	i = 0;
-	charcount = 0;
 	while ((*tab)[i])
 	{
 		j = 0;
 		while ((*tab)[i][j])
 		{
 			if (!ft_strchr("\t\n ", (*tab)[i][j]))
-				charcount++;
+				return (1);
 			j++;
 		}
 		i++;
 	}
-	if (!charcount)
-		return (1);
 	return (0);
 }
 
@@ -134,8 +130,8 @@ int split_map(char **map, char ***part1, char ***part2)
 	}
 	else
 	{
-		*part1 = malloc(sizeof(char *) * splitline + 1);
-		*part2 = malloc(sizeof(char *) * lines_tot - splitline + 1);
+		*part1 = malloc(sizeof(char *) * (splitline + 1));
+		*part2 = malloc(sizeof(char *) * ((lines_tot - splitline) + 1));
 		if (!*part1 || !*part2)
 		{
 			printerror(MEM_FAIL);

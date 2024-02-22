@@ -53,6 +53,7 @@ int	free_used_lines(char *a, char *b)
 		free(a);
 	if(b)
 		free(b);
+
 	return (0);
 }
 
