@@ -64,26 +64,26 @@ static int findsplitpoint(char **map)
 	return (i);
 }
 
-static int tabemptycheck(char ***tab)
-{
-	int	i;
-	int	j;
-	if (!(*tab) || !(*tab)[0])
-		return (1);
-	i = 0;
-	while ((*tab)[i])
-	{
-		j = 0;
-		while ((*tab)[i][j])
-		{
-			if (!ft_strchr("\t\n ", (*tab)[i][j]))
-				return (1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
+// static int tabemptycheck(char ***tab)
+// {
+// 	int	i;
+// 	int	j;
+// 	if (!(*tab) || !(*tab)[0])
+// 		return (1);
+// 	i = 0;
+// 	while ((*tab)[i])
+// 	{
+// 		j = 0;
+// 		while ((*tab)[i][j])
+// 		{
+// 			if (!ft_strchr("\t\n ", (*tab)[i][j]))
+// 				return (1);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 
 const char *defaultconfig[] = 
@@ -92,7 +92,7 @@ const char *defaultconfig[] =
 	"SO ./Includes/default.xpm", //1
 	"WE ./Includes/default.xpm", //2
 	"EA ./Includes/default.xpm", //3
-	"F 220,100,0", //4
+	"F 220,100,55", //4
 	"C 225,30,0" //5
 };
 
@@ -149,11 +149,6 @@ int split_map(char **map, char ***part1, char ***part2)
 			j++;
 		}
 		(*part2)[lines_tot - splitline] = NULL;
-		if (tabemptycheck(part1))
-		{
-			*part1 = (char **) defaultconfig;
-			printerror(INVALID_CONFIG);
-		}
 	}
 	return (1);
 }

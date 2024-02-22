@@ -63,7 +63,7 @@ int	check_asset_three(char *parse_line, t_game *game)
 		unspace_line = removes_spaces(parse_line);
 		if (!get_color(unspace_line, game->groundcol))
 			return (free_used_lines(unspace_line, parse_line));
-		game->ground_check += 1;
+		game->ground_check = true;
 		free(unspace_line);
 	}
 	if (parse_line [0] == 'C')
@@ -71,7 +71,7 @@ int	check_asset_three(char *parse_line, t_game *game)
 		unspace_line = removes_spaces(parse_line);
 		if (!get_color(unspace_line, game->skycol))
 			return (free_used_lines(unspace_line, parse_line));
-		game->sky_check += 1;
+		game->sky_check = true;
 		free (unspace_line);
 	}
 	return (1);
@@ -116,7 +116,7 @@ int	get_param(char **config_file, t_game *game)
 		i ++;
 	}
 	if (!check_game(game))
-		get_dflt_setting(game);
+		printerror(MISSING_ARGS);
 	print_param(game);
 	return (1);
 }

@@ -45,9 +45,9 @@ typedef struct s_game
 	void		*mlx_session;
 	void		*mlx_window;
 	int			groundcol[4];
-	int 		ground_check;
+	bool 		ground_check;
 	int			skycol[4];
-	int			sky_check;
+	bool		sky_check;
 	double		ppos;
 }	t_game;
 

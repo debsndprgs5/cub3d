@@ -27,7 +27,7 @@ char	*removes_spaces(char *spc_line)
 			spc_count ++;
 		i ++;
 	}
-	new_line = ft_calloc(sizeof (char) , (size_t)(i - spc_count + 1));
+	new_line = ft_calloc(sizeof (char) , (size_t)(i - spc_count+1));
 	i = 0;
 	j = 0;
 	while (spc_line[i])
@@ -37,6 +37,7 @@ char	*removes_spaces(char *spc_line)
 		else
 			i ++;
 	}
+	new_line[j] = '\0';
 	return (new_line);
 }
 
@@ -50,13 +51,13 @@ char	*removes_first_spaces(char *str, int i)
 		i ++;
 	if (i >= ft_strlen(str))
 		return (NULL);
-	new_str = ft_calloc(sizeof(char) , (size_t)(ft_strlen(str) - i + 1));
-	while (i < ft_strlen(str))
+	new_str = ft_calloc(sizeof(char) , (size_t)(ft_strlen(str) - i));
+	while (i <= ft_strlen(str))
 		new_str[j ++] = str[i ++];
 	if (new_str[j - 1] == '\n')
 		new_str[j - 1] = '\0';
-	// else
-	// 	new_str[j--] = '\0';
+	else
+		new_str[j--] = '\0';
 	return (new_str);
 }
 
@@ -71,11 +72,11 @@ char	*removes_last_stuff(char *old_str)
 		return (ft_strdup(old_str));
 	while (new_size >= 0)
 	{
-		if (ft_isprint(old_str[new_size]))
+		if (ft_isprint(old_str[new_size]) && old_str[new_size] != '\n')
 			break ;
 		new_size --;
 	}
-	new_str = ft_calloc(sizeof(char) , (size_t)(new_size+1));
+	new_str = ft_calloc(sizeof(char) , (size_t)(new_size));
 	new_size ++;
 	i = 0;
 	while (i <= new_size)
@@ -83,6 +84,7 @@ char	*removes_last_stuff(char *old_str)
 		new_str[i] = old_str[i];
 		i ++;
 	}
+	new_str[i] = '\0';
 	return (new_str);
 }
 
@@ -112,7 +114,7 @@ int	check_game(t_game *game)
 			return (0);
 		i ++;
 	}
-	if (!game->ground_check || !game->sky_check)
+	if (game->ground_check == false || !game->sky_check == false)
 		return (0);
 	return (1);
 }
