@@ -19,7 +19,11 @@ int	check_extention(char *path, char *ext, int len)
 
 	fd = open(path, O_DIRECTORY);
 	if (fd > 0)
+	{
+		close(fd);
 		return (0);
+	}
+	close(fd);
 	i = ft_strlen(path);
 	i --;
 	while (ext[len] && len >= 0)

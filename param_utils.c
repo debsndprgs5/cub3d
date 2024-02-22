@@ -27,7 +27,7 @@ char	*removes_spaces(char *spc_line)
 			spc_count ++;
 		i ++;
 	}
-	new_line = ft_calloc(sizeof (char) , (size_t)(i - spc_count+1));
+	new_line = ft_calloc(sizeof (char) , (size_t)(i - spc_count + 1));
 	i = 0;
 	j = 0;
 	while (spc_line[i])
@@ -46,15 +46,11 @@ char	*removes_first_spaces(char *str, int i)
 	int		j;
 
 	j = 0;
-	while (str[i])
-	{
-		if (str[i] != ' ' || str[i] != ' ')
-			break ;
+	while (str[i] == ' ' || str[i] == '\t')
 		i ++;
-	}
 	if (i >= ft_strlen(str))
 		return (NULL);
-	new_str = ft_calloc(sizeof(char) , (size_t)(ft_strlen(str) - i+1));
+	new_str = ft_calloc(sizeof(char) , (size_t)(ft_strlen(str) - i + 1));
 	while (i < ft_strlen(str))
 		new_str[j ++] = str[i ++];
 	if (new_str[j - 1] == '\n')
@@ -75,19 +71,18 @@ char	*removes_last_stuff(char *old_str)
 		return (ft_strdup(old_str));
 	while (new_size >= 0)
 	{
-		if (old_str[new_size] != ' ' && ft_isprint(old_str[new_size]))
+		if (ft_isprint(old_str[new_size]))
 			break ;
 		new_size --;
 	}
+	new_str = ft_calloc(sizeof(char) , (size_t)(new_size+1));
 	new_size ++;
-	new_str = ft_calloc(sizeof(char), (size_t)(new_size +1));
 	i = 0;
-	while (i != new_size)
+	while (i <= new_size)
 	{
 		new_str[i] = old_str[i];
 		i ++;
 	}
-	//new_str[i] = '\0';
 	return (new_str);
 }
 
@@ -97,7 +92,8 @@ int	is_good_char(char *parse_line)
 		&& parse_line[0] != 'F' && ft_strncmp(parse_line, "WE", 2)
 		&& ft_strncmp(parse_line, "EA", 2)
 		&& ft_strncmp(parse_line, "SO", 2)
-		&& ft_strncmp(parse_line, "NO", 2))
+		&& ft_strncmp(parse_line, "NO", 2)
+		&& ft_isprint(parse_line[0]))
 	{
 		free(parse_line);
 		return (0);

@@ -1,16 +1,14 @@
 
-NO
-
 F 2,2,2
 
 
-NO Includes/default.xmp
+NO ./Includes/default.xpm
 
-SO Includes/default.xmp
+SO ./Includes/default.xpm
 C 1,	1, 1
-EA Includes/default.xmp
+EA ./Includes/default.xpm
 
-WE	Includes/default.xmp
+WE	./Includes/default.xpm
 
           111111111111111
           1110000W000111111
