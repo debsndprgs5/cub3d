@@ -110,9 +110,11 @@ int	get_param(char **config_file, t_game *game)
 		else if (!check_asset_three(parse_line, game))
 			return (0);
 		else if (!is_good_char(parse_line))
-			return (printerror(ARGS_UNDEFINED));
-		if(parse_line)
+		{
 			free(parse_line);
+			return (printerror(ARGS_UNDEFINED));
+		}
+		free(parse_line);
 		i ++;
 	}
 	if (!check_game(game))
