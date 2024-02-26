@@ -27,7 +27,7 @@ char	*removes_spaces(char *spc_line)
 			spc_count ++;
 		i ++;
 	}
-	new_line = ft_calloc(sizeof (char) , (size_t)(i - spc_count+1));
+	new_line = malloc(sizeof (char) * (i - spc_count) + 1);
 	i = 0;
 	j = 0;
 	while (spc_line[i])
@@ -37,6 +37,7 @@ char	*removes_spaces(char *spc_line)
 		else
 			i ++;
 	}
+	new_line[j] = '\0';
 	return (new_line);
 }
 
@@ -102,7 +103,8 @@ int	is_good_char(char *parse_line)
 		&& parse_line[0] != 'F' && ft_strncmp(parse_line, "WE", 2)
 		&& ft_strncmp(parse_line, "EA", 2)
 		&& ft_strncmp(parse_line, "SO", 2)
-		&& ft_strncmp(parse_line, "NO", 2))
+		&& ft_strncmp(parse_line, "NO", 2)
+		&& ft_isprint(parse_line[0]))
 	{
 		free(parse_line);
 		return (0);
@@ -121,7 +123,7 @@ int	check_game(t_game *game)
 			return (0);
 		i ++;
 	}
-	if (!game->ground_check || !game->sky_check)
+	if (game->ground_check == false || !game->sky_check == false)
 		return (0);
 	return (1);
 }

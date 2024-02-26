@@ -6,12 +6,14 @@
 #    By: zfavere <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/08 22:06:06 by zfavere           #+#    #+#              #
-#    Updated: 2023/02/20 19:20:13 by zfavere          ###   ########.fr        #
+#    Updated: 2024/02/22 17:26:12 by zfavere          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g 
+
+CFLAGS = -Wall -Wextra -Werror -g
+
 SRC = cube.c \
 	  main.c \
 	  map_reader.c \
@@ -32,7 +34,7 @@ NAME = cub3d
 all: $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@ 
 
 $(NAME): $(OBJ)
 	cd mlx_linux && make

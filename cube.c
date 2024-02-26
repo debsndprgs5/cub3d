@@ -22,6 +22,11 @@ int	main(int ac, char **path)
 	if (ac == 2 && check_extention(path[1], ".cub", 3))
 	{
 		map = readmap(path[1]);
+		if (map == NULL)
+		{
+			printerror(FILE_NOT_EXIST);
+			return(1);
+		}
 		if (!split_map(map, &configfile, &parsedmap))
 			return (1);
 		freetab(map);
@@ -38,7 +43,7 @@ int	main(int ac, char **path)
 		// 	printf("sz = %d  | %s", ft_strlen(parsedmap[i]), parsedmap[i]);
 		//renderft();
 		// freetab(configfile);
-		freetab(parsedmap);
+		// terminate(configfile, parsedmap);
 	}
 	else
 		printerror(FILE_NOT_EXIST);

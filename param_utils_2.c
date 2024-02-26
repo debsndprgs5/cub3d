@@ -15,17 +15,23 @@
 int	check_extention(char *path, char *ext, int len)
 {
 	int	i;
-	int	fd;
+	int fd;
 
 	fd = open(path, O_DIRECTORY);
 	if (fd > 0)
+	{
+		close(fd);
 		return (0);
+	}
+	close(fd);
 	i = ft_strlen(path);
 	i --;
 	while (ext[len] && len >= 0)
 	{
 		if (path[i] != ext[len])
+		{
 			return (0);
+		}
 		len --;
 		i --;
 	}
@@ -36,10 +42,8 @@ int	check_extention(char *path, char *ext, int len)
 
 int	free_used_lines(char *a, char *b)
 {
-	if (a)
-		free(a);
-	if(b)
-		free(b);
+	free (a);
+	free (b);
 	return (0);
 }
 
