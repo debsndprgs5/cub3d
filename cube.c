@@ -26,14 +26,14 @@ int	main(int ac, char **path)
 			return (1);
 		freetab(map);
 		get_format(&parsedmap);
-		game.map = parsedmap;
-		if (!(map_check(parsedmap)))
-			return (1);
+		game.map = parsedmap;	
 		if (!init_struct(&game, configfile))
 		{
 			//free game
 			return (1);
 		}
+		if (!(map_check(parsedmap)))
+			return (1);
 		// for (int i = 0; parsedmap[i]; i++)
 		// 	printf("sz = %d  | %s", ft_strlen(parsedmap[i]), parsedmap[i]);
 		//renderft();

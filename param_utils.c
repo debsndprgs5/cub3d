@@ -40,60 +40,65 @@ char	*removes_spaces(char *spc_line)
 	return (new_line);
 }
 
-char	*removes_first_spaces(char *str, int i)
+int	get_next_print(char *str, int start)
+{
+	int	next_start;
+
+	next_start = start;
+	while(str[next_start])
+	{
+		if (ft_isprint(str[next_start]) && str[next_start] != ' ')
+			return (next_start);
+		next_start ++;
+	}
+	return(next_start);
+}
+
+int	get_last_print(char *str)
+{
+	int	end;
+
+	end = ft_strlen(str);
+	while(end >= 0)
+	{
+		if (ft_isprint(str[end]) && str[end] != ' ')
+			return (end);
+		end --;
+	}
+	return (end);
+}
+
+char	*clean_first_spaces(char *str, int i)
 {
 	char	*new_str;
+	int		new_start;
+	int		new_end;
 	int		j;
 
-	j = 0;
-	while (str[i])
-	{
-		if (str[i] != ' ' || str[i] != ' ')
-			break ;
-		i ++;
-	}
-	if (i >= ft_strlen(str))
+	new_start = get_next_print(str, i);
+	if(new_start >= ft_strlen(str))
 		return (NULL);
-	new_str = ft_calloc(sizeof(char) , (size_t)(ft_strlen(str) - i+1));
-	while (i < ft_strlen(str))
-		new_str[j ++] = str[i ++];
-	if (new_str[j - 1] == '\n')
-		new_str[j - 1] = '\0';
-	// else
-	// 	new_str[j--] = '\0';
+	new_end = get_last_print(str);
+	if (new_end <= 0)
+		return (NULL);
+	new_str = ft_calloc(sizeof(char), (size_t)(new_end - new_start + 1));
+	j = 0;
+	while( new_start <= new_end)
+	{
+		new_str[j] = str[new_start];
+		j ++;
+		new_start ++;
+	}
+	new_str[j] = '\0';
 	return (new_str);
 }
 
-char	*removes_last_stuff(char *old_str)
-{
-	char	*new_str;
-	int		new_size;
-	int		i;
-
-	new_size = ft_strlen(old_str);
-	if (new_size <= 1)
-		return (ft_strdup(old_str));
-	while (new_size >= 0)
-	{
-		if (old_str[new_size] != ' ' && ft_isprint(old_str[new_size]))
-			break ;
-		new_size --;
-	}
-	new_size ++;
-	new_str = ft_calloc(sizeof(char), (size_t)(new_size +1));
-	i = 0;
-	while (i != new_size)
-	{
-		new_str[i] = old_str[i];
-		i ++;
-	}
-	//new_str[i] = '\0';
-	return (new_str);
-}
 
 int	is_good_char(char *parse_line)
 {
-	if (parse_line[0] != '\n' && parse_line [0] != 'C'
+	if (parse_line == NULL)
+		return (1);
+	if (parse_line[0] != '\n' &&  parse_line[0] != '\0' && parse_line [0] != 'C'
 		&& parse_line[0] != 'F' && ft_strncmp(parse_line, "WE", 2)
 		&& ft_strncmp(parse_line, "EA", 2)
 		&& ft_strncmp(parse_line, "SO", 2)

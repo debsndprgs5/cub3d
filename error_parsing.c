@@ -47,7 +47,7 @@ const char* ErrorMsg[] =
     "Map missing",
 	"Wrong extention name",
 	"Duplicates arguments",
-	"UNFATAL -> Missings arguments will be set by default"
+	"Missings arguments"
 };
 
 int printerror(ErrorCode err)
