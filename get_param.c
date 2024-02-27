@@ -104,6 +104,7 @@ int 	is_garbage(char *str)
 	{
 		if (ft_isprint(str[i]))
 			return (1);
+		i ++;
 	}
 	return (0);
 }

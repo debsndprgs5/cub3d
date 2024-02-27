@@ -84,8 +84,6 @@ char	*clean_first_spaces(char *str, int i)
 	if(new_start >= ft_strlen(str))
 		return (NULL);
 	new_end = get_last_print(str);
-	if (new_end <= 0)
-		return (NULL);
 	new_str = ft_calloc(sizeof(char), (size_t)(new_end - new_start+2));
 	if (!new_str)
 		return(NULL);
@@ -105,8 +103,7 @@ int	is_good_char(char *parse_line)
 		&& parse_line[0] != 'F' && ft_strncmp(parse_line, "WE", 2)
 		&& ft_strncmp(parse_line, "EA", 2)
 		&& ft_strncmp(parse_line, "SO", 2)
-		&& ft_strncmp(parse_line, "NO", 2)
-		&& ft_isprint(parse_line[0]))
+		&& ft_strncmp(parse_line, "NO", 2))
 	{
 		free(parse_line);
 		return (0);
