@@ -86,6 +86,7 @@ char	*removes_spaces(char *spc_line);
 char 	*parse_config_line(char *line);
 void 	get_dflt_setting(t_game *game);
 int 	get_dir_path(char *path, char **stack, int index);
+int		free_game(t_game *game);
 int		map_check(char **map);
 void	get_format(char ***parsedmap);
 int		printerror(ErrorCode err);
