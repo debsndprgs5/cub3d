@@ -87,26 +87,15 @@ int	get_dir_path(char *path, char **stack, int index)
 		return (printerror(WRONG_EXTENT));
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
+	{
+		close(fd);
 		return (printerror(index + 3));
+	}
 	else if (stack[index] != NULL)
 		return (printerror(DUP_ARGS));
 	stack[index] = ft_strdup(path);
 	close(fd);
 	return (1);
-}
-
-int 	is_garbage(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (ft_isprint(str[i]))
-			return (1);
-		i ++;
-	}
-	return (0);
 }
 
 int	get_param(char **config_file, t_game *game)
@@ -118,9 +107,7 @@ int	get_param(char **config_file, t_game *game)
 	while (config_file[i])
 	{
 		parse_line = clean_first_spaces(config_file[i], 0);
-		if(!is_garbage(config_file[i]))
-			i ++;
-		else if (! parse_line)
+		 if (! parse_line)
 			i ++;
 		else if (!is_good_char(parse_line))
 			return (printerror(ARGS_UNDEFINED));
@@ -134,9 +121,8 @@ int	get_param(char **config_file, t_game *game)
 			i ++;
 		free(parse_line);
 	}
-	print_param(game);
 	if (!check_game(game))
 		return (printerror(MISSING_ARGS));
-	
+	print_param(game);
 	return (1);
 }

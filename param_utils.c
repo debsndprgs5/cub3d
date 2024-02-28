@@ -12,6 +12,26 @@
 
 #include "cube.h"
 
+
+int	get_spaces_count(char *spc_line)
+{
+	int		i;
+	int		spc_count;
+
+	i = 0;
+	spc_count = 0;
+	if(! spc_line)
+		return (spc_count);
+	while (spc_line[i])
+	{
+		if (spc_line[i] == ' ')
+			spc_count ++;
+		i ++;
+	}
+	return (spc_count);
+}
+
+
 char	*removes_spaces(char *spc_line)
 {
 	char	*new_line;
@@ -19,17 +39,9 @@ char	*removes_spaces(char *spc_line)
 	int		i;
 	int		j;
 
-	i = 0;
-	spc_count = 0;
-	if (spc_line == NULL)
-		return (NULL);
-	while (spc_line[i])
-	{
-		if (spc_line[i] == ' ')
-			spc_count ++;
-		i ++;
-	}
-	new_line = ft_calloc(sizeof(char), (i - spc_count +2));
+	spc_count  = get_spaces_count(spc_line);
+	new_line = ft_calloc(sizeof(char), 
+		(ft_strlen(spc_line) - spc_count +2));
 	i = 0;
 	j = 0;
 	while (spc_line[i])
@@ -92,37 +104,4 @@ char	*clean_first_spaces(char *str, int i)
 		new_str[j++] = str[new_start++];
 	new_str[j] = '\0';
 	return (new_str);
-}
-
-
-int	is_good_char(char *parse_line)
-{
-	if (parse_line == NULL)
-		return (1);
-	if (parse_line[0] != '\n' &&  parse_line[0] != '\0' && parse_line [0] != 'C'
-		&& parse_line[0] != 'F' && ft_strncmp(parse_line, "WE", 2)
-		&& ft_strncmp(parse_line, "EA", 2)
-		&& ft_strncmp(parse_line, "SO", 2)
-		&& ft_strncmp(parse_line, "NO", 2))
-	{
-		free(parse_line);
-		return (0);
-	}
-	return (1);
-}
-
-int	check_game(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	while (i <= 3)
-	{
-		if (game->paths[i] == NULL)
-			return (0);
-		i ++;
-	}
-	if (game->ground_check == false || game->sky_check == false)
-		return (0);
-	return (1);
 }
