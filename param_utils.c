@@ -105,3 +105,36 @@ char	*clean_first_spaces(char *str, int i)
 	new_str[j] = '\0';
 	return (new_str);
 }
+
+int	is_good_char(char *parse_line)
+{
+	if (parse_line == NULL)
+		return (1);
+	if (parse_line[0] != '\n' &&  parse_line[0] != '\0' && parse_line [0] != 'C'
+		&& parse_line[0] != 'F' && ft_strncmp(parse_line, "WE", 2)
+		&& ft_strncmp(parse_line, "EA", 2)
+		&& ft_strncmp(parse_line, "SO", 2)
+		&& ft_strncmp(parse_line, "NO", 2)
+		&& ft_isprint(parse_line[0]))
+	{
+		free(parse_line);
+		return (0);
+	}
+	return (1);
+}
+
+int	check_game(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i <= 3)
+	{
+		if (game->paths[i] == NULL)
+			return (0);
+		i ++;
+	}
+	if (game->ground_check == false || game->sky_check == false)
+		return (0);
+	return (1);
+}

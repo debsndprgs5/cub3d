@@ -1,6 +1,18 @@
-#include "cube.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_parsing.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/08 18:37:22 by zfavere           #+#    #+#             */
+/*   Updated: 2024/02/08 18:37:27 by zfavere          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-//Needs to add color and game exit
+
+
+#include "cube.h"
 
 int error_path(int ref)
 {
@@ -26,6 +38,8 @@ int error_path(int ref)
 14 = Map missing 
 15 = wrong extention(.cub || .xpm)
 16 = Duplicate configs arguments
+17 = Missing Arguments
+18 = Position error - check the code
 */
 
 const char* ErrorMsg[] =
@@ -47,7 +61,8 @@ const char* ErrorMsg[] =
     "Map missing",
 	"Wrong extention name",
 	"Duplicates arguments",
-	"Missings arguments"
+	"Missings arguments",
+    "Position error, check the code"
 };
 
 int printerror(ErrorCode err)
