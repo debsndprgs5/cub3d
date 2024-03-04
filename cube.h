@@ -101,8 +101,8 @@ int		init_struct(t_game *game, char **config_file);
 char	*clean_first_spaces(char *str, int i);
 char	*removes_spaces(char *spc_line);
 char 	*parse_config_line(char *line);
-void 	get_dflt_setting(t_game *game);
 int 	get_dir_path(char *path, char **stack, int index);
+int		free_game(t_game *game);
 int		map_check(char **map);
 void	get_format(char ***parsedmap);
 int		printerror(ErrorCode err);
@@ -110,9 +110,6 @@ int		printerror(ErrorCode err);
 // RENDERING FUNCTIONS //
 
 // ERROR CHECKING //
-int		error_color_parsing(int ref);
-int		error_parse_line(int ref);
-int 	error_path(int ref);
 void	print_param(t_game *game);
 int		is_good_char(char* parse_line);
 int		check_extention(char *path, char *ext, int len);

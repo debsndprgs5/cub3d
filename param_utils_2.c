@@ -15,15 +15,15 @@
 int	check_extention(char *path, char *ext, int len)
 {
 	int	i;
-	int fd;
+	// int fd;
 
-	fd = open(path, O_DIRECTORY);
-	if (fd > 0)
-	{
-		close(fd);
-		return (0);
-	}
-	close(fd);
+	// fd = open(path, O_DIRECTORY);
+	// if (fd > 0)
+	// {
+	// 	close(fd);
+	// 	return (0);
+	// }
+	// close(fd);
 	i = ft_strlen(path);
 	i --;
 	while (ext[len] && len >= 0)
@@ -38,8 +38,6 @@ int	check_extention(char *path, char *ext, int len)
 	return (1);
 }
 
-
-
 int	free_used_lines(char *a, char *b)
 {
 	free (a);
@@ -47,28 +45,45 @@ int	free_used_lines(char *a, char *b)
 	return (0);
 }
 
-void get_dflt_setting(t_game *game)
+int	free_game(t_game *game)
+{
+	int i;
+
+	i = 0;
+	while(i <= 3)
+		free(game->paths[i++]);
+	free(game->paths);
+	return (0);
+}
+
+int	is_good_char(char *parse_line)
+{
+	if (parse_line == NULL)
+		return (1);
+	if (parse_line[0] != '\n' &&  parse_line[0] != '\0' && parse_line [0] != 'C'
+		&& parse_line[0] != 'F' && ft_strncmp(parse_line, "WE", 2)
+		&& ft_strncmp(parse_line, "EA", 2)
+		&& ft_strncmp(parse_line, "SO", 2)
+		&& ft_strncmp(parse_line, "NO", 2))
+	{
+		free(parse_line);
+		return (0);
+	}
+	return (1);
+}
+
+int	check_game(t_game *game)
 {
 	int	i;
 
 	i = 0;
-	while(i <= 3)
+	while (i <= 3)
 	{
-		if(game->paths[i] == NULL)
-			game->paths[i] = "./Includes/default.xpm";
+		if (game->paths[i] == NULL)
+			return (0);
 		i ++;
 	}
-	if (!game->sky_check)
-	{	
-		game->skycol[0] = 0;
-		game->skycol[1] = 0;
-		game->skycol[2] = 0;
-	}
-	if (!game->ground_check)
-	{
-		game->groundcol[0] = 255;
-		game->groundcol[1] = 255;
-		game->groundcol[2] = 255;
-	}
-	printerror(MISSING_ARGS);
+	if (game->ground_check == false || game->sky_check == false)
+		return (0);
+	return (1);
 }

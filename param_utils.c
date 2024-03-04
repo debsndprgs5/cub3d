@@ -12,6 +12,26 @@
 
 #include "cube.h"
 
+
+int	get_spaces_count(char *spc_line)
+{
+	int		i;
+	int		spc_count;
+
+	i = 0;
+	spc_count = 0;
+	if(! spc_line)
+		return (spc_count);
+	while (spc_line[i])
+	{
+		if (spc_line[i] == ' ')
+			spc_count ++;
+		i ++;
+	}
+	return (spc_count);
+}
+
+
 char	*removes_spaces(char *spc_line)
 {
 	char	*new_line;
@@ -19,15 +39,9 @@ char	*removes_spaces(char *spc_line)
 	int		i;
 	int		j;
 
-	i = 0;
-	spc_count = 0;
-	while (spc_line[i])
-	{
-		if (spc_line[i] == ' ' || '	')
-			spc_count ++;
-		i ++;
-	}
-	new_line = malloc(sizeof (char) * (i - spc_count) + 1);
+	spc_count  = get_spaces_count(spc_line);
+	new_line = ft_calloc(sizeof(char), 
+		(ft_strlen(spc_line) - spc_count +2));
 	i = 0;
 	j = 0;
 	while (spc_line[i])
@@ -76,24 +90,21 @@ char	*clean_first_spaces(char *str, int i)
 	int		new_end;
 	int		j;
 
+	if (!str)
+		return (NULL);
 	new_start = get_next_print(str, i);
 	if(new_start >= ft_strlen(str))
 		return (NULL);
 	new_end = get_last_print(str);
-	if (new_end <= 0)
-		return (NULL);
-	new_str = ft_calloc(sizeof(char), (size_t)(new_end - new_start + 1));
+	new_str = ft_calloc(sizeof(char), (size_t)(new_end - new_start+2));
+	if (!new_str)
+		return(NULL);
 	j = 0;
 	while( new_start <= new_end)
-	{
-		new_str[j] = str[new_start];
-		j ++;
-		new_start ++;
-	}
+		new_str[j++] = str[new_start++];
 	new_str[j] = '\0';
 	return (new_str);
 }
-
 
 int	is_good_char(char *parse_line)
 {

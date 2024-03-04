@@ -34,9 +34,10 @@ int	main(int ac, char **path)
 		game.map = parsedmap;
 		if (!init_struct(&game, configfile))
 		{
-			//free game
+			//free_game(&game);
 			return (1);
 		}
+		//free_game(&game);
 		if (!(map_check(parsedmap)))
 			return (1);
 		raycasting_loop(&game);
@@ -45,6 +46,7 @@ int	main(int ac, char **path)
 		//renderft();
 		// freetab(configfile);
 		// terminate(configfile, parsedmap);
+		
 	}
 	else
 		printerror(FILE_NOT_EXIST);
