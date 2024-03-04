@@ -91,6 +91,7 @@ void	get_format(char ***parsedmap);
 int		printerror(ErrorCode err);
 
 // RENDERING FUNCTIONS //
+int render_game(t_game *game);
 
 // ERROR CHECKING //
 void	print_param(t_game *game);
