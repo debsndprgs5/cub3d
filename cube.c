@@ -31,7 +31,7 @@ int	main(int ac, char **path)
 			return (1);
 		freetab(map);
 		get_format(&parsedmap);
-		game.map = parsedmap;	
+		game.map = parsedmap;
 		if (!init_struct(&game, configfile))
 		{
 			//free game
@@ -39,6 +39,7 @@ int	main(int ac, char **path)
 		}
 		if (!(map_check(parsedmap)))
 			return (1);
+		raycasting_loop(&game);
 		// for (int i = 0; parsedmap[i]; i++)
 		// 	printf("sz = %d  | %s", ft_strlen(parsedmap[i]), parsedmap[i]);
 		//renderft();

@@ -123,7 +123,7 @@ int	check_game(t_game *game)
 			return (0);
 		i ++;
 	}
-	if (game->ground_check == false || !game->sky_check == false)
+	if (game->ground_check == false || game->sky_check == false)
 		return (0);
 	return (1);
 }

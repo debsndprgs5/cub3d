@@ -26,6 +26,7 @@ SRC = cube.c \
 	  param_utils_2.c \
 	  parse_map.c \
 	  rgb_param.c \
+	  raycasting_loop.c \
 
 
 OBJ = $(SRC:.c=.o)

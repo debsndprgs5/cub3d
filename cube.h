@@ -13,15 +13,22 @@
 #ifndef CUBE_H
 #define CUBE_H
 
-# include "./Includes/libft/libft.h"
+#include "./Includes/libft/libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-# include <unistd.h>
-# include <stdbool.h>
-# include <fcntl.h>
+#include <unistd.h>
+#include <stdbool.h>
+#include <fcntl.h>
 #include <mlx.h>
+#include <math.h>
+
+#define WIDTH 960
+
+#define LENGTH 540
+
+#define FOV 80
 
 // Walls/Ground raw images
 
@@ -33,13 +40,21 @@ typedef struct s_frames
 	void **w_we_img;
 }	t_frames;
 
+typedef struct s_ppos
+{
+	double x;
+	double y;
+}	t_ppos;
+
 // Main struct
 // Paths are N->0 S->1 E->2 W->3 in this order
 typedef struct s_game
 {
 	t_frames	*frames;
-	int			xdiff;
-	int			ydiff;
+	// int			ymin;
+	int			ymax;
+	// int			xmin;
+	int			xmax;
 	char		**paths;
 	char		**map;
 	void		*mlx_session;
@@ -48,7 +63,7 @@ typedef struct s_game
 	bool 		ground_check;
 	int			skycol[4];
 	bool		sky_check;
-	double		ppos;
+	t_ppos		ppos;
 }	t_game;
 
 typedef enum ErrorCode {
@@ -68,12 +83,14 @@ typedef enum ErrorCode {
     MAP_NOT_EXIST,
 	WRONG_EXTENT,
 	DUP_ARGS , 
-	MISSING_ARGS
+	MISSING_ARGS,
+	POS_ERROR
 } ErrorCode;
 
 
 // PARSING FUNCTIONS //
 
+int		raycasting_loop(t_game *game);
 char	**readmap(char *pathtofile);
 void	freetab(char **str);
 int		get_param(char **config_file,  t_game *game);

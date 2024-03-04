@@ -13,7 +13,7 @@ for file in *; do
     if [ -f "$file" ]; then
         cd "$START_DIR"
         echo "Executing ./cub3d with $file..."
-        ./cub3d "$1/$file"
+        valgrind --leak-check=full ./cub3d "$1/$file"
         
         read -p "Press Enter to continue..."
         

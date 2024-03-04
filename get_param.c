@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   parsing.c										  :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: zfavere <marvin@42.fr>					 +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2024/02/08 18:37:22 by zfavere		   #+#	#+#			 */
-/*   Updated: 2024/02/08 18:37:27 by zfavere		  ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_param.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/08 18:37:22 by zfavere           #+#    #+#             */
+/*   Updated: 2024/02/08 18:37:27 by zfavere          ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
@@ -118,8 +118,8 @@ int	get_param(char **config_file, t_game *game)
 			i ++;
 		free(parse_line);
 	}
+	print_param(game);
 	if (!check_game(game))
 		return (printerror(MISSING_ARGS));
-	print_param(game);
 	return (1);
 }

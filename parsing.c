@@ -32,7 +32,7 @@ int init_first_game(t_game *game)
 static void ft_init_mlx(t_game *game)
 {
 	game->mlx_session = mlx_init();
-	game->mlx_window = mlx_new_window(game->mlx_session, 1920, 1080, "Cub3D");
+	game->mlx_window = mlx_new_window(game->mlx_session, 960, 540, "Cub3D");
 }
 
 void get_player_pos(int *x, int *y, t_game *game)
@@ -63,9 +63,9 @@ void get_player_pos(int *x, int *y, t_game *game)
 int init_struct(t_game *game, char **config_file)
 {
 	t_frames	frames;
+	t_ppos		ppos;
 	int width;
 	int height;
-	
 	int	x;
 	int	y;
 
@@ -76,8 +76,15 @@ int init_struct(t_game *game, char **config_file)
 	if (!get_param(config_file, game))
 		return (0);
 	get_player_pos(&x, &y, game);
-	game->xdiff = -x;
-	game->ydiff = -y;
+	game->ppos = ppos;
+	game->ppos.x = (double) x + 0.5;
+	game->ppos.y = (double) y + 0.5;
+	game->ymax = 0;
+	game->xmax = ft_strlen(game->map[0]);
+	while (game->map[game->ymax])
+		game->ymax++;
+	game->ymax -= 1;
+	// printf("-------------\nxm = %d\nym = %d\n-------------", game->xmax, game->ymax);
 	ft_init_mlx(game);
 	frames.w_no_img = mlx_xpm_file_to_image(game->mlx_session,
 		game->paths[0], &width, &height);
