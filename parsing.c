@@ -95,5 +95,7 @@ int init_struct(t_game *game, char **config_file)
 	frames.w_we_img = mlx_xpm_file_to_image(game->mlx_session,
 		game->paths[3], &width, &height);
 	game->frames = &frames;
+	mlx_loop_hook(game->mlx_session, render_game, game);
+	mlx_loop(game->mlx_session);
 	return(1);
 }
