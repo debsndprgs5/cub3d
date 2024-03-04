@@ -77,3 +77,16 @@ int raycasting_loop(t_game *game)
 	}
 	return(0);
 }
+
+
+// 1 = N
+// 2 = S
+// 3 = E
+// 4 = W
+
+int get_playerdir(t_game *game)
+{
+	int dir;
+
+	if (game->ppos.)
+}

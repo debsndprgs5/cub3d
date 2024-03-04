@@ -28,7 +28,7 @@
 
 #define LENGTH 540
 
-#define FOV 80
+#define FOV 90
 
 // Walls/Ground raw images
 
