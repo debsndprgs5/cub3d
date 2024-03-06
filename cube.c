@@ -46,7 +46,6 @@ int	main(int ac, char **path)
 		//renderft();
 		// freetab(configfile);
 		// terminate(configfile, parsedmap);
-		
 	}
 	else
 		printerror(FILE_NOT_EXIST);

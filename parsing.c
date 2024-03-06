@@ -77,8 +77,8 @@ int init_struct(t_game *game, char **config_file)
 		return (0);
 	get_player_pos(&x, &y, game);
 	game->ppos = ppos;
-	game->ppos.x = (double) x + 0.5;
-	game->ppos.y = (double) y + 0.5;
+	game->ppos.x = (double) x - 0.5;
+	game->ppos.y = (double) y - 0.5;
 	game->ymax = 0;
 	game->xmax = ft_strlen(game->map[0]);
 	while (game->map[game->ymax])
@@ -95,7 +95,9 @@ int init_struct(t_game *game, char **config_file)
 	frames.w_we_img = mlx_xpm_file_to_image(game->mlx_session,
 		game->paths[3], &width, &height);
 	game->frames = &frames;
+	game->lookingdir = get_iniplayerdir(game);
+	// printf("lookingdir = %d\n", game->lookingdir);
 	mlx_loop_hook(game->mlx_session, render_game, game);
-	mlx_loop(game->mlx_session);
+	// mlx_loop(game->mlx_session);
 	return(1);
 }

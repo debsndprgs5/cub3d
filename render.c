@@ -22,12 +22,12 @@ void	render_background(t_game *game)
 
 	x = 0;
 	y = 0;
-	while(y <= 1920)//(MAx LEN)
+	while(y <= WIDTH)//(MAx LEN)
 	{
 		x = 0;
-		while(x <= 1080) //(max HIGTH)
+		while(x <= LENGTH) //(max HIGTH)
 		{
-			if (x <= 1080/2)
+			if (x <= LENGTH/2)
 				mlx_pixel_put(game->mlx_session, game->mlx_window, y, x, get_good_rgb(game->skycol));
 			else
 				mlx_pixel_put(game->mlx_session, game->mlx_window, y, x, get_good_rgb(game->groundcol));
