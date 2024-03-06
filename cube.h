@@ -112,6 +112,8 @@ int 	render_game(t_game *game);
 int 	set_good_wall(double wall_x, double wall_y, t_game *game);
 double 	get_wall_higth(double wall_x, double wall_y, t_ppos player);
 void 	render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game);
+void 	render_all(t_game *game);
+int 	get_key(t_game *game, int key);
 int get_good_rgb(int *arr);// use here only to have color render wall instead of xpm textures
 
 // ERROR CHECKING //

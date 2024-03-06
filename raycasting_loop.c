@@ -86,9 +86,9 @@ int raycasting_loop(t_game *game)
 // 3 = E
 // 4 = W
 
-int get_playerdir(t_game *game)
-{
-	int dir;
+// int get_playerdir(t_game *game)
+// {
+// 	int dir;
 
-	if (game->ppos.)
-}
+// 	if (game->ppos.)
+// }

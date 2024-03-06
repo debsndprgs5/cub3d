@@ -48,7 +48,6 @@ void render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game)
 
 	wall_image = set_good_wall(wall_x, wall_y, game);
 	wall_size = get_wall_higth(wall_x, wall_y, game->ppos);
-	printf("HAUTEUR DU MUR %f\n", wall_size);
 	start = 0;
 	if (wall_size < LENGTH)
 	{
@@ -71,4 +70,11 @@ int render_game(t_game *game)
 	render_background(game);
 	raycasting_loop(game);
 	return(0);
+}
+
+void render_all(t_game *game)
+{
+	mlx_key_hook(game->mlx_session, get_key, game);
+	mlx_loop_hook(game->mlx_session, render_game, game);
+	mlx_loop(game->mlx_session);
 }

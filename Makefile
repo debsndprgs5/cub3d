@@ -29,7 +29,7 @@ SRC = cube.c \
 	  render.c \
 	  raycasting_loop.c \
 	  get_good_wall.c \
-	  get_size.c \
+	  player_move.c \
 
 
 OBJ = $(SRC:.c=.o)
