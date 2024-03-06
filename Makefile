@@ -28,6 +28,8 @@ SRC = cube.c \
 	  rgb_param.c \
 	  render.c \
 	  raycasting_loop.c \
+	  get_good_wall.c \
+	  get_size.c \
 
 
 OBJ = $(SRC:.c=.o)

@@ -134,6 +134,7 @@ int raycasting_loop(t_game *game)
 	{
 		printf("angle = %f\n", angle);
 		cast_ray(game, deg_to_rad(angle), &foundx, &foundy);
+		render_wall(foundx, foundy, i, game);
 		i++;
 		angle += temp;
 		if (angle >= 360)
