@@ -122,19 +122,3 @@ int	is_good_char(char *parse_line)
 	}
 	return (1);
 }
-
-int	check_game(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	while (i <= 3)
-	{
-		if (game->paths[i] == NULL)
-			return (0);
-		i ++;
-	}
-	if (game->ground_check == false || game->sky_check == false)
-		return (0);
-	return (1);
-}

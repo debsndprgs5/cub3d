@@ -69,11 +69,13 @@ int raycasting_loop(t_game *game)
 	temp = 1/temp;
 	while (i <= WIDTH)
 	{
-		printf("angle = %f\n", angle);
+		//printf("angle = %f\n", angle);
 		cast_ray(game, angle, &foundx, &foundy);
+		render_wall(foundx, foundy, i, game);
 		i++;
 		angle += temp;
-		printf("x du mur trouve = %f\ny du mur trouve = %f\n", foundx, foundy);
+		//printf("x du mur trouve = %f\ny du mur trouve = %f\n", foundx, foundy);
+		
 	}
 	return(0);
 }

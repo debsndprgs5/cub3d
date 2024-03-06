@@ -12,19 +12,17 @@
 
 #include "libft.h"
 
-int	ft_abs(int val)
+double	ft_abs(double val)
 {
 	if (val < 0)
 		val = -val;
 	return (val);
 }
 
-int	ft_val_abs(int ref, int val)
+double	ft_val_abs(double ref, double val)
 {
-	int	abs_val;
-	int	abs_ref;
 
-	abs_ref = ref;
-	abs_val = val;
-	return (abs_ref - abs_val);
+	if (ref > val)
+		return(ref - val);
+	return(val - ref);
 }
