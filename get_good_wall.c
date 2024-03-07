@@ -11,7 +11,7 @@ double get_wall_higth(double wall_x, double wall_y, t_ppos player)
 
 	proj_dist = (WIDTH/2)/tan(3.14159265358979323846 * 1/4);
 	distance = sqrt(pow((wall_x - player.x), 2) + pow((wall_y - player.y),2));
-	printf("DISTANCE CONNUE = %f\n", distance);
+	 printf("DISTANCE CONNUE = %f\n", distance);
 
 	return ((double)((WALL_HIGTH * proj_dist) / distance)); // *ratio unite/pixel ?
 }
@@ -75,12 +75,12 @@ int set_good_wall(double wall_x, double wall_y, t_game *game)
 	int weast[3] = {255,255,0}; //yellow
 
 	face = get_dir_wall(wall_x, wall_y);
-	printf("FACE DU MUR TROUVE : %d\n", face);
+	 printf("FACE DU MUR TROUVE : %d\n", face);
 	dir = find_dir_wall(wall_x, wall_y, game->ppos);
-	printf("DIR DU MUR TROUVE : %d\n", dir);
+	 printf("DIR DU MUR TROUVE : %d\n", dir);
 	if (face == 1 || face == 0) //SIDE
 	{
-		if (dir == 11 || 21 || 31)
+		if (dir == 11 || dir == 21 || dir == 31)
 			return (get_good_rgb(east));	//EAST
 		else
 			return (get_good_rgb(weast)); //WEST
@@ -94,3 +94,4 @@ int set_good_wall(double wall_x, double wall_y, t_game *game)
 	}
 	return (-1);
 }
+

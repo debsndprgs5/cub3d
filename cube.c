@@ -41,6 +41,7 @@ int	main(int ac, char **path)
 		if (!(map_check(parsedmap)))
 			return (1);
 		render_game(&game);
+		mlx_loop(game.mlx_session);
 		// for (int i = 0; parsedmap[i]; i++)
 		// 	printf("sz = %d  | %s", ft_strlen(parsedmap[i]), parsedmap[i]);
 		//renderft();

@@ -48,7 +48,7 @@ void render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game)
 
 	wall_image = set_good_wall(wall_x, wall_y, game);
 	wall_size = get_wall_higth(wall_x, wall_y, game->ppos);
-	printf("HAUTEUR DU MUR %f\n", wall_size);
+	// printf("HAUTEUR DU MUR %f\n", wall_size);
 	start = 0;
 	if (wall_size < LENGTH)
 	{
