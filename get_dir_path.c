@@ -1,6 +1,5 @@
 #include "cube.h"
 
-
 void	print_param(t_game *game)
 {
 	int i;

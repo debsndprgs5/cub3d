@@ -16,7 +16,7 @@
 #define PI 3.14159265358979323846
 
 
-static double deg_to_rad(double degrees) 
+double deg_to_rad(double degrees) 
 {
 	return (degrees * (PI / 180.0));
 }
@@ -81,6 +81,8 @@ static void ray_wall_hit_trigger(t_ray *ray, t_game *game,
 		*foundx = game->ppos.x + ray->perpWallDist * ray->dx;
 		*foundy = ray->y0;
 	}
+	//printf("RAY DIST %f \n", ray->perpWallDist);
+	game->wall_dist = ray->perpWallDist;
 }
 
 static void cast_ray(t_game *game, double angle, double *foundx, double *foundy)
@@ -109,7 +111,7 @@ static void cast_ray(t_game *game, double angle, double *foundx, double *foundy)
 			ray.y0 += ray.stepY;
 			ray.side = 1;
 		}
-		// Vérifiez si le rayon a touché un mur
+		// Vérifier si le rayon a touché un mur
 		if (iswall(ray.x0, ray.y0, game->map))
 			ray_wall_hit_trigger(&ray, game, foundx, foundy);
 	}
@@ -132,14 +134,15 @@ int raycasting_loop(t_game *game)
 	temp = 1/temp;
 	while (i <= WIDTH)
 	{
-		printf("angle = %f\n", angle);
-		cast_ray(game, deg_to_rad(-angle), &foundx, &foundy);
+		//printf("angle = %f\n", angle);
+		cast_ray(game, deg_to_rad(angle), &foundx, &foundy);
 		render_wall(foundx, foundy, i, game);
-		i++;
+	printf("x du mur trouve = %f\ny du mur trouve = %f\n", foundx, foundy);
 		angle += temp;
 		if (angle >= 360)
 			angle -= 360;
-		printf("x du mur trouve = %f\ny du mur trouve = %f\n", foundx, foundy);
+		i ++;
+		
 	}
 	return(0);
 }

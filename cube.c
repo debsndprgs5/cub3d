@@ -40,8 +40,7 @@ int	main(int ac, char **path)
 		//free_game(&game);
 		if (!(map_check(parsedmap)))
 			return (1);
-		render_game(&game);
-		mlx_loop(game.mlx_session);
+		render_all(&game);
 		// for (int i = 0; parsedmap[i]; i++)
 		// 	printf("sz = %d  | %s", ft_strlen(parsedmap[i]), parsedmap[i]);
 		//renderft();
