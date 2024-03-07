@@ -3,15 +3,16 @@
 
 #define WALL_HIGTH (double) 1.5
 
-double get_wall_higth(double wall_x, double wall_y, t_ppos player)
+int get_wall_higth(double wall_x, double wall_y, t_ppos player, t_game *game)
 {
 
 	double distance;
 	double proj_dist;
 
-	proj_dist = (WIDTH/2)/tan(3.14159265358979323846 * 1/4);
-	distance = sqrt(pow((wall_x - player.x), 2) + pow((wall_y - player.y),2));
-	return ((double)((WALL_HIGTH * proj_dist) / distance)); // *ratio unite/pixel ?
+	proj_dist = (WIDTH/2)/tan(deg_to_rad(FOV/2));
+	distance = game->wall_dist;
+	return((LENGTH/distance));
+	return ((double)((WALL_HIGTH * proj_dist) / distance + wall_x + player.x * wall_y)); // *ratio unite/pixel ?
 }
 
 int is_full(double num)
@@ -19,9 +20,9 @@ int is_full(double num)
 	int	tmp;
 
 	tmp = (int)num;
-	if (num == tmp)
-		return (0);
-	return (1);
+	if (num == (double)tmp)
+		return (1);
+	return (0);
 }
 
 /* East = 1 Weast  = 2 North = 10 South = 20 */
@@ -51,13 +52,13 @@ int	find_dir_wall(double wall_x, double wall_y,  t_ppos player)
 
 int get_dir_wall(double wall_x, double wall_y)
 {
-	if(!is_full(wall_x) && !is_full(wall_y))
+	if(is_full(wall_x) && is_full(wall_y))
 		return (0);
-	if(!is_full(wall_x))
+	if(is_full(wall_x))
 		return (1);
-	if(!is_full(wall_y))
+	if(is_full(wall_y))
 		return (2);
-	return (-1);
+	return (0);
 }
 
 
@@ -74,10 +75,11 @@ int set_good_wall(double wall_x, double wall_y, t_game *game)
 
 	face = get_dir_wall(wall_x, wall_y);
 	dir = find_dir_wall(wall_x, wall_y, game->ppos);
+	printf("DIR = %d FACE == %d\n", dir, face);
 	if (face == 1 || face == 0) //SIDE
 	{
-		if (dir == 11 || 21 || 31)
-			return (get_good_rgb(east));	//EAST
+		if (dir == 11 || dir == 21 || dir == 31)
+			return (get_good_rgb(east));//EAST
 		else
 			return (get_good_rgb(weast)); //WEST
 	}

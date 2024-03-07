@@ -46,6 +46,25 @@ typedef struct s_ppos
 	double y;
 }	t_ppos;
 
+typedef struct s_ray
+{
+	double	deltaDistX; /* La longueur
+	du rayon depuis le point courant jusqu'au prochain cote x */
+	double	deltaDistY; /* La longueur
+	du rayon depuis le point courant jusqu'au prochain cote y */
+	double	sideDistX; // Distance vers le prochain mur en X
+	double	sideDistY; // Distance vers le prochain mur en Y
+	double	perpWallDist;
+	int		stepX; // FLAG / Quel cote le rayon va tapper ensuite
+	int		stepY; // FLAG / Quel cote le rayon va tapper ensuite
+	int		hit; // FLAG / Est-ce que le rayon a touché un mur ?
+	int		side; // FLAG / Est-ce que le rayon a touché un côté X ou un côté Y du bloc ?
+	int		x0; // Valeur de x de depart (pos joueur)
+	int		y0; // Valeur de y de depart (pos joueur)
+	double	dx; // Vecteurs directionnel dx/dy
+	double	dy;
+} t_ray;
+
 // Main struct
 // Paths are N->0 S->1 E->2 W->3 in this order
 typedef struct s_game
@@ -64,6 +83,8 @@ typedef struct s_game
 	int			skycol[4];
 	bool		sky_check;
 	t_ppos		ppos;
+	int			lookingdir;
+	double		wall_dist;
 }	t_game;
 
 typedef enum ErrorCode {
@@ -84,7 +105,8 @@ typedef enum ErrorCode {
 	WRONG_EXTENT,
 	DUP_ARGS , 
 	MISSING_ARGS,
-	POS_ERROR
+	POS_ERROR,
+	MATH_ERROR,
 } ErrorCode;
 
 
@@ -105,15 +127,16 @@ int 	get_dir_path(char *path, char **stack, int index);
 int		free_game(t_game *game);
 int		map_check(char **map);
 void	get_format(char ***parsedmap);
-int		printerror(ErrorCode err);
+int		get_iniplayerdir(t_game *game);
 
 // RENDERING FUNCTIONS //
 int 	render_game(t_game *game);
 int 	set_good_wall(double wall_x, double wall_y, t_game *game);
-double 	get_wall_higth(double wall_x, double wall_y, t_ppos player);
+int 	get_wall_higth(double wall_x, double wall_y, t_ppos player, t_game *game);
 void 	render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game);
 void 	render_all(t_game *game);
 int 	get_key(t_game *game, int key);
+double deg_to_rad(double degrees);
 int get_good_rgb(int *arr);// use here only to have color render wall instead of xpm textures
 
 // ERROR CHECKING //
@@ -122,7 +145,9 @@ int		is_good_char(char* parse_line);
 int		check_extention(char *path, char *ext, int len);
 int		check_game(t_game *game);
 int		free_used_lines(char *a, char *b);
+int		printerror(ErrorCode err);
 
 // METH //
+void adjust_coords(double *x, double *y);
 
 #endif

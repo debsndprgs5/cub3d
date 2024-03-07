@@ -40,6 +40,7 @@ int error_path(int ref)
 16 = Duplicate configs arguments
 17 = Missing Arguments
 18 = Position error - check the code
+19 = Math error, please stop meth
 */
 
 const char* ErrorMsg[] =
@@ -62,7 +63,8 @@ const char* ErrorMsg[] =
 	"Wrong extention name",
 	"Duplicates arguments",
 	"Missings arguments",
-    "Position error, check the code"
+    "Position error, check the code",
+    "Math error, please stop meth"
 };
 
 int printerror(ErrorCode err)

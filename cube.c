@@ -41,13 +41,12 @@ int	main(int ac, char **path)
 		if (!(map_check(parsedmap)))
 			return (1);
 
-		
+		render_all(&game);		
 		// for (int i = 0; parsedmap[i]; i++)
 		// 	printf("sz = %d  | %s", ft_strlen(parsedmap[i]), parsedmap[i]);
 		//renderft();
 		// freetab(configfile);
 		// terminate(configfile, parsedmap);
-		
 	}
 	else
 		printerror(FILE_NOT_EXIST);
