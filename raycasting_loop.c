@@ -81,6 +81,7 @@ static void ray_wall_hit_trigger(t_ray *ray, t_game *game,
 		*foundx = game->ppos.x + ray->perpWallDist * ray->dx;
 		*foundy = ray->y0;
 	}
+	//printf("RAY DIST %f \n", ray->perpWallDist);
 	game->wall_dist = ray->perpWallDist;
 }
 
@@ -136,11 +137,12 @@ int raycasting_loop(t_game *game)
 		//printf("angle = %f\n", angle);
 		cast_ray(game, deg_to_rad(angle), &foundx, &foundy);
 		render_wall(foundx, foundy, i, game);
-		i ++;
+	printf("x du mur trouve = %f\ny du mur trouve = %f\n", foundx, foundy);
 		angle += temp;
 		if (angle >= 360)
 			angle -= 360;
-		//printf("x du mur trouve = %f\ny du mur trouve = %f\n", foundx, foundy);
+		i ++;
+		
 	}
 	return(0);
 }
