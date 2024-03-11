@@ -64,6 +64,15 @@ static void calc_ray_steps(t_game *game, t_ray *ray)
 	}
 }
 
+
+
+double fisheyefix(double dx, double dy)
+{
+    double angle;
+    angle = atan2(dy, dx);
+    return angle;
+}
+
 static void ray_wall_hit_trigger(t_ray *ray, t_game *game,
 	double *foundx, double *foundy)
 {
@@ -83,6 +92,7 @@ static void ray_wall_hit_trigger(t_ray *ray, t_game *game,
 	}
 	//printf("RAY DIST %f \n", ray->perpWallDist);
 	game->wall_dist = ray->perpWallDist;
+	game->wall_dist *= fabs(cos(fisheyefix(ray->dx, ray->dy) - deg_to_rad(game->lookingdir)));
 }
 
 static void cast_ray(t_game *game, double angle, double *foundx, double *foundy)
@@ -137,7 +147,7 @@ int raycasting_loop(t_game *game)
 		//printf("angle = %f\n", angle);
 		cast_ray(game, deg_to_rad(angle), &foundx, &foundy);
 		render_wall(foundx, foundy, i, game);
-	printf("x du mur trouve = %f\ny du mur trouve = %f\n", foundx, foundy);
+		printf("x du mur trouve = %f\ny du mur trouve = %f\n", foundx, foundy);
 		angle += temp;
 		if (angle >= 360)
 			angle -= 360;

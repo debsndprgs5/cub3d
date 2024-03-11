@@ -11,7 +11,7 @@ double get_wall_higth(double wall_x, double wall_y, t_ppos player, t_game *game)
 
 	proj_dist = (WIDTH/2)/tan(deg_to_rad(FOV/2));
 	distance = game->wall_dist;
-	printf("%f\n", distance);
+	// printf("%f\n", distance);
 	return(LENGTH/distance);
 	return ((double)((WALL_HIGTH * proj_dist) / distance + wall_x + player.x * wall_y)); // *ratio unite/pixel ?
 }
