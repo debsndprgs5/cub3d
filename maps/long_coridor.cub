@@ -3,8 +3,8 @@ SO	sprites/basic.xpm
 WE	sprites/basic.xpm
 EA	sprites/basic.xpm
 
-F	100,0,100
-C	0,100,100
+F	2, 122, 144
+C	63, 93, 248
 
 
                1111111
@@ -42,6 +42,6 @@ C	0,100,100
                1000001
                1000001
                1000001
-               1000001
+               100N001
                1111111
              

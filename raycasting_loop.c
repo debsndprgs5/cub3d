@@ -25,6 +25,8 @@ double deg_to_rad(double degrees)
 
 static int iswall(int x, int y, char **map)
 {
+	if (y == -1)
+		y = 0;
 	if (map[y][x] == '1')
 		return (1);
 	return(0);
@@ -142,17 +144,14 @@ int raycasting_loop(t_game *game)
 	angle = (double) game->lookingdir;
 	temp = (double) WIDTH / (double) FOV;
 	temp = 1/temp;
-	while (i <= WIDTH)
+	while (i < WIDTH)
 	{
-		//printf("angle = %f\n", angle);
 		cast_ray(game, deg_to_rad(angle), &foundx, &foundy);
 		render_wall(foundx, foundy, i, game);
-		printf("x du mur trouve = %f\ny du mur trouve = %f\n", foundx, foundy);
 		angle += temp;
 		if (angle >= 360)
 			angle -= 360;
-		i ++;
-		
+		i ++;		
 	}
 	return(0);
 }

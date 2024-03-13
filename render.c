@@ -30,11 +30,13 @@ void	render_background(t_game *game)
 			if (x <= LENGTH/2)
 				mlx_pixel_put(game->mlx_session, game->mlx_window, y, x, get_good_rgb(game->skycol));
 			else
+			{
 				mlx_pixel_put(game->mlx_session, game->mlx_window, y, x, get_good_rgb(game->groundcol));
+			}
 			x++;
 		}
 		y++;
-	}
+	}	
 	
 	
 }
@@ -47,7 +49,7 @@ void render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game)
 	int end;
 
 	wall_image = set_good_wall(wall_x, wall_y, game);
-	wall_size = (int)get_wall_higth(wall_x, wall_y, game->ppos, game);
+	wall_size = (int)(LENGTH/game->wall_dist);
 	start = 0;
 	if (wall_size < LENGTH)
 	{
@@ -74,9 +76,7 @@ int render_game(t_game *game)
 
 void render_all(t_game *game)
 {
-	// mlx_key_hook(game->mlx_session, get_key, game);
-	//mlx_loop_hook(game->mlx_session, render_game, game);
-	//raycasting_loop(game);
-	render_game(game);
+	render_game(game);	
+	mlx_key_hook(game->mlx_window, get_key, game);
 	mlx_loop(game->mlx_session);
 }

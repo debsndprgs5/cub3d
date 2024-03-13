@@ -30,6 +30,21 @@
 
 #define FOV 90
 
+#define SPEED 2
+
+#define UP_KEY 119
+
+#define DOWN_KEY 115
+
+#define LEFT_KEY 97
+
+#define RIGTH_KEY 100
+
+#define LOOK_RIGTH 65363
+
+#define LOOK_LEFT 65361
+
+#define LOOK_SPEED 10
 // Walls/Ground raw images
 
 typedef struct s_frames
@@ -132,10 +147,10 @@ int		get_iniplayerdir(t_game *game);
 // RENDERING FUNCTIONS //
 int 	render_game(t_game *game);
 int 	set_good_wall(double wall_x, double wall_y, t_game *game);
-double 	get_wall_higth(double wall_x, double wall_y, t_ppos player, t_game *game);
+double 	get_wall_higth(t_game *game);
 void 	render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game);
 void 	render_all(t_game *game);
-int 	get_key(t_game *game, int key);
+int 	get_key(int key, t_game *game);
 double deg_to_rad(double degrees);
 int get_good_rgb(int *arr);// use here only to have color render wall instead of xpm textures
 

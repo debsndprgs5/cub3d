@@ -3,14 +3,8 @@ NO	./sprites/pipe_wall.xpm
 WE	./sprites/gear_wall.xpm
 EA	./sprites/pipe_wall.xpm
 
-CR	sprites/crosshair_HL2.xpm
-
-DC	sprites/door_closed_retro.xpm
-DO	sprites/door_opened_retro.xpm
-
 F	148,83,50
 C	51,255,255
-#C	julia
 
 111111111111111111111111111111111111111111
 1E000110001000011100D000101000001110000001

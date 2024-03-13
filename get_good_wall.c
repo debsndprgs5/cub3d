@@ -3,22 +3,8 @@
 
 #define WALL_HIGTH (double) 1.5
 
-double get_wall_higth(double wall_x, double wall_y, t_ppos player, t_game *game)
-{
-
-	double distance;
-	double proj_dist;
-
-	proj_dist = (WIDTH/2)/tan(deg_to_rad(FOV/2));
-	distance = game->wall_dist;
-	// printf("%f\n", distance);
-	return(LENGTH/distance);
-	return ((double)((WALL_HIGTH * proj_dist) / distance + wall_x + player.x * wall_y)); // *ratio unite/pixel ?
-}
-
 int is_full(double num)
 {
-	//printf("NUM | %f, FLOOR | %f\n",fabs(num) , floor(fabs(num)));
 	if(floor(fabs(num)) == fabs(num))
 		return(1);
 	return(0);
@@ -75,7 +61,6 @@ int set_good_wall(double wall_x, double wall_y, t_game *game)
 
 	face = get_dir_wall(wall_x, wall_y);
 	dir = find_dir_wall(wall_x, wall_y, game->ppos);
-	printf("DIR = %d FACE == %d\n", dir, face);
 	if (face == 1 || face == 0) //SIDE
 	{
 		if (dir == 11 || dir == 21 || dir == 31)
@@ -92,3 +77,4 @@ int set_good_wall(double wall_x, double wall_y, t_game *game)
 	}
 	return (-1);
 }
+
