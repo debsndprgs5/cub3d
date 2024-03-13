@@ -30,7 +30,7 @@
 
 #define FOV 90
 
-#define SPEED 2
+#define SPEED 0.25
 
 #define UP_KEY 119
 
