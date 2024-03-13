@@ -6,19 +6,21 @@
 /*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 19:33:16 by zfavere           #+#    #+#             */
-/*   Updated: 2024/02/28 19:33:17 by zfavere          ###   ########.fr       */
+/*   Updated: 2024/03/12 20:19:42 by zfavere          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
 
-#define PI 3.14159265358979323846
-
-
 double deg_to_rad(double degrees) 
 {
-	return (degrees * (PI / 180.0));
+	return (degrees * (M_PI / 180.0));
+}
+
+double rad_to_deg(double radians)
+{
+    return (radians * (180.0 / M_PI));
 }
 
 // Check if a map cell is a wall, int since walls are on a whole x, y (check for position problem)
@@ -32,6 +34,7 @@ static int iswall(int x, int y, char **map)
 
 static void calc_ray_steps(t_game *game, t_ray *ray)
 {
+dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	// Ray's size from current point to the next x/y side
 	if (ray->dx == 0)
 	    ray->deltaDistX = 1e30;
@@ -64,9 +67,17 @@ static void calc_ray_steps(t_game *game, t_ray *ray)
 	}
 }
 
+double fisheyefix(double dx, double dy)
+{
+    double angle;
+    angle = atan2(dy, dx);
+    return angle;
+}
+
 static void ray_wall_hit_trigger(t_ray *ray, t_game *game,
 	double *foundx, double *foundy)
 {
+dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	ray->hit = 1;
 // Déterminez la position précise du mur touché
 	if (ray->side == 0)
@@ -83,10 +94,12 @@ static void ray_wall_hit_trigger(t_ray *ray, t_game *game,
 	}
 	//printf("RAY DIST %f \n", ray->perpWallDist);
 	game->wall_dist = ray->perpWallDist;
+	game->wall_dist *= fabs(cos(fisheyefix(ray->dx, ray->dy) - deg_to_rad(game->lookingdir)));
 }
 
 static void cast_ray(t_game *game, double angle, double *foundx, double *foundy)
 {
+dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	t_ray	ray;
 
 	ray.dx = cos(angle);
@@ -118,50 +131,100 @@ static void cast_ray(t_game *game, double angle, double *foundx, double *foundy)
 }
 
 
+static void	handle_anormal_fov(t_game *game, double *angles)
+{
+dprintf(2, "/033[31mentering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+	int		i;
+	double	interval;
+	double	radFOV;
+
+	radFOV = deg_to_rad(FOV);
+	angles[0] = deg_to_rad(game->lookingdir) - (radFOV / 2);
+	angles[WIDTH -1] = deg_to_rad(game->lookingdir) + (radFOV / 2);
+	interval = (angles[WIDTH - 1] - angles[0]) / WIDTH;
+	i = 0;
+	while (++i < WIDTH - 1)
+		angles[i] = angles[i -1] + interval;
+}
+
+
+void	distribute_rays(t_game *game, double *angles)
+{
+	// dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+	int		i;
+	double	seg_len;
+	double	radFOV;
+
+	radFOV = deg_to_rad(FOV);
+//	dprintf(2, "FOV = %d, radFOV = %f\n", FOV, radFOV);//DEBUG
+	if (radFOV >= M_PI || radFOV <= -M_PI)
+	{
+		handle_anormal_fov(game, angles);
+		return ;
+	}
+	angles += WIDTH / 2;
+	seg_len = tan(radFOV / WIDTH);
+//	dprintf(2, "\033[33mtan(%f) = %f\033[0;1m\n", radFOV, tan(radFOV));//DEBUG
+//	seg_len = 0.5;
+	dprintf(2, "seglen calculed : %f\n", seg_len);//DEBUG
+	i = -WIDTH/ 2;
+	while (i <= WIDTH / 2)
+	{
+		dprintf(2, "loop %d\n", i);//DEBUG
+		angles[i] = deg_to_rad(game->lookingdir) + atan(i * seg_len);
+		dprintf(2, "angles[%d] = %f\n", i, angles[i]);//DEBUG
+		i ++;
+	}
+}
+
+
 int raycasting_loop(t_game *game)
 {
-	double	i;
-	double foundx;
-	double foundy;
-	double angle;
-	double temp;
+dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+	int		i;
+	double	foundx;
+	double	foundy;
+	double	tabangles[WIDTH];
+	// double temp;
 
 	foundx = 0;
 	foundy = 0;
 	i = 0;
-	angle = (double) game->lookingdir;
-	temp = (double) WIDTH / (double) FOV;
-	temp = 1/temp;
-	while (i <= WIDTH)
+	printf("testestestset = %f\n\n\n\n\n", game->lookingdir);
+	distribute_rays(game, tabangles);
+	// temp = (double) WIDTH / (double) FOV;
+	// temp = 1/temp;
+	printf("\033[33mentering raycasting_loop\033[0;1m\n");
+	while (i < WIDTH)
 	{
-		//printf("angle = %f\n", angle);
-		cast_ray(game, deg_to_rad(angle), &foundx, &foundy);
+		printf("angle deg = %f, angle rad = %f\n", rad_to_deg(tabangles[i]), tabangles[i]);
+		cast_ray(game, tabangles[i], &foundx, &foundy);
 		render_wall(foundx, foundy, i, game);
-	printf("x du mur trouve = %f\ny du mur trouve = %f\n", foundx, foundy);
-		angle += temp;
-		if (angle >= 360)
-			angle -= 360;
+		// printf("x du mur trouve = %f\ny du mur trouve = %f\n", foundx, foundy);
+		// if (angle >= 360)
+		// 	angle -= 360;
 		i ++;
 		
 	}
+	printf("\033[0;33mexiting raycasting_loop\033[0m\n");
 	return(0);
 }
-
 
 // 45 degrees = N
 // 225 = S
 // 315 = E
 // 135 = W
 
-int get_iniplayerdir(t_game *game)
+double get_iniplayerdir(t_game *game)
 {
+dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	if (game->map[(int)game->ppos.y + 1][(int)game->ppos.x + 1] == 'N')
-		return(45);
+		return(90);
 	if (game->map[(int)game->ppos.y + 1][(int)game->ppos.x + 1] == 'S')
-		return(225);
+		return(270);
 	if (game->map[(int)game->ppos.y + 1][(int)game->ppos.x + 1] == 'E')
-		return(315);
+		return(0);
 	if (game->map[(int)game->ppos.y + 1][(int)game->ppos.x + 1] == 'W')
-		return(135);
+		return(180);
 	return(printerror(MATH_ERROR));
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 18:37:22 by zfavere           #+#    #+#             */
-/*   Updated: 2024/02/08 18:37:27 by zfavere          ###   ########.fr       */
+/*   Updated: 2024/03/13 15:33:37 by zfavere          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@
 
 #define LENGTH 540
 
-#define FOV 90
+#define FOV 90.2
 
 // Walls/Ground raw images
+
+/*structures--------------------------------------------------------structures*/
 
 typedef struct s_frames
 {
@@ -83,9 +85,11 @@ typedef struct s_game
 	int			skycol[4];
 	bool		sky_check;
 	t_ppos		ppos;
-	int			lookingdir;
+	double		lookingdir;
 	double		wall_dist;
 }	t_game;
+
+/*enums------------------------------------------------------------------enums*/
 
 typedef enum ErrorCode {
     MORE_THAN_ONE_DIRECTION = 1,
@@ -110,7 +114,9 @@ typedef enum ErrorCode {
 } ErrorCode;
 
 
+
 // PARSING FUNCTIONS //
+/*parsing functions------------------------------------------parsing functions*/
 
 int		raycasting_loop(t_game *game);
 char	**readmap(char *pathtofile);
@@ -127,16 +133,18 @@ int 	get_dir_path(char *path, char **stack, int index);
 int		free_game(t_game *game);
 int		map_check(char **map);
 void	get_format(char ***parsedmap);
-int		get_iniplayerdir(t_game *game);
+double		get_iniplayerdir(t_game *game);
 
 // RENDERING FUNCTIONS //
+
+
+/*rendering functions--------------------------------------rendering functions*/
 int 	render_game(t_game *game);
 int 	set_good_wall(double wall_x, double wall_y, t_game *game);
 double 	get_wall_higth(double wall_x, double wall_y, t_ppos player, t_game *game);
 void 	render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game);
 void 	render_all(t_game *game);
 int 	get_key(t_game *game, int key);
-double deg_to_rad(double degrees);
 int get_good_rgb(int *arr);// use here only to have color render wall instead of xpm textures
 
 // ERROR CHECKING //
@@ -149,5 +157,7 @@ int		printerror(ErrorCode err);
 
 // METH //
 void adjust_coords(double *x, double *y);
+double rad_to_deg(double radians);
+double deg_to_rad(double degrees);
 
 #endif

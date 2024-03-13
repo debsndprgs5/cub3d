@@ -6,7 +6,7 @@
 #    By: zfavere <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/08 22:06:06 by zfavere           #+#    #+#              #
-#    Updated: 2024/02/22 17:26:12 by zfavere          ###   ########.fr        #
+#    Updated: 2024/03/13 17:00:47 by zfavere          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,5 +56,9 @@ fclean: clean
 	rm -f mlx_linux/libmlx.a
 
 re: fclean all
+
+conf:
+	rm $(OBJ) $(NAME)
+	make all
 
 .PHONY: all clean fclean re

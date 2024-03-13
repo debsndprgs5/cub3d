@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "cube.h"
+#include <signal.h>
+
+
 
 int	main(int ac, char **path)
 {
@@ -18,7 +21,6 @@ int	main(int ac, char **path)
 	char	**configfile;
 	char	**parsedmap;
 	t_game	game;
-
 	if (ac == 2 && check_extention(path[1], ".cub", 3))
 	{
 		map = readmap(path[1]);
