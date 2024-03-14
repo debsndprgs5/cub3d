@@ -36,7 +36,7 @@ static int iswall(int x, int y, char **map)
 
 static void calc_ray_steps(t_game *game, t_ray *ray)
 {
-dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+// dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	// Ray's size from current point to the next x/y side
 	if (ray->dx == 0)
 	    ray->deltaDistX = 1e30;
@@ -81,7 +81,7 @@ double fisheyefix(double dx, double dy)
 static void ray_wall_hit_trigger(t_ray *ray, t_game *game,
 	double *foundx, double *foundy)
 {
-dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+// dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	ray->hit = 1;
 // Déterminez la position précise du mur touché
 	if (ray->side == 0)
@@ -103,7 +103,7 @@ dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 
 static void cast_ray(t_game *game, double angle, double *foundx, double *foundy)
 {
-dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+// dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	t_ray	ray;
 
 	ray.dx = cos(angle);
@@ -113,7 +113,7 @@ dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	// Effectuez le lancer de rayon DDA
 	ray.x0 = (int)game->ppos.x;
 	ray.y0 = (int)game->ppos.y;
-	while (ray.hit == 0 && ray.x0 >= 0 && ray.x0 < WIDTH && ray.y0 >= 0 && ray.y0 < LENGTH)
+	while (ray.hit == 0 && ray.x0 >= 0 && ray.x0 < WIDTH && ray.y0 >= 0 && ray.y0 < HEIGHT)
 	{
 		// Sautez au bloc suivant de la carte, en X ou en Y
 		if (ray.sideDistX < ray.sideDistY)
@@ -137,7 +137,7 @@ dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 
 static void	handle_anormal_fov(t_game *game, double *angles)
 {
-dprintf(2, "/033[31mentering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+// dprintf(2, "/033[31mentering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	int		i;
 	double	interval;
 	double	radFOV;
@@ -170,13 +170,13 @@ void	distribute_rays(t_game *game, double *angles)
 	seg_len = tan(radFOV / WIDTH);
 //	dprintf(2, "\033[33mtan(%f) = %f\033[0;1m\n", radFOV, tan(radFOV));//DEBUG
 //	seg_len = 0.5;
-	dprintf(2, "seglen calculed : %f\n", seg_len);//DEBUG
+	// dprintf(2, "seglen calculed : %f\n", seg_len);//DEBUG
 	i = -WIDTH/ 2;
 	while (i < WIDTH / 2)
 	{
-		dprintf(2, "loop %d\n", i);//DEBUG
+		// dprintf(2, "loop %d\n", i);//DEBUG
 		angles[i] = deg_to_rad(game->lookingdir) + atan(i * seg_len);
-		dprintf(2, "angles[%d] = %f\n", i, angles[i]);//DEBUG
+		// dprintf(2, "angles[%d] = %f\n", i, angles[i]);//DEBUG
 		i ++;
 	}
 }
@@ -184,7 +184,7 @@ void	distribute_rays(t_game *game, double *angles)
 
 int raycasting_loop(t_game *game)
 {
-dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+// dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	int		i;
 	double	foundx;
 	double	foundy;
@@ -194,12 +194,12 @@ dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	foundx = 0;
 	foundy = 0;
 	i = 0;
-	printf("testestestset = %f\n\n\n\n\n", game->lookingdir);
+	// printf("testestestset = %f\n\n\n\n\n", game->lookingdir);
 	distribute_rays(game, tabangles);
-	printf("\033[33mentering raycasting_loop\033[0;1m\n");
+	// printf("\033[33mentering raycasting_loop\033[0;1m\n");
 	while (i < WIDTH)
 	{
-		printf("angle deg = %f, angle rad = %f\n", rad_to_deg(tabangles[i]), tabangles[i]);
+		// printf("angle deg = %f, angle rad = %f\n", rad_to_deg(tabangles[i]), tabangles[i]);
 		cast_ray(game, tabangles[i], &foundx, &foundy);
 		printf("Pixel row %d\n", i);
 		render_wall(foundx, foundy, i, game);

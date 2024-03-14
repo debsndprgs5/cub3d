@@ -42,6 +42,8 @@ int	main(int ac, char **path)
 		//free_game(&game);
 		if (!(map_check(parsedmap)))
 			return (1);
+		mlx_mouse_hide(game.mlx_session, game.mlx_window);
+		mlx_hook(game.mlx_window, 6, 1L<<6, check_cursor, &game);
 		render_all(&game);
 		// for (int i = 0; parsedmap[i]; i++)
 		// 	printf("sz = %d  | %s", ft_strlen(parsedmap[i]), parsedmap[i]);

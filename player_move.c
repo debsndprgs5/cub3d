@@ -85,7 +85,7 @@ static int cast_ray(t_game *game, int angle, t_ppos *ray_end)
 	// Effectuez le lancer de rayon DDA
 	ray.x0 = (int)game->ppos.x;
 	ray.y0 = (int)game->ppos.y;
-	while (ray.hit == 0 && ray.x0 >= 0 && ray.x0 < WIDTH && ray.y0 >= 0 && ray.y0 < LENGTH)
+	while (ray.hit == 0 && ray.x0 >= 0 && ray.x0 < WIDTH && ray.y0 >= 0 && ray.y0 < HEIGHT)
 	{
 		// Sautez au bloc suivant de la carte, en X ou en Y
 		if (ray.sideDistX < ray.sideDistY)
@@ -133,7 +133,6 @@ void player_moove(int key, t_game *game)
 {
 	int ray_angle;
 	t_ppos ray_end;
-
 	ray_angle = set_dir(key, game->lookingdir);
 	ray_end = game->ppos;
 	//printf("WESH %d\n",cast_ray(game, ray_angle , &ray_end) );
@@ -158,7 +157,13 @@ void player_look(int key, t_game *game)
 
 int get_key(int key, t_game *game)
 {
-
+	// if (key == MOUSE_TGLE)
+	// 	toogle_mouse(game);
+	if (key == 65307)
+	{
+		mlx_destroy_window(game->mlx_session, game->mlx_window);
+		exit(0);
+	}
 	if(key == UP_KEY ||key == DOWN_KEY ||key == LEFT_KEY ||key == RIGTH_KEY)
 		player_moove(key, game);
 	if(key == LOOK_LEFT || key == LOOK_RIGTH)

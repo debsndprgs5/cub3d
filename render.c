@@ -25,7 +25,7 @@ void render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game)
 	t_image to_fill;
 
 	wall_image = set_good_wall(wall_x, wall_y, game);
-	wall_size = (int)(LENGTH/game->wall_dist);
+	wall_size = (int)(HEIGHT/game->wall_dist);
 	start = 0;
 	if(game->is_current == false)
 		to_fill = game->current;
@@ -33,14 +33,14 @@ void render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game)
 		to_fill = game->next;
 	//to_fill.mlx_img = game->background.mlx_img;
 	to_fill.address = mlx_get_data_addr(to_fill.mlx_img, &to_fill.bpp, &to_fill.line_length, &to_fill.endian);
-	if (wall_size < LENGTH)
+	if (wall_size < HEIGHT)
 	{
-		start = (LENGTH - wall_size) / 2;
+		start = (HEIGHT - wall_size) / 2;
 		end = start + wall_size;
 	}
 	else
-		end = LENGTH;
-	while(start < end)
+		end = HEIGHT;
+	while(start <= end)
 	{
 		my_pixel_put(&to_fill, pixel_rows, start, wall_image);
 		start++;
