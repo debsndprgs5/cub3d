@@ -172,7 +172,7 @@ void	distribute_rays(t_game *game, double *angles)
 //	seg_len = 0.5;
 	dprintf(2, "seglen calculed : %f\n", seg_len);//DEBUG
 	i = -WIDTH/ 2;
-	while (i <= WIDTH / 2)
+	while (i < WIDTH / 2)
 	{
 		dprintf(2, "loop %d\n", i);//DEBUG
 		angles[i] = deg_to_rad(game->lookingdir) + atan(i * seg_len);
@@ -201,13 +201,14 @@ dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	{
 		printf("angle deg = %f, angle rad = %f\n", rad_to_deg(tabangles[i]), tabangles[i]);
 		cast_ray(game, tabangles[i], &foundx, &foundy);
+		printf("Pixel row %d\n", i);
 		render_wall(foundx, foundy, i, game);
 		// printf("x du mur trouve = %f\ny du mur trouve = %f\n", foundx, foundy);
-		// if (angle >= 360)
-		// 	angle -= 360;
 		i ++;
 		
 	}
+	dprintf(2, "HEYEHYEHYEHEY\n\n");
+	load_raycast_image(game);
 	printf("\033[0;33mexiting raycasting_loop\033[0m\n");
 	return(0);
 }
@@ -220,6 +221,7 @@ dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 double get_iniplayerdir(t_game *game)
 {
 dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+printf("%d %d\n", (int)game->ppos.y + 1, (int)game->ppos.x + 1 );
 	if (game->map[(int)game->ppos.y + 1][(int)game->ppos.x + 1] == 'N')
 		return(90);
 	if (game->map[(int)game->ppos.y + 1][(int)game->ppos.x + 1] == 'S')

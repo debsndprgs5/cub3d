@@ -12,7 +12,7 @@
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 SRC = cube.c \
 	  main.c \
@@ -30,6 +30,7 @@ SRC = cube.c \
 	  raycasting_loop.c \
 	  get_good_wall.c \
 	  player_move.c \
+	  render_init.c \
 
 
 OBJ = $(SRC:.c=.o)

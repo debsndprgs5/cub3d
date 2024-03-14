@@ -45,8 +45,18 @@
 #define LOOK_LEFT 65361
 
 #define LOOK_SPEED 15
+
 // Walls/Ground raw images
 
+
+typedef struct s_image
+{
+	void	*mlx_img;
+	char 	*address;
+	int		bpp;
+	int 	line_length;
+	int 	endian;
+}	t_image;
 
 typedef struct s_frames
 {
@@ -86,6 +96,10 @@ typedef struct s_ray
 typedef struct s_game
 {
 	t_frames	*frames;
+	t_image		background;
+	t_image		current;
+	t_image		next;
+	bool 		is_current;
 	// int			ymin;
 	int			ymax;
 	// int			xmin;
@@ -159,6 +173,9 @@ void 	render_all(t_game *game);
 int 	get_key(int key, t_game *game);
 double deg_to_rad(double degrees);
 int get_good_rgb(int *arr);// use here only to have color render wall instead of xpm textures
+void create_background(t_game *game, t_image *background);
+void my_pixel_put(t_image *image, int x, int y, int color);
+void load_raycast_image(t_game *game);
 
 // ERROR CHECKING //
 void	print_param(t_game *game);

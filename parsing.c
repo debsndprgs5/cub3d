@@ -26,6 +26,7 @@ int init_first_game(t_game *game)
 		game->paths[i] = NULL;
 		i ++;
 	}
+	game->is_current = false;
 	return (1);
 }
 
@@ -33,6 +34,8 @@ static void ft_init_mlx(t_game *game)
 {
 	game->mlx_session = mlx_init();
 	game->mlx_window = mlx_new_window(game->mlx_session, 960, 540, "Cub3D");
+	game->current.mlx_img = mlx_new_image(game->mlx_session, WIDTH, LENGTH);
+	game->next.mlx_img  = mlx_new_image(game->mlx_session, WIDTH, LENGTH);
 }
 
 void get_player_pos(int *x, int *y, t_game *game)

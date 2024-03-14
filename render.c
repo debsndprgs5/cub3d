@@ -14,32 +14,7 @@ int get_good_rgb(int *arr)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void	render_background(t_game *game)
-{
 
-	int x;
-	int y;
-
-	x = 0;
-	y = 0;
-	while(y <= WIDTH)//(MAx LEN)
-	{
-		x = 0;
-		while(x <= LENGTH) //(max HIGTH)
-		{
-			if (x <= LENGTH/2)
-				mlx_pixel_put(game->mlx_session, game->mlx_window, y, x, get_good_rgb(game->skycol));
-			else
-			{
-				mlx_pixel_put(game->mlx_session, game->mlx_window, y, x, get_good_rgb(game->groundcol));
-			}
-			x++;
-		}
-		y++;
-	}	
-	
-	
-}
 
 void render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game)
 {
@@ -47,10 +22,17 @@ void render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game)
 	int wall_size;
 	int start;
 	int end;
+	t_image to_fill;
 
 	wall_image = set_good_wall(wall_x, wall_y, game);
 	wall_size = (int)(LENGTH/game->wall_dist);
 	start = 0;
+	if(game->is_current == false)
+		to_fill = game->current;
+	else
+		to_fill = game->next;
+	//to_fill.mlx_img = game->background.mlx_img;
+	to_fill.address = mlx_get_data_addr(to_fill.mlx_img, &to_fill.bpp, &to_fill.line_length, &to_fill.endian);
 	if (wall_size < LENGTH)
 	{
 		start = (LENGTH - wall_size) / 2;
@@ -58,9 +40,9 @@ void render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game)
 	}
 	else
 		end = LENGTH;
-	while(start <= end)
+	while(start < end)
 	{
-		mlx_pixel_put(game->mlx_session, game->mlx_window, pixel_rows, start, wall_image);
+		my_pixel_put(&to_fill, pixel_rows, start, wall_image);
 		start++;
 	}
 	
@@ -69,13 +51,16 @@ void render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game)
 
 int render_game(t_game *game)
 {
-	render_background(game);
+	if(game->is_current == true)
+		create_background(game, &game->next);
+	else
+		create_background(game, &game->current);
 	raycasting_loop(game);
 	return(0);
 }
 
 void render_all(t_game *game)
-{
+{	
 	render_game(game);	
 	mlx_key_hook(game->mlx_window, get_key, game);
 	mlx_loop(game->mlx_session);
