@@ -32,7 +32,7 @@ int init_first_game(t_game *game)
 static void ft_init_mlx(t_game *game)
 {
 	game->mlx_session = mlx_init();
-	game->mlx_window = mlx_new_window(game->mlx_session, 960, 540, "Cub3D");
+	game->mlx_window = mlx_new_window(game->mlx_session, WIDTH, HEIGHT, "Cub3D");
 }
 
 void get_player_pos(int *x, int *y, t_game *game)
@@ -96,6 +96,7 @@ int init_struct(t_game *game, char **config_file)
 		game->paths[3], &width, &height);
 	game->frames = &frames;
 	game->lookingdir = get_iniplayerdir(game);
+	game->mouse_active = 0;
 	// printf("lookingdir = %d\n", game->lookingdir);
 	return(1);
 }

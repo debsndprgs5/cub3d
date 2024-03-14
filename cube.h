@@ -26,7 +26,7 @@
 
 #define WIDTH 960
 
-#define LENGTH 540
+#define HEIGHT 540
 
 #define FOV 90.2
 
@@ -45,8 +45,9 @@
 #define LOOK_LEFT 65361
 
 #define LOOK_SPEED 15
-// Walls/Ground raw images
 
+#define MOUSE_TGLE 96
+// Walls/Ground raw images
 
 typedef struct s_frames
 {
@@ -101,6 +102,7 @@ typedef struct s_game
 	t_ppos		ppos;
 	double		lookingdir;
 	double		wall_dist;
+	char	mouse_active;
 }	t_game;
 
 
@@ -149,8 +151,6 @@ double		get_iniplayerdir(t_game *game);
 
 // RENDERING FUNCTIONS //
 
-
-
 int 	render_game(t_game *game);
 int 	set_good_wall(double wall_x, double wall_y, t_game *game);
 double 	get_wall_higth(t_game *game);
@@ -159,8 +159,12 @@ void 	render_all(t_game *game);
 int 	get_key(int key, t_game *game);
 double deg_to_rad(double degrees);
 int get_good_rgb(int *arr);// use here only to have color render wall instead of xpm textures
+int check_cursor(int x, int y, t_game *game);
+// void	toogle_mouse(t_game *game);
+
 
 // ERROR CHECKING //
+
 void	print_param(t_game *game);
 int		is_good_char(char* parse_line);
 int		check_extention(char *path, char *ext, int len);
@@ -169,6 +173,7 @@ int		free_used_lines(char *a, char *b);
 int		printerror(ErrorCode err);
 
 // METH //
+
 void adjust_coords(double *x, double *y);
 double rad_to_deg(double radians);
 double deg_to_rad(double degrees);
