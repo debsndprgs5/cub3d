@@ -1,25 +1,15 @@
-NO  sprites/helian_floor.xpm
-SO  sprites/zouindowsXP.xpm
-EA  sprites/door.xpm
-WE  sprites/helian_floor_no_motif.xpm
+NO  Includes/default.xpm
+SO  Includes/default.xpm
+EA  Includes/default.xpm
+WE  Includes/default.xpm
 
-CR	sprites/crosshair_ME1.xpm
-
-DC	sprites/door_closed_retro.xpm
-DO	sprites/door_opened_retro.xpm
-
-C  julia
-F  #f23a0b
+C  50,50,50
+F  200,25,25
 
 
-1111111111111
-10000S0000001
- 10000000001
-  100000001
-   1000001
-    11D11
-   1000001
-  100000001
- 10000000001
-1000000000001
-1111111111111
+11111111111111
+10000000000001
+10000000000111
+100000000001S1
+10000000000111
+11111111111111

@@ -54,10 +54,10 @@ int set_good_wall(double wall_x, double wall_y, t_game *game)
 {
 	int	face;
 	int dir;
-	int north[3] = {255,0,0}; //red
-	int south[3] = {0,255,0}; //green
-	int east[3] = {0,0,255}; //blue
-	int weast[3] = {255,255,0}; //yellow
+	int north[3] = {67, 171, 107}; //green
+	int south[3] = {67, 171, 107}; //red
+	int east[3] = {158, 63, 65}; //blue
+	int weast[3] = {158, 63, 65}; //yellow
 
 	face = get_dir_wall(wall_x, wall_y);
 	dir = find_dir_wall(wall_x, wall_y, game->ppos);
