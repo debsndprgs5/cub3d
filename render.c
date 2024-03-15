@@ -59,9 +59,11 @@ int render_game(t_game *game)
 	return(0);
 }
 
-void render_all(t_game *game)
+void lhookylhook(t_game *game)
 {	
-	render_game(game);	
-	mlx_key_hook(game->mlx_window, get_key, game);
+	render_game(game);
+	mlx_hook(game->mlx_window, 2, (1L<<0), get_key, game);
+	mlx_hook(game->mlx_window, 3, (1L<<1), release_key, game);
+	// mlx_key_hook(game->mlx_window, release_key, game);
 	mlx_loop(game->mlx_session);
 }

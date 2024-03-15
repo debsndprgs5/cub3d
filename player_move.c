@@ -122,23 +122,24 @@ int set_dir(int key, int angle)
 		res += 180;
 	if (key == LEFT_KEY)
 		res -= 90; 
-	if (key == RIGTH_KEY)
+	if (key == RIGHT_KEY)
 		res += 90;
 	if(angle > 360)
 		res -= 360;
 	return (res);
 }
 
-void player_moove(int key, t_game *game)
+void player_move(int key, t_game *game)
 {
 	int ray_angle;
 	t_ppos ray_end;
+
 	ray_angle = set_dir(key, game->lookingdir);
 	ray_end = game->ppos;
 	//printf("WESH %d\n",cast_ray(game, ray_angle , &ray_end) );
 	if (!cast_ray(game, ray_angle , &ray_end))
 	{
-		printf("Ray end x %f, y %f\n",ray_end.x, ray_end.y);
+		// printf("Ray end x %f, y %f\n",ray_end.x, ray_end.y);
 		game->ppos = ray_end;
 		render_game(game);
 	}
@@ -150,24 +151,38 @@ void player_look(int key, t_game *game)
 	if(key == LOOK_LEFT)
 		game->lookingdir -= LOOK_SPEED;
 
-	if (key == LOOK_RIGTH)
+	if (key == LOOK_RIGHT)
 		game->lookingdir += LOOK_SPEED;
 	render_game(game);
 }
 
 int get_key(int key, t_game *game)
 {
-	// if (key == MOUSE_TGLE)
-	// 	toogle_mouse(game);
+	if (key == MOUSE_TGLE)
+	 	toogle_mouse(game);
 	if (key == 65307)
 	{
 		mlx_destroy_window(game->mlx_session, game->mlx_window);
 		exit(0);
 	}
-	if(key == UP_KEY ||key == DOWN_KEY ||key == LEFT_KEY ||key == RIGTH_KEY)
-		player_moove(key, game);
-	if(key == LOOK_LEFT || key == LOOK_RIGTH)
+	if(key == UP_KEY ||key == DOWN_KEY ||key == LEFT_KEY ||key == RIGHT_KEY)
+	{
+		if (game->kpress == 0)
+			game->kpress = 1;
+		player_move(key, game);
+	}
+	if(key == LOOK_LEFT || key == LOOK_RIGHT)
 		player_look(key, game);
 	//printf("KEYCODE %d", key);
+	return (0);
+}
+
+int release_key(int key, t_game *game)
+{
+	if(key == UP_KEY ||key == DOWN_KEY ||key == LEFT_KEY ||key == RIGHT_KEY)
+	{
+		if (game->kpress == 1)
+			game->kpress = 0;
+	}
 	return (0);
 }

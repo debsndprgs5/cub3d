@@ -38,14 +38,15 @@
 
 #define LEFT_KEY 97
 
-#define RIGTH_KEY 100
+#define RIGHT_KEY 100
 
-#define LOOK_RIGTH 65363
+#define LOOK_RIGHT 65363
 
 #define LOOK_LEFT 65361
 
 #define LOOK_SPEED 15
-
+#define TRUE 1
+#define FALSE 0
 
 #define MOUSE_TGLE 96
 // Walls/Ground raw images
@@ -116,7 +117,7 @@ typedef struct s_game
 	t_ppos		ppos;
 	double		lookingdir;
 	double		wall_dist;
-	char	mouse_active;
+	bool		kpress;
 }	t_game;
 
 
@@ -169,15 +170,16 @@ int 	render_game(t_game *game);
 int 	set_good_wall(double wall_x, double wall_y, t_game *game);
 double 	get_wall_higth(t_game *game);
 void 	render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game);
-void 	render_all(t_game *game);
+void lhookylhook(t_game *game);
 int 	get_key(int key, t_game *game);
+int release_key(int key, t_game *game);
 double deg_to_rad(double degrees);
 int get_good_rgb(int *arr);// use here only to have color render wall instead of xpm textures
 void create_background(t_game *game, t_image *background);
 void my_pixel_put(t_image *image, int x, int y, int color);
 void load_raycast_image(t_game *game);
 int check_cursor(int x, int y, t_game *game);
-// void	toogle_mouse(t_game *game);
+void	toogle_mouse(t_game *game);
 
 
 // ERROR CHECKING //

@@ -12,23 +12,23 @@
 
 #include "cube.h"
 
+void	toogle_mouse(t_game *game)
+{
+	static bool is_mouse_active = TRUE;
 
-// void	toogle_mouse(t_game *game)
-// {
-// 	if (game->mouse_active)
-// 	{
-// 		// mlx_mouse_show(game->mlx_session, game->mlx_window);
-// 	printf("check cursor case 1----------------------------------------------------\n");
-// 		game->mouse_active = 0;
-// 	}
-// 	else
-// 	{
-// 	printf("check cursor case 2----------------------------------------------------\n");
-// 		// mlx_mouse_hide(game->mlx_session, game->mlx_window);
-// 		game->mouse_active = 1;
-// 	}
-// }
-
+	if (is_mouse_active) 
+	{
+		is_mouse_active = FALSE;
+		mlx_mouse_show(game->mlx_session, game->mlx_window);
+		mlx_hook(game->mlx_window, 6, 1L<<6, NULL, game);
+	}
+	else
+	{
+		is_mouse_active = TRUE;
+		mlx_mouse_hide(game->mlx_session, game->mlx_window);
+		mlx_hook(game->mlx_window, 6, 1L<<6, check_cursor, game);
+	}
+}
 
 
 void put_cursor_middle(t_game *game)
@@ -38,7 +38,6 @@ void put_cursor_middle(t_game *game)
 
 int check_cursor(int x, int y, t_game *game)
 {
-	printf("check cursor ----------------------------------------------------\n");
 	(void)y;
 	if (x != WIDTH/2)
 	{
