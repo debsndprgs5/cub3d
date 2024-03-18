@@ -12,7 +12,7 @@
 
 #include "cube.h"
 
-void my_pixel_put(t_image *image, int x, int y, int color)
+void	my_pixel_put(t_image *image, int x, int y, int color)
 {
 	char *dst;
 
@@ -20,7 +20,7 @@ void my_pixel_put(t_image *image, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void load_raycast_image(t_game *game)
+void	load_raycast_image(t_game *game)
 {
 	
 	if(game->is_current == true)
@@ -47,7 +47,7 @@ void load_raycast_image(t_game *game)
 
 
 
-void create_background(t_game *game, t_image *background)
+void	create_background(t_game *game, t_image *background)
 {
 	int x;
 	int y;
@@ -56,12 +56,12 @@ void create_background(t_game *game, t_image *background)
 	y = 0;
 	background->mlx_img = mlx_new_image(game->mlx_session, WIDTH, HEIGHT);
 	background->address = mlx_get_data_addr(background->mlx_img, &background->bpp, &background->line_length, &background->endian);
-	while(x <= WIDTH)//(MAx LEN)
+	while (x <= WIDTH)
 	{
 		y = 0;
-		while(y <= HEIGHT) //(max HIGTH)
+		while (y <= HEIGHT)
 		{
-			if (y <= HEIGHT/2)
+			if (y <= HEIGHT / 2)
 				my_pixel_put(background, x, y, get_good_rgb(game->skycol));
 			else
 			{
@@ -70,7 +70,5 @@ void create_background(t_game *game, t_image *background)
 			y++;
 		}
 		x++;
-	}	
-	
+	}
 }
-

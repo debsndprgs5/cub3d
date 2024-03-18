@@ -39,33 +39,33 @@ static void calc_ray_steps(t_game *game, t_ray *ray)
 // dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	// Ray's size from current point to the next x/y side
 	if (ray->dx == 0)
-	    ray->deltaDistX = 1e30;
+	    ray->deltadistx = 1e30;
 	else
-	    ray->deltaDistX = fabs(1 / ray->dx);
+	    ray->deltadistx = fabs(1 / ray->dx);
 	if (ray->dy == 0)
-	    ray->deltaDistY = 1e30;
+	    ray->deltadisty = 1e30;
 	else
-	    ray->deltaDistY = fabs(1 / ray->dy);
+	    ray->deltadisty = fabs(1 / ray->dy);
 	// Ray's steps calculating
 	if (ray->dx < 0)
 	{
-		ray->stepX = -1;
-		ray->sideDistX = (game->ppos.x - (int)game->ppos.x) * ray->deltaDistX;
+		ray->stepx = -1;
+		ray->sidedistx = (game->ppos.x - (int)game->ppos.x) * ray->deltadistx;
 	}
 	else
 	{
-		ray->stepX = 1;
-		ray->sideDistX = ((int)game->ppos.x + 1.0 - game->ppos.x) * ray->deltaDistX;
+		ray->stepx = 1;
+		ray->sidedistx = ((int)game->ppos.x + 1.0 - game->ppos.x) * ray->deltadistx;
 	}
 	if (ray->dy < 0)
 	{
-		ray->stepY = -1;
-		ray->sideDistY = (game->ppos.y - (int)game->ppos.y) * ray->deltaDistY;
+		ray->stepy = -1;
+		ray->sidedisty = (game->ppos.y - (int)game->ppos.y) * ray->deltadisty;
 	}
 	else
 	{
-		ray->stepY = 1;
-		ray->sideDistY = ((int)game->ppos.y + 1.0 - game->ppos.y) * ray->deltaDistY;
+		ray->stepy = 1;
+		ray->sidedisty = ((int)game->ppos.y + 1.0 - game->ppos.y) * ray->deltadisty;
 	}
 }
 
@@ -86,18 +86,18 @@ static void ray_wall_hit_trigger(t_ray *ray, t_game *game,
 // Déterminez la position précise du mur touché
 	if (ray->side == 0)
 	{
-		ray->perpWallDist = (ray->sideDistX - ray->deltaDistX);
+		ray->perpwalldist = (ray->sidedistx - ray->deltadistx);
 		*foundx = ray->x0;
-		*foundy = game->ppos.y + ray->perpWallDist * ray->dy;
+		*foundy = game->ppos.y + ray->perpwalldist * ray->dy;
 	}
 	else
 	{
-		ray->perpWallDist = (ray->sideDistY - ray->deltaDistY);
-		*foundx = game->ppos.x + ray->perpWallDist * ray->dx;
+		ray->perpwalldist = (ray->sidedisty - ray->deltadisty);
+		*foundx = game->ppos.x + ray->perpwalldist * ray->dx;
 		*foundy = ray->y0;
 	}
-	//printf("RAY DIST %f \n", ray->perpWallDist);
-	game->wall_dist = ray->perpWallDist;
+	//printf("RAY DIST %f \n", ray->perpwalldist);
+	game->wall_dist = ray->perpwalldist;
 	game->wall_dist *= fabs(cos(fisheyefix(ray->dx, ray->dy) - deg_to_rad(game->lookingdir)));
 }
 
@@ -116,16 +116,16 @@ static void cast_ray(t_game *game, double angle, double *foundx, double *foundy)
 	while (ray.hit == 0 && ray.x0 >= 0 && ray.x0 < WIDTH && ray.y0 >= 0 && ray.y0 < HEIGHT)
 	{
 		// Sautez au bloc suivant de la carte, en X ou en Y
-		if (ray.sideDistX < ray.sideDistY)
+		if (ray.sidedistx < ray.sidedisty)
 		{
-			ray.sideDistX += ray.deltaDistX;
-			ray.x0 += ray.stepX;
+			ray.sidedistx += ray.deltadistx;
+			ray.x0 += ray.stepx;
 			ray.side = 0;
 		}
 		else
 		{
-			ray.sideDistY += ray.deltaDistY;
-			ray.y0 += ray.stepY;
+			ray.sidedisty += ray.deltadisty;
+			ray.y0 += ray.stepy;
 			ray.side = 1;
 		}
 		// Vérifier si le rayon a touché un mur

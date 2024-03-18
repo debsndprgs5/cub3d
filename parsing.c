@@ -99,7 +99,6 @@ int init_struct(t_game *game, char **config_file)
 		game->paths[3], &width, &height);
 	game->frames = &frames;
 	game->lookingdir = get_iniplayerdir(game);
-	game->kpress = FALSE;
 	// printf("lookingdir = %d\n", game->lookingdir);
 	return(1);
 }

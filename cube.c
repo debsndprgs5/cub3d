@@ -13,8 +13,6 @@
 #include "cube.h"
 #include <signal.h>
 
-
-
 int	main(int ac, char **path)
 {
 	char	**map;
@@ -56,55 +54,37 @@ int	main(int ac, char **path)
 	return(0);
 }
 
-
-
-
-// To clean / move out
-
-
-static int get_biggest_line(char ***parsedmap)
+int	exit_game(t_game *game)
 {
-	int	temp;
-	int	temp2;
-	int	i;
-
-	i = 0;
-	temp = 0;
-	temp2 = 0;
-	while ((*parsedmap)[i])
-	{
-		temp2 = ft_strlen((*parsedmap)[i]);
-		if (temp2 > temp)
-			temp = temp2;
-		i++;
-	}
-	return(temp);
+	freetab(game->map);
+	free_game(game);
+	mlx_destroy_window(game->mlx_session, game->mlx_window);
+	exit(0);
 }
 
-void get_format(char ***parsedmap)
+int	loopframe(t_game *game)
 {
-	int		format;
-	char	*tempstr;
-	int		temp;
-	int		i;
-	int		j;
+	if (game->keypress.key_forward == TRUE)
+		player_move(UP_KEY, game);
+	if (game->keypress.key_back == TRUE)
+		player_move(DOWN_KEY, game);
+	if (game->keypress.key_left == TRUE)
+		player_move(LEFT_KEY, game);
+	if (game->keypress.key_right == TRUE)
+		player_move(RIGHT_KEY, game);
+	if (game->keypress.look_left == TRUE)
+		player_look(LOOK_LEFT, game);
+	if (game->keypress.look_right == TRUE)
+		player_look(LOOK_RIGHT, game);
+	return (0);
+}
 
-	i = 0;
-	format = get_biggest_line(parsedmap);
-	while ((*parsedmap)[i])
-	{
-		temp = ft_strlen((*parsedmap)[i]);
-		tempstr = ft_strdup((*parsedmap)[i]);
-		free((*parsedmap)[i]);
-		(*parsedmap)[i] = malloc(format + 1);
-		ft_strcpy((*parsedmap)[i], tempstr);
-		j = temp;
-		while (j < format)
-		{
-			(*parsedmap)[i][j] = ' ';
-			j++;
-		}
-		(*parsedmap)[i][j] = '\0';
-		i++;
-	}
+void	lhookylhook(t_game *game)
+{
+	render_game(game);
+	mlx_hook(game->mlx_window, 2, (1L << 0), get_key, game);
+	mlx_hook(game->mlx_window, 3, (1L << 1), release_key, game);
+	mlx_hook(game->mlx_window, 17, 0L, exit_game, game);
+	mlx_loop_hook(game->mlx_session, &loopframe, game);
+	mlx_loop(game->mlx_session);
 }
