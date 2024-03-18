@@ -32,6 +32,7 @@ SRC = cube.c \
 	  player_move.c \
 	  render_init.c \
 	  cursor_cam.c \
+	  get_textures.c \
 
 
 OBJ = $(SRC:.c=.o)

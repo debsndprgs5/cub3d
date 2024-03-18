@@ -50,31 +50,35 @@ int get_dir_wall(double wall_x, double wall_y)
 
 /* for each wall pos choose wich textures add on */
 
-int set_good_wall(double wall_x, double wall_y, t_game *game)
+void set_good_wall(double wall_x, double wall_y, t_game *game, t_image *image)
 {
 	int	face;
 	int dir;
-	int north[3] = {67, 171, 107}; //green
-	int south[3] = {67, 171, 107}; //red
-	int east[3] = {158, 63, 65}; //blue
-	int weast[3] = {158, 63, 65}; //yellow
+	int width;
+	int height;
+
 
 	face = get_dir_wall(wall_x, wall_y);
 	dir = find_dir_wall(wall_x, wall_y, game->ppos);
+	//image->mlx_img = mlx_new_image(game->mlx_session, WIDTH, HEIGHT);
 	if (face == 1 || face == 0) //SIDE
 	{
 		if (dir == 11 || dir == 21 || dir == 31)
-			return (get_good_rgb(east));//EAST
+			image->mlx_img =  mlx_xpm_file_to_image(game->mlx_session,
+		game->paths[2], &width, &height);//EAST
 		else
-			return (get_good_rgb(weast)); //WEST
+			image->mlx_img =  mlx_xpm_file_to_image(game->mlx_session,
+		game->paths[0], &width, &height); //WEST
 	}
 	if (face == 2) // FRONT
 	{
 		if((dir > 10 && dir < 20) || dir > 30)
-			return (get_good_rgb(north));//NORTH 
+			image->mlx_img =  mlx_xpm_file_to_image(game->mlx_session,
+		game->paths[0], &width, &height);//NORTH 
 		else
-			return (get_good_rgb(south));//SOUTH 
+			image->mlx_img =  mlx_xpm_file_to_image(game->mlx_session,
+		game->paths[1], &width, &height);//SOUTH 
 	}
-	return (-1);
+	image->address = mlx_get_data_addr(image->mlx_img, &image->bpp, &image->line_length, &image->endian);
 }
 

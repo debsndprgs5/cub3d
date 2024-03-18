@@ -96,7 +96,6 @@ static void ray_wall_hit_trigger(t_ray *ray, t_game *game,
 		*foundx = game->ppos.x + ray->perpWallDist * ray->dx;
 		*foundy = ray->y0;
 	}
-	//printf("RAY DIST %f \n", ray->perpWallDist);
 	game->wall_dist = ray->perpWallDist;
 	game->wall_dist *= fabs(cos(fisheyefix(ray->dx, ray->dy) - deg_to_rad(game->lookingdir)));
 }
@@ -201,13 +200,13 @@ int raycasting_loop(t_game *game)
 	{
 		// printf("angle deg = %f, angle rad = %f\n", rad_to_deg(tabangles[i]), tabangles[i]);
 		cast_ray(game, tabangles[i], &foundx, &foundy);
-		printf("Pixel row %d\n", i);
+		//printf("Pixel row %d\n", i);
 		render_wall(foundx, foundy, i, game);
 		// printf("x du mur trouve = %f\ny du mur trouve = %f\n", foundx, foundy);
 		i ++;
 		
 	}
-	dprintf(2, "HEYEHYEHYEHEY\n\n");
+	//dprintf(2, "HEYEHYEHYEHEY\n\n");
 	load_raycast_image(game);
 	printf("\033[0;33mexiting raycasting_loop\033[0m\n");
 	return(0);

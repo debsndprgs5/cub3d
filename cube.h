@@ -46,8 +46,10 @@
 
 #define LOOK_SPEED 15
 
-
 #define MOUSE_TGLE 96
+
+#define IMG_SIZE 250
+
 // Walls/Ground raw images
 
 typedef struct s_image
@@ -72,6 +74,12 @@ typedef struct s_ppos
 	double x;
 	double y;
 }	t_ppos;
+
+typedef struct s_dbl_int
+{
+	int start;
+	int end;
+}	t_dbl_int;
 
 typedef struct s_ray
 {
@@ -166,7 +174,7 @@ double		get_iniplayerdir(t_game *game);
 // RENDERING FUNCTIONS //
 
 int 	render_game(t_game *game);
-int 	set_good_wall(double wall_x, double wall_y, t_game *game);
+void	set_good_wall(double wall_x, double wall_y, t_game *game, t_image *image);
 double 	get_wall_higth(t_game *game);
 void 	render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game);
 void 	render_all(t_game *game);
@@ -177,6 +185,9 @@ void create_background(t_game *game, t_image *background);
 void my_pixel_put(t_image *image, int x, int y, int color);
 void load_raycast_image(t_game *game);
 int check_cursor(int x, int y, t_game *game);
+int get_textures(t_image texture, int x, int y);
+int get_texture_line(int line, int wall_size);
+int get_texture_row(double x, double y);
 // void	toogle_mouse(t_game *game);
 
 

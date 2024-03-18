@@ -138,7 +138,6 @@ void player_moove(int key, t_game *game)
 	//printf("WESH %d\n",cast_ray(game, ray_angle , &ray_end) );
 	if (!cast_ray(game, ray_angle , &ray_end))
 	{
-		printf("Ray end x %f, y %f\n",ray_end.x, ray_end.y);
 		game->ppos = ray_end;
 		render_game(game);
 	}
@@ -168,6 +167,5 @@ int get_key(int key, t_game *game)
 		player_moove(key, game);
 	if(key == LOOK_LEFT || key == LOOK_RIGTH)
 		player_look(key, game);
-	//printf("KEYCODE %d", key);
 	return (0);
 }
