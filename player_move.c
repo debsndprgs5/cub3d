@@ -1,6 +1,6 @@
 #include "cube.h"
 
-static int iswall(int x, int y, char **map)
+static int iswall_look(int x, int y, char **map)
 {
 	if (y == -1)
 		y = 0;
@@ -73,8 +73,6 @@ static void calc_ray_steps(t_game *game, t_ray *ray)
 static int cast_ray(t_game *game, int angle, t_ppos *ray_end)
 {
 	t_ray	ray;
-	//double temp;
-
 
 	if(angle > 360)
 		angle -= 360;
@@ -101,7 +99,7 @@ static int cast_ray(t_game *game, int angle, t_ppos *ray_end)
 			ray.side = 1;
 		}
 		// Vérifier si le rayon a touché un mur
-		if (iswall(ray.x0, ray.y0, game->map))
+		if (iswall_look(ray.x0, ray.y0, game->map))
 			ray_wall_hit_trigger(&ray, game, &ray_end->x, &ray_end->y);
 	}
 	return(0);

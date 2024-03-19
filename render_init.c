@@ -44,9 +44,6 @@ void	load_raycast_image(t_game *game)
 
 
 
-
-
-
 void	create_background(t_game *game, t_image *background)
 {
 	int x;

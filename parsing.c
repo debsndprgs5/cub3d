@@ -102,3 +102,16 @@ int init_struct(t_game *game, char **config_file)
 	// printf("lookingdir = %d\n", game->lookingdir);
 	return(1);
 }
+
+double	get_iniplayerdir(t_game *game)
+{
+	if (game->map[(int)game->ppos.y + 1][(int)game->ppos.x + 1] == 'N')
+		return (90);
+	if (game->map[(int)game->ppos.y + 1][(int)game->ppos.x + 1] == 'S')
+		return (270);
+	if (game->map[(int)game->ppos.y + 1][(int)game->ppos.x + 1] == 'E')
+		return (0);
+	if (game->map[(int)game->ppos.y + 1][(int)game->ppos.x + 1] == 'W')
+		return (180);
+	return (printerror(MATH_ERROR));
+}
