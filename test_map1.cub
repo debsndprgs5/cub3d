@@ -1,11 +1,11 @@
 
-EA ./sprites/wall_2.2.xpm
+EA ./sprites/basic.xpm
 											       
-NO ./sprites/wall_2.2.xpm
+NO ./sprites/basic.xpm
 
-SO ./sprites/wall_2.2.xpm
+SO ./sprites/basic.xpm
 
-		WE                             ./sprites/wall_2.2.xpm                         
+		WE                             ./sprites/basic.xpm                         
 
 F 255,255,255		
 

@@ -12,6 +12,6 @@ void init_asset(t_game *game)
 		free(game->paths[i]);
 		i++;
 	}
-	game->background = create_background(game);
+	game->current = create_background(game);
 	free(game->paths);
 }

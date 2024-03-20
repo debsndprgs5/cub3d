@@ -1,7 +1,7 @@
 #include "cube.h"
 
 
-#define WALL_HIGTH (double) 1.5
+
 
 int is_full(double num)
 {

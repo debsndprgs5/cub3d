@@ -39,12 +39,12 @@ void render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game)
 		screen_buff.start = (HEIGHT - wall_size) / 2;
 		screen_buff.end = screen_buff.start + wall_size;
 		wall_buff.start = 0;
-		wall_buff.end = wall_size-(0.75/game->wall_dist);
+		wall_buff.end = wall_size ;
 	}
 	else
 	{
-		wall_buff.start = wall_size - HEIGHT; 
-		wall_buff.end = wall_size;
+		wall_buff.start = wall_size - HEIGHT - ((WALL_HIGTH / game->wall_dist)/2); 
+		wall_buff.end = wall_size + ((WALL_HIGTH / game->wall_dist)/2);
 	}
 	texture_row = get_texture_row(wall_x, wall_y, current_wall.width);
 	while(screen_buff.start <= screen_buff.end)
@@ -53,9 +53,7 @@ void render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game)
 			get_textures(current_wall.image,get_texture_line(wall_buff.start, wall_size, current_wall.height),texture_row));
 		screen_buff.start++;
 		wall_buff.start ++;
-	}
-	//mlx_destroy_image(game->mlx_session, current_wall.image.mlx_img);
-	
+	}	
 }
 
 t_image cpy_image(t_image *ref, t_game *game)
@@ -69,10 +67,6 @@ t_image cpy_image(t_image *ref, t_game *game)
 
 int render_game(t_game *game)
 {
-	// if(game->is_current == true)
-	// 	game->next = game->background;
-	// else
-	// 	game->current = game->background;
 	raycasting_loop(game);
 	return(0);
 }

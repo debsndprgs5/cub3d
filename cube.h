@@ -52,6 +52,8 @@
 # define FALSE 0
 
 # define MOUSE_TGLE 96
+
+# define WALL_HIGTH  1.5
 // Walls/Ground raw images
 
 typedef struct s_image
