@@ -12,7 +12,7 @@
 
 #include "cube.h"
 
-void	toogle_mouse(t_game *game)
+void	toggle_mouse(t_game *game)
 {
 	static bool	is_mouse_active = TRUE;
 

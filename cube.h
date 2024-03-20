@@ -190,9 +190,6 @@ int		exit_game(t_game *game);
 int get_textures(t_image texture, int x, int y);
 int get_texture_line(int line, int wall_size, int size);
 int get_texture_row(double x, double y, int size);
-
-// void	toogle_mouse(t_game *game);
-
 int		render_game(t_game *game);
 void		set_good_wall(double wall_x, double wall_y, t_game *game, t_asset *current_wall);
 double	get_wall_higth(t_game *game);
@@ -207,7 +204,7 @@ t_image	create_background(t_game *game);
 void	my_pixel_put(t_image *image, int x, int y, int color);
 void	load_raycast_image(t_game *game);
 int		check_cursor(int x, int y, t_game *game);
-void	toogle_mouse(t_game *game);
+void	toggle_mouse(t_game *game);
 void	player_move(int key, t_game *game);
 void	player_look(int key, t_game *game);
 void	distribute_rays(t_game *game, double *angles);
