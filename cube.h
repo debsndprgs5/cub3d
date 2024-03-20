@@ -208,6 +208,10 @@ int		check_cursor(int x, int y, t_game *game);
 void	toogle_mouse(t_game *game);
 void	player_move(int key, t_game *game);
 void	player_look(int key, t_game *game);
+void	distribute_rays(t_game *game, double *angles);
+int		iswall(int x, int y, char **map);
+void	init_calc_ray(t_ray *ray);
+double	fisheyefix(double dx, double dy);
 
 // ERROR CHECKING //
 

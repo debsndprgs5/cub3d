@@ -35,6 +35,8 @@ SRC = cube.c \
 	  get_textures.c \
 	  parsing_utils.c \
 	  assets.c \
+	  raycasting_utils.c \
+	  raycasting_utils2.c \
 
 
 OBJ = $(SRC:.c=.o)
