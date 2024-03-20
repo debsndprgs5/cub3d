@@ -33,6 +33,8 @@ SRC = cube.c \
 	  render_init.c \
 	  cursor_cam.c \
 	  get_textures.c \
+	  parsing_utils.c \
+	  assets.c \
 
 
 OBJ = $(SRC:.c=.o)

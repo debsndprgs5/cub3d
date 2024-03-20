@@ -1,11 +1,11 @@
 
-EA ./Includes/default.xpm
+EA ./sprites/wall_2.2.xpm
 											       
-NO ./Includes/default.xpm
+NO ./sprites/wall_2.2.xpm
 
-SO ./Includes/default.xpm
+SO ./sprites/wall_2.2.xpm
 
-		WE                             ./Includes/default.xpm                         
+		WE                             ./sprites/wall_2.2.xpm                         
 
 F 255,255,255		
 
@@ -14,9 +14,19 @@ C 0,0,0
 
 11111
 10001
-10N01
 10001
-11111
+10001
+10001
+10001
+10001
+10001
+10001
+10001
+10001111111111111111111
+10000000000000000000001
+10N00000000000000000001
+10000000000000000000001
+11111111111111111111111
 
 
 

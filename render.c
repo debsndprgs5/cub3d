@@ -18,15 +18,14 @@ int get_good_rgb(int *arr)
 
 void render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game)
 {
-	t_image 	wall_image;
+	t_asset 	current_wall;
 	int 		wall_size;
 	t_dbl_int	screen_buff;
 	t_dbl_int	wall_buff;
 	t_image 	to_fill;
+	int 		texture_row;
 
-	if(wall_y == -1)
-		wall_y +=1;
-	set_good_wall(wall_x, wall_y, game, &wall_image);
+	set_good_wall(wall_x, wall_y, game, &current_wall);
 	wall_size = (int)(HEIGHT/game->wall_dist);
 	screen_buff.start = 0;
 	screen_buff.end = HEIGHT;
@@ -40,37 +39,41 @@ void render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game)
 		screen_buff.start = (HEIGHT - wall_size) / 2;
 		screen_buff.end = screen_buff.start + wall_size;
 		wall_buff.start = 0;
-		wall_buff.end = wall_size;
+		wall_buff.end = wall_size-(0.75/game->wall_dist);
 	}
 	else
 	{
 		wall_buff.start = wall_size - HEIGHT; 
 		wall_buff.end = wall_size;
 	}
+	texture_row = get_texture_row(wall_x, wall_y, current_wall.width);
 	while(screen_buff.start <= screen_buff.end)
 	{
-		my_pixel_put(&to_fill, pixel_rows, screen_buff.start, get_textures(wall_image, get_texture_line(wall_buff.start, wall_size) , get_texture_row(wall_x, wall_y)));
+		my_pixel_put(&to_fill, pixel_rows, screen_buff.start,
+			get_textures(current_wall.image,get_texture_line(wall_buff.start, wall_size, current_wall.height),texture_row));
 		screen_buff.start++;
 		wall_buff.start ++;
 	}
-	mlx_destroy_image(game->mlx_session, wall_image.mlx_img);
+	//mlx_destroy_image(game->mlx_session, current_wall.image.mlx_img);
 	
+}
+
+t_image cpy_image(t_image *ref, t_game *game)
+{
+	t_image new;
+	new.mlx_img = mlx_new_image(game->mlx_session,WIDTH,HEIGHT);
+	new.mlx_img = ref->mlx_img;
+	return(new);
 }
 
 
 int render_game(t_game *game)
 {
-	if(game->is_current == true)
-		create_background(game, &game->next);
-	else
-		create_background(game, &game->current);
+	// if(game->is_current == true)
+	// 	game->next = game->background;
+	// else
+	// 	game->current = game->background;
 	raycasting_loop(game);
 	return(0);
 }
 
-void render_all(t_game *game)
-{	
-	render_game(game);	
-	mlx_key_hook(game->mlx_window, get_key, game);
-	mlx_loop(game->mlx_session);
-}

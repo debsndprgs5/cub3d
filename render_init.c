@@ -12,7 +12,7 @@
 
 #include "cube.h"
 
-void my_pixel_put(t_image *image, int x, int y, int color)
+void	my_pixel_put(t_image *image, int x, int y, int color)
 {
 	char *dst;
 
@@ -20,7 +20,7 @@ void my_pixel_put(t_image *image, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void load_raycast_image(t_game *game)
+void	load_raycast_image(t_game *game)
 {
 	
 	if(game->is_current == true)
@@ -28,17 +28,17 @@ void load_raycast_image(t_game *game)
 		mlx_put_image_to_window(game->mlx_session, game->mlx_window, game->next.mlx_img, 0, 0);
 		game->is_current = false;
 		mlx_destroy_image(game->mlx_session, game->current.mlx_img);
-		game->current.mlx_img = mlx_new_image(game->mlx_session, WIDTH, HEIGHT);
-		//game->current.mlx_img = game->background.mlx_img;
+		game->current = create_background(game);
+		//game->current.mlx_img = mlx_new_image(game->mlx_session, WIDTH, HEIGHT);
 	}
 	else
 	{		
 		mlx_put_image_to_window(game->mlx_session, game->mlx_window, game->current.mlx_img, 0, 0);
 		game->is_current = true;
 		mlx_destroy_image(game->mlx_session, game->next.mlx_img);
-		game->next.mlx_img = mlx_new_image(game->mlx_session, WIDTH, HEIGHT);
-		//game->next.mlx_img = game->background.mlx_img;
-
+		game->next = create_background(game);
+	
+		//game->next.mlx_img = mlx_new_image(game->mlx_session, WIDTH, HEIGHT);
 	}
 }
 
@@ -47,30 +47,31 @@ void load_raycast_image(t_game *game)
 
 
 
-void create_background(t_game *game, t_image *background)
+t_image	create_background(t_game *game)
 {
 	int x;
 	int y;
+	t_image background;
 
 	x = 0;
 	y = 0;
-	background->mlx_img = mlx_new_image(game->mlx_session, WIDTH, HEIGHT);
-	background->address = mlx_get_data_addr(background->mlx_img, &background->bpp, &background->line_length, &background->endian);
-	while(x <= WIDTH)//(MAx LEN)
+	background.mlx_img = mlx_new_image(game->mlx_session, WIDTH, HEIGHT);
+	background.address = mlx_get_data_addr(background.mlx_img,
+		&background.bpp, &background.line_length, &background.endian);
+	while (x <= WIDTH)
 	{
 		y = 0;
-		while(y <= HEIGHT) //(max HIGTH)
+		while (y <= HEIGHT)
 		{
-			if (y <= HEIGHT/2)
-				my_pixel_put(background, x, y, get_good_rgb(game->skycol));
+			if (y <= HEIGHT / 2)
+				my_pixel_put(&background, x, y, get_good_rgb(game->skycol));
 			else
 			{
-				my_pixel_put(background, x, y, get_good_rgb(game->groundcol));
+				my_pixel_put(&background, x, y, get_good_rgb(game->groundcol));
 			}
 			y++;
 		}
 		x++;
-	}	
-	
+	}
+	return (background);
 }
-

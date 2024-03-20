@@ -65,10 +65,7 @@ void get_player_pos(int *x, int *y, t_game *game)
 
 int init_struct(t_game *game, char **config_file)
 {
-	t_frames	frames;
 	t_ppos		ppos;
-	int width;
-	int height;
 	int	x;
 	int	y;
 
@@ -89,17 +86,7 @@ int init_struct(t_game *game, char **config_file)
 	game->ymax -= 1;
 	// printf("-------------\nxm = %d\nym = %d\n-------------", game->xmax, game->ymax);
 	ft_init_mlx(game);
-	frames.w_no_img = mlx_xpm_file_to_image(game->mlx_session,
-		game->paths[0], &width, &height);
-	frames.w_so_img = mlx_xpm_file_to_image(game->mlx_session,
-		game->paths[1], &width, &height);
-	frames.w_ea_img = mlx_xpm_file_to_image(game->mlx_session,
-		game->paths[2], &width, &height);
-	frames.w_we_img = mlx_xpm_file_to_image(game->mlx_session,
-		game->paths[3], &width, &height);
-	game->frames = &frames;
-	game->lookingdir = get_iniplayerdir(game);
-	game->mouse_active = 0;
+	init_asset(game);
 	// printf("lookingdir = %d\n", game->lookingdir);
 	return(1);
 }

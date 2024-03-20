@@ -50,12 +50,11 @@ int get_dir_wall(double wall_x, double wall_y)
 
 /* for each wall pos choose wich textures add on */
 
-void set_good_wall(double wall_x, double wall_y, t_game *game, t_image *image)
+void set_good_wall(double wall_x, double wall_y, t_game *game, t_asset *current_wall)
 {
 	int	face;
 	int dir;
-	int width;
-	int height;
+
 
 
 	face = get_dir_wall(wall_x, wall_y);
@@ -64,21 +63,17 @@ void set_good_wall(double wall_x, double wall_y, t_game *game, t_image *image)
 	if (face == 1 || face == 0) //SIDE
 	{
 		if (dir == 11 || dir == 21 || dir == 31)
-			image->mlx_img =  mlx_xpm_file_to_image(game->mlx_session,
-		game->paths[2], &width, &height);//EAST
+			*current_wall =  game->assets[2];//EAST
 		else
-			image->mlx_img =  mlx_xpm_file_to_image(game->mlx_session,
-		game->paths[0], &width, &height); //WEST
+			*current_wall =  game->assets[3]; //WEST
 	}
 	if (face == 2) // FRONT
 	{
 		if((dir > 10 && dir < 20) || dir > 30)
-			image->mlx_img =  mlx_xpm_file_to_image(game->mlx_session,
-		game->paths[0], &width, &height);//NORTH 
+			*current_wall =  game->assets[0];//NORTH 
 		else
-			image->mlx_img =  mlx_xpm_file_to_image(game->mlx_session,
-		game->paths[1], &width, &height);//SOUTH 
+			*current_wall =  game->assets[1];//SOUTH 
 	}
-	image->address = mlx_get_data_addr(image->mlx_img, &image->bpp, &image->line_length, &image->endian);
+	//image->address = mlx_get_data_addr(image->mlx_img, &image->bpp, &image->line_length, &image->endian);
 }
 

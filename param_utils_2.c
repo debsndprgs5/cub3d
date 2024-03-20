@@ -47,12 +47,15 @@ int	free_used_lines(char *a, char *b)
 
 int	free_game(t_game *game)
 {
-	int i;
+	// int i;
 
-	i = 0;
-	while(i <= 3)
-		free(game->paths[i++]);
-	free(game->paths);
+	// i = 0;
+	// while(i <= 3)
+	// 	free(game->paths[i++]);
+	// free(game->paths);
+	if(game)
+	{
+	}
 	return (0);
 }
 
