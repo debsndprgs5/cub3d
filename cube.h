@@ -43,7 +43,7 @@
 
 # define LOOK_LEFT 65361
 
-# define LOOK_SPEED 5
+# define LOOK_SPEED 1
 
 #define MOUSE_TGLE 96
 
