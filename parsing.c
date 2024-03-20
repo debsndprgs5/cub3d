@@ -79,27 +79,29 @@ int init_struct(t_game *game, char **config_file)
 	game->ppos = ppos;
 	game->ppos.x = (double) x - 0.5;
 	game->ppos.y = (double) y - 0.5;
+	printf("x = %f\ny = %f\n", game->ppos.x, game->ppos.y);
 	game->ymax = 0;
 	game->xmax = ft_strlen(game->map[0]);
 	while (game->map[game->ymax])
 		game->ymax++;
 	game->ymax -= 1;
+	game->lookingdir = get_iniplayerdir(game);
 	// printf("-------------\nxm = %d\nym = %d\n-------------", game->xmax, game->ymax);
 	ft_init_mlx(game);
 	init_asset(game);
-	// printf("lookingdir = %d\n", game->lookingdir);
+	printf("lookingdir = %f\n", game->lookingdir);
 	return(1);
 }
 
 double	get_iniplayerdir(t_game *game)
 {
-	if (game->map[(int)game->ppos.y + 1][(int)game->ppos.x + 1] == 'N')
+	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'N')
 		return (90);
-	if (game->map[(int)game->ppos.y + 1][(int)game->ppos.x + 1] == 'S')
+	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'S')
 		return (270);
-	if (game->map[(int)game->ppos.y + 1][(int)game->ppos.x + 1] == 'E')
+	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'E')
 		return (0);
-	if (game->map[(int)game->ppos.y + 1][(int)game->ppos.x + 1] == 'W')
+	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'W')
 		return (180);
 	return (printerror(MATH_ERROR));
 }

@@ -148,7 +148,6 @@ void player_look(int key, t_game *game)
 {
 	if(key == LOOK_LEFT)
 		game->lookingdir -= LOOK_SPEED;
-
 	if (key == LOOK_RIGHT)
 		game->lookingdir += LOOK_SPEED;
 	render_game(game);
