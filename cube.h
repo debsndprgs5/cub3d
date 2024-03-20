@@ -54,6 +54,8 @@
 # define MOUSE_TGLE 96
 
 # define WALL_HIGTH  1.5
+
+# define PLAYER_HEIGHT 0.75
 // Walls/Ground raw images
 
 typedef struct s_image

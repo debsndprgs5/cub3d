@@ -43,11 +43,12 @@ void render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game)
 	}
 	else
 	{
-		wall_buff.start = wall_size - HEIGHT - ((WALL_HIGTH / game->wall_dist)/2); 
-		wall_buff.end = wall_size + ((WALL_HIGTH / game->wall_dist)/2);
+		wall_buff.start =   (wall_size - HEIGHT)/2;
+		wall_buff.end = wall_buff.start + HEIGHT;
 	}
 	texture_row = get_texture_row(wall_x, wall_y, current_wall.width);
-	while(screen_buff.start <= screen_buff.end)
+	
+	while(screen_buff.start <= screen_buff.end && wall_buff.start <= wall_buff.end)
 	{
 		my_pixel_put(&to_fill, pixel_rows, screen_buff.start,
 			get_textures(current_wall.image,get_texture_line(wall_buff.start, wall_size, current_wall.height),texture_row));
