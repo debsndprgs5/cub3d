@@ -95,13 +95,13 @@ int init_struct(t_game *game, char **config_file)
 
 double	get_iniplayerdir(t_game *game)
 {
-	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'N')
-		return (90);
-	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'S')
-		return (270);
-	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'E')
-		return (0);
 	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'W')
+		return (90);
+	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'E')
+		return (270);
+	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'S')
+		return (0);
+	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'N')
 		return (180);
 	return (printerror(MATH_ERROR));
 }

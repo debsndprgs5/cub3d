@@ -156,7 +156,7 @@ void player_look(int key, t_game *game)
 int get_key(int key, t_game *game)
 {
 	if (key == MOUSE_TGLE)
-	 	toogle_mouse(game);
+	 	toggle_mouse(game);
 	if (key == 65307)
 		exit_game(game);
 	// if(key == UP_KEY ||key == DOWN_KEY ||key == LEFT_KEY ||key == RIGHT_KEY)
