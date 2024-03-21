@@ -26,7 +26,9 @@ void render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game)
 	int 		texture_row;
 
 	set_good_wall(wall_x, wall_y, game, &current_wall);
-	wall_size = (int)(HEIGHT/game->wall_dist);
+	printf("double wall_size : %f ", (HEIGHT/game->wall_dist));
+	wall_size = (HEIGHT/game->wall_dist);
+	printf("INT wall_size : %d\n", wall_size);
 	screen_buff.start = 0;
 	screen_buff.end = HEIGHT;
 	if(game->is_current == false)
@@ -46,9 +48,10 @@ void render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game)
 		wall_buff.start =   (wall_size - HEIGHT)/2;
 		wall_buff.end = wall_buff.start + HEIGHT;
 	}
+	if(wall_buff.end - wall_buff.start != screen_buff.end - screen_buff.start)
+		printf("KOUKOUILLE\n\n\n");
 	texture_row = get_texture_row(wall_x, wall_y, current_wall.width);
-	
-	while(screen_buff.start <= screen_buff.end && wall_buff.start <= wall_buff.end)
+	while(screen_buff.start < screen_buff.end && wall_buff.start <= wall_buff.end)
 	{
 		my_pixel_put(&to_fill, pixel_rows, screen_buff.start,
 			get_textures(current_wall.image,get_texture_line(wall_buff.start, wall_size, current_wall.height),texture_row));
