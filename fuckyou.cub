@@ -1,0 +1,23 @@
+
+EA ./sprites/default.xpm
+											       
+NO ./sprites/default.xpm
+
+SO ./sprites/Roosvelt.xpm
+
+		WE                             ./sprites/Roosvelt.xpm                   
+
+
+F 255,255,255		
+
+C 0,0,0
+
+
+11111
+10S01
+10001
+
+
+
+                          
+                        

@@ -29,7 +29,7 @@
 
 # define FOV 90.2
 
-# define SPEED 0.1
+# define SPEED 0.33
 
 # define UP_KEY 119
 
