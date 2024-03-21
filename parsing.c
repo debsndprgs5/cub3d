@@ -33,7 +33,7 @@ int init_first_game(t_game *game)
 static void ft_init_mlx(t_game *game)
 {
 	game->mlx_session = mlx_init();
-	game->mlx_window = mlx_new_window(game->mlx_session, 960, 540, "Cub3D");
+	game->mlx_window = mlx_new_window(game->mlx_session, WIDTH, HEIGHT, "Cub3D");
 	game->current.mlx_img = mlx_new_image(game->mlx_session, WIDTH, HEIGHT);
 	game->next.mlx_img  = mlx_new_image(game->mlx_session, WIDTH, HEIGHT);
 }

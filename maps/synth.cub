@@ -1,7 +1,7 @@
-NO	Includes/default.xpm
-SO	Includes/default.xpm
-EA	Includes/default.xpm
-WE	Includes/default.xpm
+NO	sprites/Wall_Steel_bulkhead.xpm
+SO	sprites/Wall_Vent.xpm
+EA	sprites/Wall_Weathered_brick.xpm
+WE	sprites/Wood_slats.xpm
 
 
 F	79, 91, 92

@@ -6,7 +6,7 @@
 /*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 18:37:22 by zfavere           #+#    #+#             */
-/*   Updated: 2024/03/13 15:33:37 by zfavere          ###   ########.fr       */
+/*   Updated: 2024/03/20 19:41:40 by zfavere          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef CUBE_H
@@ -23,13 +23,13 @@
 # include <mlx.h>
 # include <math.h>
 
-# define WIDTH 960
+# define WIDTH 1920 //960
 
-# define HEIGHT 540
+# define HEIGHT 1030
 
 # define FOV 90.2
 
-# define SPEED 0.05
+# define SPEED 0.1
 
 # define UP_KEY 119
 

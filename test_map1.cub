@@ -1,11 +1,7 @@
-
-EA ./sprites/basic.xpm
-											       
-NO ./sprites/basic.xpm
-
-SO ./sprites/basic.xpm
-
-		WE                             ./sprites/basic.xpm                         
+NO	sprites/surprise.xpm
+SO	sprites/surprise.xpm
+WE	sprites/surprise.xpm
+EA	sprites/surprise.xpm
 
 F 255,255,255		
 
