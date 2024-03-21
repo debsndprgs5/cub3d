@@ -1,11 +1,11 @@
 
-EA ./sprites/basic.xpm
+EA ./sprites/default.xpm
 											       
-NO ./sprites/basic.xpm
+NO ./sprites/default.xpm
 
-SO ./sprites/basic.xpm
+SO ./sprites/Roosvelt.xpm
 
-		WE                             ./sprites/basic.xpm                         
+		WE                             ./sprites/Roosvelt.xpm                   
 
 F 255,255,255		
 
@@ -15,18 +15,10 @@ C 0,0,0
 11111
 10001
 10001
+10E01
 10001
 10001
-10001
-10001
-10001
-10001
-10001
-10001111111111111111111
-10000000000000000000001
-10N00000000000000000001
-10000000000000000000001
-11111111111111111111111
+11111
 
 
 
