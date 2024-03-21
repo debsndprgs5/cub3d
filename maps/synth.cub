@@ -1,7 +1,8 @@
-NO	sprites/basic.xpm
-SO	sprites/basic.xpm
-EA	sprites/Roosvelt.xpm
-WE	sprites/default.xpm
+NO	sprites/Wall_Steel_bulkhead.xpm
+SO	sprites/Wall_Vent.xpm
+EA	sprites/Wall_Weathered_brick.xpm
+WE	sprites/Wood_slats.xpm
+
 
 
 F	79, 91, 92
