@@ -26,8 +26,8 @@ void render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game)
 	int 		texture_row;
 
 	set_good_wall(wall_x, wall_y, game, &current_wall);
-	printf("double wall_size : %f ", (HEIGHT/game->wall_dist));
-	wall_size = (HEIGHT/game->wall_dist);
+	printf("double wall_size : %f ", round((double)HEIGHT/game->wall_dist));
+	wall_size = round((double)HEIGHT / game->wall_dist);
 	printf("INT wall_size : %d\n", wall_size);
 	screen_buff.start = 0;
 	screen_buff.end = HEIGHT;

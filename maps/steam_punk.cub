@@ -1,4 +1,4 @@
-SO	./Includes/default.xpm
+SO	./sprites/default.xpm
 NO	./sprites/pipe_wall.xpm
 WE	./sprites/gear_wall.xpm
 EA	./sprites/pipe_wall.xpm
