@@ -17,7 +17,7 @@ static void ray_wall_hit_trigger(t_ray *ray, t_game *game,
 	if (ray->side == 0)
 	{
 		ray->perpwalldist = (ray->sidedistx - ray->deltadistx);
-		if(ray->perpwalldist >= SPEED)
+		if(ray->perpwalldist >= SPEED + 0.1)
 		{
 			*foundx = game->ppos.x + SPEED * ray->dx;
 			*foundy = game->ppos.y + SPEED * ray->dy;
@@ -26,7 +26,7 @@ static void ray_wall_hit_trigger(t_ray *ray, t_game *game,
 	else
 	{
 		ray->perpwalldist = (ray->sidedisty - ray->deltadisty);
-		if(ray->perpwalldist >= SPEED)
+		if(ray->perpwalldist >= SPEED + 0.1)
 		{
 			*foundx = game->ppos.x + SPEED * ray->dx;
 			*foundy = game->ppos.y + SPEED * ray->dy;

@@ -3,9 +3,9 @@ EA ./sprites/default.xpm
 											       
 NO ./sprites/default.xpm
 
-SO ./sprites/Roosvelt.xpm
+SO ./sprites/default.xpm
 
-		WE                             ./sprites/Roosvelt.xpm                   
+		WE                             ./sprites/default.xpm                   
 
 F 255,255,255		
 
