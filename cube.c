@@ -28,7 +28,10 @@ int	main(int ac, char **path)
 			return(1);
 		}
 		if (!split_map(map, &configfile, &parsedmap))
+		{
+			free(map);
 			return (1);
+		}
 		freetab(map);
 		get_format(&parsedmap);
 		game.map = parsedmap;

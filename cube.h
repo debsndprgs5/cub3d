@@ -23,9 +23,9 @@
 # include <mlx.h>
 # include <math.h>
 
-# define WIDTH 480 //960
+# define WIDTH 960 //960
 
-# define HEIGHT 270
+# define HEIGHT 540
 
 # define FOV 90.2
 

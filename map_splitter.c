@@ -154,13 +154,10 @@ int	split_map(char **map, char ***part1, char ***part2)
 	while (map[lines_tot])
 		lines_tot++;
 	splitline = findsplitpoint(map);
-	if (!splitline)
+	if (!splitline && !(splitline == lines_tot))
 		create_config_if_empty(part1, part2, map, splitline);
 	else if (splitline == lines_tot)
-	{
-		printerror(MAP_NOT_EXIST);
-		return (0);
-	}
+		return (printerror(MAP_NOT_EXIST));
 	else
 	{
 		*part1 = malloc(sizeof(char *) * (splitline + 1));
