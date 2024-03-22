@@ -21,7 +21,6 @@ SRC = cube.c \
 	  parsing.c \
 	  get_param.c \
 	  error_parsing.c \
-	  get_dir_path.c \
 	  param_utils.c \
 	  param_utils_2.c \
 	  parse_map.c \

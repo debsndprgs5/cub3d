@@ -15,15 +15,15 @@
 int	check_extention(char *path, char *ext, int len)
 {
 	int	i;
-	// int fd;
+	int fd;
 
-	// fd = open(path, O_DIRECTORY);
-	// if (fd > 0)
-	// {
-	// 	close(fd);
-	// 	return (0);
-	// }
-	// close(fd);
+	fd = open(path, O_DIRECTORY);
+	if (fd > 0)
+	{
+		close(fd);
+		return (0);
+	}
+	close(fd);
 	i = ft_strlen(path);
 	i --;
 	while (ext[len] && len >= 0)

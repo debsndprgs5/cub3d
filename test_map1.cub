@@ -1,28 +1,15 @@
 
-EA ./sprites/default.xpm
-											       
-NO ./sprites/default.xpm
-
-SO ./sprites/default.xpm
-
-		WE                             ./sprites/default.xpm                   
-
-
-F 255,255,255	
-
-C 0,0,0
-
-
-11111
-10001
-10001
-10E01
-1000111111
-10     001
-1111111111
-
-
-
-
                           
                         
+NO test.xpm
+
+SO test.xpm
+
+WE test.xpm
+
+EA test.xpm 
+
+11111111
+10000001
+1111W111
+11111111
