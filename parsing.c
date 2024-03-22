@@ -75,6 +75,7 @@ int init_struct(t_game *game, char **config_file)
 		return (0);
 	if (!get_param(config_file, game))
 	{
+		free_paths(game->paths);
 		freetab(game->map);
 		freetab(config_file);
 		return (0);
@@ -83,17 +84,15 @@ int init_struct(t_game *game, char **config_file)
 	game->ppos = ppos;
 	game->ppos.x = (double) x - 0.5;
 	game->ppos.y = (double) y - 0.5;
-	printf("x = %f\ny = %f\n", game->ppos.x, game->ppos.y);
 	game->ymax = 0;
 	game->xmax = ft_strlen(game->map[0]);
 	while (game->map[game->ymax])
 		game->ymax++;
 	game->ymax -= 1;
 	game->lookingdir = get_iniplayerdir(game);
-	// printf("-------------\nxm = %d\nym = %d\n-------------", game->xmax, game->ymax);
 	ft_init_mlx(game);
-	init_asset(game);
-	printf("lookingdir = %f\n", game->lookingdir);
+	if (!init_asset(game))
+		return (0);
 	return(1);
 }
 

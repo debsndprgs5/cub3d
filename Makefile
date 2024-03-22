@@ -37,6 +37,7 @@ SRC = cube.c \
 	  assets.c \
 	  raycasting_utils.c \
 	  raycasting_utils2.c \
+	  ray_cast_player.c \
 
 
 OBJ = $(SRC:.c=.o)

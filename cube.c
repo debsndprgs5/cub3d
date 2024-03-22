@@ -32,13 +32,13 @@ int	main(int ac, char **path)
 		freetab(map);
 		get_format(&parsedmap);
 		game.map = parsedmap;
-		if (!init_struct(&game, configfile))
-			return (1);
 		if (!(map_check(parsedmap)))
 		{
 			exit_game(&game);
 			return (1);
 		}
+		if (!init_struct(&game, configfile))
+			return (1);	
 		mlx_mouse_hide(game.mlx_session, game.mlx_window);
 		mlx_hook(game.mlx_window, 6, 1L<<6, check_cursor, &game);
 		toggle_mouse(&game);
@@ -53,6 +53,10 @@ int	main(int ac, char **path)
 int	exit_game(t_game *game)
 {
 	freetab(game->map);
+	if (game->is_current == false)
+		mlx_destroy_image(game->mlx_session, game->current.mlx_img);
+	else 
+		mlx_destroy_image(game->mlx_session, game->next.mlx_img);
 	mlx_destroy_window(game->mlx_session, game->mlx_window);
 	exit(0);
 }
@@ -76,7 +80,7 @@ int	loopframe(t_game *game)
 
 void	lhookylhook(t_game *game)
 {
-	render_game(game);
+	raycasting_loop(game);
 	mlx_hook(game->mlx_window, 2, (1L << 0), get_key, game);
 	mlx_hook(game->mlx_window, 3, (1L << 1), release_key, game);
 	mlx_hook(game->mlx_window, 17, 0L, exit_game, game);

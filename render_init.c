@@ -29,7 +29,6 @@ void	load_raycast_image(t_game *game)
 		game->is_current = false;
 		mlx_destroy_image(game->mlx_session, game->current.mlx_img);
 		game->current = create_background(game);
-		//game->current.mlx_img = mlx_new_image(game->mlx_session, WIDTH, HEIGHT);
 	}
 	else
 	{		
@@ -37,8 +36,6 @@ void	load_raycast_image(t_game *game)
 		game->is_current = true;
 		mlx_destroy_image(game->mlx_session, game->next.mlx_img);
 		game->next = create_background(game);
-	
-		//game->next.mlx_img = mlx_new_image(game->mlx_session, WIDTH, HEIGHT);
 	}
 }
 
