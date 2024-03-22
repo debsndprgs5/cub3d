@@ -180,7 +180,6 @@ char	*clean_first_spaces(char *str, int i);
 char	*removes_spaces(char *spc_line);
 char	*parse_config_line(char *line);
 int		get_dir_path(char *path, char **stack, int index);
-int		free_game(t_game *game);
 int		map_check(char **map);
 void	get_format(char ***parsedmap);
 double	get_iniplayerdir(t_game *game);

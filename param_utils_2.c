@@ -45,20 +45,6 @@ int	free_used_lines(char *a, char *b)
 	return (0);
 }
 
-int	free_game(t_game *game)
-{
-	// int i;
-
-	// i = 0;
-	// while(i <= 3)
-	// 	free(game->paths[i++]);
-	// free(game->paths);
-	if(game)
-	{
-	}
-	return (0);
-}
-
 int	check_game(t_game *game)
 {
 	int	i;

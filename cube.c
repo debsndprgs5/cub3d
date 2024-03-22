@@ -44,6 +44,7 @@ int	main(int ac, char **path)
 		mlx_hook(game.mlx_window, 6, 1L<<6, check_cursor, &game);
 		toggle_mouse(&game);
 		lhookylhook(&game);
+		exit_game(&game);
 		// for (int i = 0; parsedmap[i]; i++)
 		// 	printf("sz = %d  | %s", ft_strlen(parsedmap[i]), parsedmap[i]);
 		//renderft();
@@ -58,7 +59,6 @@ int	main(int ac, char **path)
 int	exit_game(t_game *game)
 {
 	freetab(game->map);
-	free_game(game);
 	mlx_destroy_window(game->mlx_session, game->mlx_window);
 	exit(0);
 }
