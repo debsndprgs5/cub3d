@@ -39,6 +39,7 @@ int	error_path(int ref)
 17 = Missing Arguments
 18 = Position error - check the code
 19 = Math error, please stop meth
+20 = xpm empty
 */
 
 static const char	*errormsg[] = {
@@ -61,7 +62,8 @@ static const char	*errormsg[] = {
 	"Duplicates arguments",
 	"Missings arguments",
 	"Position error, check the code",
-	"Math error, please stop meth"
+	"Math error, please stop meth",
+	"xpm file may be empty",
 };
 
 int	printerror(t_ErrorCode err)

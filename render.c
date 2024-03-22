@@ -15,61 +15,47 @@ int get_good_rgb(int *arr)
 }
 
 
+void set_buffers(t_dbl_int *wall_buff, t_dbl_int *screen_buff, int wall_size)
+{
+	screen_buff->start = 0;
+	screen_buff->end = HEIGHT;
+	if (wall_size < HEIGHT)
+	{
+		screen_buff->start = (HEIGHT - wall_size) / 2;
+		screen_buff->end = screen_buff->start + wall_size;
+		wall_buff->start = 0;
+		wall_buff->end = wall_size;
+		return ;
+	}
+	wall_buff->start =   (wall_size - HEIGHT)/2;
+	wall_buff->end = wall_buff->start + HEIGHT;
+}
+
 
 void render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game)
 {
-	t_asset 	current_wall;
-	int 		wall_size;
-	t_dbl_int	screen_buff;
-	t_dbl_int	wall_buff;
-	t_image 	to_fill;
-	int 		texture_row;
+	t_render render;
 
-	set_good_wall(wall_x, wall_y, game, &current_wall);
-	wall_size = round((double)HEIGHT / game->wall_dist);
-	screen_buff.start = 0;
-	screen_buff.end = HEIGHT;
+	set_good_wall(wall_x, wall_y, game, &render.current_wall);
+	render.wall_size = round((double)HEIGHT / game->wall_dist);
+	set_buffers(&render.wall_buff, &render.screen_buff, render.wall_size);
 	if(game->is_current == false)
-		to_fill = game->current;
+		render.to_fill = game->current;
 	else
-		to_fill = game->next;
-	to_fill.address = mlx_get_data_addr(to_fill.mlx_img, &to_fill.bpp, &to_fill.line_length, &to_fill.endian);
-	if (wall_size < HEIGHT)
+		render.to_fill = game->next;
+	render.to_fill.address = mlx_get_data_addr(render.to_fill.mlx_img,
+		&render.to_fill.bpp, &render.to_fill.line_length, &render.to_fill.endian);
+	render.texture_row = get_texture_row(wall_x, wall_y, render.current_wall.width);
+	while(render.screen_buff.start < render.screen_buff.end
+		&& render.wall_buff.start < render.wall_buff.end)
 	{
-		screen_buff.start = (HEIGHT - wall_size) / 2;
-		screen_buff.end = screen_buff.start + wall_size;
-		wall_buff.start = 0;
-		wall_buff.end = wall_size ;
-	}
-	else
-	{
-		wall_buff.start =   (wall_size - HEIGHT)/2;
-		wall_buff.end = wall_buff.start + HEIGHT;
-	}
-	if(wall_buff.end > wall_size)
-		wall_buff.end = wall_size;
-	texture_row = get_texture_row(wall_x, wall_y, current_wall.height);
-	while(screen_buff.start < screen_buff.end && wall_buff.start < wall_buff.end)
-	{
-		my_pixel_put(&to_fill, pixel_rows, screen_buff.start,
-			get_textures(current_wall.image,get_texture_line(wall_buff.start, wall_size, current_wall.width),texture_row));
-		screen_buff.start++;
-		wall_buff.start ++;
+		my_pixel_put(&render.to_fill, pixel_rows, render.screen_buff.start,
+			get_textures(render.current_wall.image,
+				get_texture_line(render.wall_buff.start, render.wall_size,
+				render.current_wall.height),render.texture_row));
+		render.screen_buff.start++;
+		render.wall_buff.start ++;
 	}	
 }
 
-t_image cpy_image(t_image *ref, t_game *game)
-{
-	t_image new;
-	new.mlx_img = mlx_new_image(game->mlx_session,WIDTH,HEIGHT);
-	new.mlx_img = ref->mlx_img;
-	return(new);
-}
-
-
-int render_game(t_game *game)
-{
-	raycasting_loop(game);
-	return(0);
-}
 

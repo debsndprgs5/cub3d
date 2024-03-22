@@ -43,7 +43,7 @@ int	check_cursor(int x, int y, t_game *game)
 	{
 		game->lookingdir += (x - WIDTH / 2) * 0.1;
 		put_cursor_middle(game);
-		render_game(game);
+		raycasting_loop(game);
 	}
 	return (0);
 }

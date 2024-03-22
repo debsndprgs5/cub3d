@@ -58,6 +58,10 @@ int	main(int ac, char **path)
 int	exit_game(t_game *game)
 {
 	freetab(game->map);
+	if (game->is_current == true)
+		mlx_destroy_image(game->mlx_session, game->current.mlx_img);
+	else 
+		mlx_destroy_image(game->mlx_session, game->next.mlx_img);
 	free_game(game);
 	mlx_destroy_window(game->mlx_session, game->mlx_window);
 	exit(0);
@@ -82,7 +86,7 @@ int	loopframe(t_game *game)
 
 void	lhookylhook(t_game *game)
 {
-	render_game(game);
+	raycasting_loop(game);
 	mlx_hook(game->mlx_window, 2, (1L << 0), get_key, game);
 	mlx_hook(game->mlx_window, 3, (1L << 1), release_key, game);
 	mlx_hook(game->mlx_window, 17, 0L, exit_game, game);

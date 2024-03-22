@@ -23,13 +23,13 @@
 # include <mlx.h>
 # include <math.h>
 
-# define WIDTH 1920 //960
+# define WIDTH 480 //960
 
-# define HEIGHT 1030
+# define HEIGHT 270
 
 # define FOV 90.2
 
-# define SPEED 0.1
+# define SPEED 0.05
 
 # define UP_KEY 119
 
@@ -53,9 +53,7 @@
 
 # define MOUSE_TGLE 96
 
-# define WALL_HIGTH  1.5
 
-# define PLAYER_HEIGHT 0.75
 // Walls/Ground raw images
 
 typedef struct s_image
@@ -116,6 +114,16 @@ typedef struct s_keypress
 	bool	look_left;
 }	t_keypress;
 
+typedef struct s_render
+{
+	t_asset 	current_wall;
+	int 		wall_size;
+	t_dbl_int	screen_buff;
+	t_dbl_int	wall_buff;
+	t_image 	to_fill;
+	int 		texture_row;
+}	t_render;
+
 // Main struct
 // Paths are N->0 S->1 E->2 W->3 in this order
 typedef struct s_game
@@ -164,6 +172,7 @@ typedef enum s_ErrorCode
 	MISSING_ARGS,
 	POS_ERROR,
 	MATH_ERROR,
+	EMPTY_XPM,
 }	t_ErrorCode;
 
 // PARSING FUNCTIONS //
@@ -184,7 +193,7 @@ int		free_game(t_game *game);
 int		map_check(char **map);
 void	get_format(char ***parsedmap);
 double	get_iniplayerdir(t_game *game);
-void 	init_asset(t_game *game);
+int 	init_asset(t_game *game);
 int		exit_game(t_game *game);
 
 // RENDERING FUNCTIONS //
@@ -192,6 +201,7 @@ int		exit_game(t_game *game);
 int get_textures(t_image texture, int x, int y);
 int get_texture_line(int line, int wall_size, int size);
 int get_texture_row(double x, double y, int size);
+int cast_ray_player(t_game *game, int angle, t_ppos *ray_end);
 int		render_game(t_game *game);
 void		set_good_wall(double wall_x, double wall_y, t_game *game, t_asset *current_wall);
 double	get_wall_higth(t_game *game);

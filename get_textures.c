@@ -35,7 +35,6 @@ int get_textures(t_image texture, int x, int y)
 {
 	int *color;
 
-	//printf("TEXTURES X %d, Y %d, %s\n", x ,y, texture.address);
 	texture.address = mlx_get_data_addr(texture.mlx_img, &texture.bpp, &texture.line_length, &texture.endian);
 	//printf("TEXTURES2 X %d\n", y * texture.line_length + x * (texture.bpp / 8));
 	//color = texture.address[x * (texture.line_length/4) + y];
