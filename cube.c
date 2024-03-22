@@ -33,11 +33,7 @@ int	main(int ac, char **path)
 		get_format(&parsedmap);
 		game.map = parsedmap;
 		if (!init_struct(&game, configfile))
-		{
-			//free_game(&game);
 			return (1);
-		}
-		//free_game(&game);
 		if (!(map_check(parsedmap)))
 			return (1);
 		mlx_mouse_hide(game.mlx_session, game.mlx_window);
@@ -45,11 +41,6 @@ int	main(int ac, char **path)
 		toggle_mouse(&game);
 		lhookylhook(&game);
 		exit_game(&game);
-		// for (int i = 0; parsedmap[i]; i++)
-		// 	printf("sz = %d  | %s", ft_strlen(parsedmap[i]), parsedmap[i]);
-		//renderft();
-		// freetab(configfile);
-		// terminate(configfile, parsedmap);
 	}
 	else
 		printerror(FILE_NOT_EXIST);
