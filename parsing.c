@@ -76,6 +76,8 @@ int init_struct(t_game *game, char **config_file)
 	if (!get_param(config_file, game))
 	{
 		free_paths(game->paths);
+		freetab(game->map);
+		freetab(config_file);
 		return (0);
 	}
 	get_player_pos(&x, &y, game);
