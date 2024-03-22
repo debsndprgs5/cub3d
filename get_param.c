@@ -121,7 +121,6 @@ int	get_param(char **config_file, t_game *game)
 			i ++;
 		free(parse_line);
 	}
-	print_param(game);
 	if (!check_game(game))
 		return (printerror(MISSING_ARGS));
 	return (1);
