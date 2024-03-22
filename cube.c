@@ -35,7 +35,10 @@ int	main(int ac, char **path)
 		if (!init_struct(&game, configfile))
 			return (1);
 		if (!(map_check(parsedmap)))
+		{
+			exit_game(&game);
 			return (1);
+		}
 		mlx_mouse_hide(game.mlx_session, game.mlx_window);
 		mlx_hook(game.mlx_window, 6, 1L<<6, check_cursor, &game);
 		toggle_mouse(&game);
