@@ -34,7 +34,8 @@ int	main(int ac, char **path)
 		game.map = parsedmap;
 		if (!(map_check(parsedmap)))
 		{
-			exit_game(&game);
+			freetab(game.map);
+			freetab(configfile);
 			return (1);
 		}
 		if (!init_struct(&game, configfile))
