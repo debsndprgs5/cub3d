@@ -48,6 +48,7 @@ void	get_format(char ***parsedmap)
 		free((*parsedmap)[i]);
 		(*parsedmap)[i] = malloc(format + 1);
 		ft_strcpy((*parsedmap)[i], tempstr);
+		free(tempstr);
 		j = temp;
 		while (j < format)
 		{

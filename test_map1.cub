@@ -1,8 +1,7 @@
 
-EA ./sprites/false.xpm
+EA ./sprites/default.xpm
 											       
 NO ./sprites/default.xpm
-
 SO ./sprites/default.xpm
 
 		WE                             ./sprites/default.xpm                   

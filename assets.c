@@ -1,6 +1,6 @@
 #include "cube.h"
 
-void free_tab(char **path)
+void free_paths(char **path)
 {
 	int i;
 
@@ -21,11 +21,12 @@ int init_asset(t_game *game)
 			game->paths[i], &game->assets[i].width, &game->assets[i].height);
 		if (game->assets[i].image.mlx_img == (void*)0)
 		{
+			free_paths(game->paths);
 			exit_game(game);
 			return (printerror(EMPTY_XPM));
 		}
 		i++;
 	}
-	free_tab(game->paths);
+	free_paths(game->paths);
 	return (1);
 }

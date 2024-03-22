@@ -74,7 +74,10 @@ int init_struct(t_game *game, char **config_file)
 	if (!init_first_game(game))
 		return (0);
 	if (!get_param(config_file, game))
+	{
+		free_paths(game->paths);
 		return (0);
+	}
 	get_player_pos(&x, &y, game);
 	game->ppos = ppos;
 	game->ppos.x = (double) x - 0.5;

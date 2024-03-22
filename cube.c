@@ -32,18 +32,20 @@ int	main(int ac, char **path)
 		freetab(map);
 		get_format(&parsedmap);
 		game.map = parsedmap;
+		if (!(map_check(parsedmap)))
+			return (1);
 		if (!init_struct(&game, configfile))
 		{
 			//free_game(&game);
 			return (1);
 		}
 		//free_game(&game);
-		if (!(map_check(parsedmap)))
-			return (1);
+		
 		mlx_mouse_hide(game.mlx_session, game.mlx_window);
 		mlx_hook(game.mlx_window, 6, 1L<<6, check_cursor, &game);
 		toggle_mouse(&game);
 		lhookylhook(&game);
+		exit_game(&game);
 		// for (int i = 0; parsedmap[i]; i++)
 		// 	printf("sz = %d  | %s", ft_strlen(parsedmap[i]), parsedmap[i]);
 		//renderft();
@@ -58,11 +60,10 @@ int	main(int ac, char **path)
 int	exit_game(t_game *game)
 {
 	freetab(game->map);
-	if (game->is_current == true)
+	if (game->is_current == false)
 		mlx_destroy_image(game->mlx_session, game->current.mlx_img);
 	else 
 		mlx_destroy_image(game->mlx_session, game->next.mlx_img);
-	free_game(game);
 	mlx_destroy_window(game->mlx_session, game->mlx_window);
 	exit(0);
 }
