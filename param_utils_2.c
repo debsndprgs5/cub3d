@@ -15,7 +15,7 @@
 int	check_extention(char *path, char *ext, int len)
 {
 	int	i;
-	int fd;
+	int	fd;
 
 	fd = open(path, O_DIRECTORY);
 	if (fd > 0)
@@ -59,4 +59,22 @@ int	check_game(t_game *game)
 	if (game->ground_check == false || game->sky_check == false)
 		return (0);
 	return (1);
+}
+
+int	get_spaces_count(char *spc_line)
+{
+	int		i;
+	int		spc_count;
+
+	i = 0;
+	spc_count = 0;
+	if (!spc_line)
+		return (spc_count);
+	while (spc_line[i])
+	{
+		if (spc_line[i] == ' ')
+			spc_count ++;
+		i ++;
+	}
+	return (spc_count);
 }

@@ -45,14 +45,13 @@
 
 # define LOOK_SPEED 1
 
-#define MOUSE_TGLE 96
+# define MOUSE_TGLE 96
 
 # define TRUE 1
 
 # define FALSE 0
 
 # define MOUSE_TGLE 96
-
 
 // Walls/Ground raw images
 
@@ -68,8 +67,8 @@ typedef struct s_image
 typedef struct s_asset
 {
 	t_image		image;
-	int 		width;
-	int 		height;
+	int			width;
+	int			height;
 }	t_asset;
 
 typedef struct s_ppos
@@ -80,8 +79,8 @@ typedef struct s_ppos
 
 typedef struct s_dbl_int
 {
-	int start;
-	int end;
+	int	start;
+	int	end;
 }	t_dbl_int;
 
 typedef struct s_ray
@@ -116,12 +115,12 @@ typedef struct s_keypress
 
 typedef struct s_render
 {
-	t_asset 	current_wall;
-	int 		wall_size;
+	t_asset		current_wall;
+	int			wall_size;
 	t_dbl_int	screen_buff;
 	t_dbl_int	wall_buff;
-	t_image 	to_fill;
-	int 		texture_row;
+	t_image		to_fill;
+	int			texture_row;
 }	t_render;
 
 // Main struct
@@ -192,18 +191,22 @@ int		get_dir_path(char *path, char **stack, int index);
 int		map_check(char **map);
 void	get_format(char ***parsedmap);
 double	get_iniplayerdir(t_game *game);
-int 	init_asset(t_game *game);
-void 	free_paths(char **path);
+int		init_asset(t_game *game);
+void	free_paths(char **path);
 int		exit_game(t_game *game);
+int		is_map(char *str);
+int		get_spaces_count(char *spc_line);
+void	get_player_pos(int *x, int *y, t_game *game);
 
 // RENDERING FUNCTIONS //
 
-int get_textures(t_image texture, int x, int y);
-int get_texture_line(int line, int wall_size, int size);
-int get_texture_row(double x, double y, int size);
-int cast_ray_player(t_game *game, int angle, t_ppos *ray_end);
+int		get_textures(t_image texture, int x, int y);
+int		get_texture_line(int line, int wall_size, int size);
+int		get_texture_row(double x, double y, int size);
+int		cast_ray_player(t_game *game, int angle, t_ppos *ray_end);
 int		render_game(t_game *game);
-void		set_good_wall(double wall_x, double wall_y, t_game *game, t_asset *current_wall);
+void	set_good_wall(double wall_x, double wall_y,
+			t_game *game, t_asset *current_wall);
 double	get_wall_higth(t_game *game);
 void	render_wall(double wall_x, double wall_y, int pixel_rows, t_game *game);
 void	lhookylhook(t_game *game);
@@ -223,6 +226,7 @@ void	distribute_rays(t_game *game, double *angles);
 int		iswall(int x, int y, char **map);
 void	init_calc_ray(t_ray *ray);
 double	fisheyefix(double dx, double dy);
+int		loopframe(t_game *game);
 
 // ERROR CHECKING //
 

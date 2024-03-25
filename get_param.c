@@ -107,7 +107,7 @@ int	get_param(char **config_file, t_game *game)
 	while (config_file[i])
 	{
 		parse_line = clean_first_spaces(config_file[i], 0);
-		 if (! parse_line)
+		if (!parse_line)
 			i ++;
 		else if (!is_good_char(parse_line))
 			return (printerror(ARGS_UNDEFINED));

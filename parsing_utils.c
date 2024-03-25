@@ -59,3 +59,28 @@ void	get_format(char ***parsedmap)
 		i++;
 	}
 }
+
+void	get_player_pos(int *x, int *y, t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (game->map[i])
+	{
+		j = 0;
+		while (game->map[i][j])
+		{
+			if (game->map[i][j] == 'W' ||
+			game->map[i][j] == 'E' || game->map[i][j] == 'S' ||
+			game->map[i][j] == 'N')
+			{
+				(*y) = i;
+				(*x) = j;
+				break ;
+			}
+			j++;
+		}
+		i++;
+	}
+}

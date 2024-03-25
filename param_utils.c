@@ -12,26 +12,6 @@
 
 #include "cube.h"
 
-
-int	get_spaces_count(char *spc_line)
-{
-	int		i;
-	int		spc_count;
-
-	i = 0;
-	spc_count = 0;
-	if(! spc_line)
-		return (spc_count);
-	while (spc_line[i])
-	{
-		if (spc_line[i] == ' ')
-			spc_count ++;
-		i ++;
-	}
-	return (spc_count);
-}
-
-
 char	*removes_spaces(char *spc_line)
 {
 	char	*new_line;
@@ -39,9 +19,9 @@ char	*removes_spaces(char *spc_line)
 	int		i;
 	int		j;
 
-	spc_count  = get_spaces_count(spc_line);
-	new_line = ft_calloc(sizeof(char), 
-		(ft_strlen(spc_line) - spc_count +2));
+	spc_count = get_spaces_count(spc_line);
+	new_line = ft_calloc(sizeof(char),
+			(ft_strlen(spc_line) - spc_count +2));
 	i = 0;
 	j = 0;
 	while (spc_line[i])
@@ -60,13 +40,13 @@ int	get_next_print(char *str, int start)
 	int	next_start;
 
 	next_start = start;
-	while(str[next_start])
+	while (str[next_start])
 	{
 		if (ft_isprint(str[next_start]) && str[next_start] != ' ')
 			return (next_start);
 		next_start ++;
 	}
-	return(next_start);
+	return (next_start);
 }
 
 int	get_last_print(char *str)
@@ -74,7 +54,7 @@ int	get_last_print(char *str)
 	int	end;
 
 	end = ft_strlen(str);
-	while(end >= 0)
+	while (end >= 0)
 	{
 		if (ft_isprint(str[end]) && str[end] != ' ')
 			return (end);
@@ -93,14 +73,14 @@ char	*clean_first_spaces(char *str, int i)
 	if (!str)
 		return (NULL);
 	new_start = get_next_print(str, i);
-	if(new_start >= ft_strlen(str))
+	if (new_start >= ft_strlen(str))
 		return (NULL);
 	new_end = get_last_print(str);
-	new_str = ft_calloc(sizeof(char), (size_t)(new_end - new_start+2));
+	new_str = ft_calloc(sizeof(char), (size_t)(new_end - new_start + 2));
 	if (!new_str)
-		return(NULL);
+		return (NULL);
 	j = 0;
-	while( new_start <= new_end)
+	while (new_start <= new_end)
 		new_str[j++] = str[new_start++];
 	new_str[j] = '\0';
 	return (new_str);
@@ -110,7 +90,7 @@ int	is_good_char(char *parse_line)
 {
 	if (parse_line == NULL)
 		return (1);
-	if (parse_line[0] != '\n' &&  parse_line[0] != '\0' && parse_line [0] != 'C'
+	if (parse_line[0] != '\n' && parse_line[0] != '\0' && parse_line [0] != 'C'
 		&& parse_line[0] != 'F' && ft_strncmp(parse_line, "WE", 2)
 		&& ft_strncmp(parse_line, "EA", 2)
 		&& ft_strncmp(parse_line, "SO", 2)
