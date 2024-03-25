@@ -1,9 +1,10 @@
 
 EA ./sprites/default.xpm
 											       
+
 NO ./sprites/default.xpm
 
-SO ./sprites/default.xpm
+
 
 		WE                             ./sprites/default.xpm                   
 
@@ -20,5 +21,3 @@ C 0,0,0
 10001
 10001
 11111
-
-
