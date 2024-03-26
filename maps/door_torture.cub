@@ -1,13 +1,10 @@
-NO	sprites/surprise.xpm
-SO	sprites/surprise.xpm
-WE	sprites/surprise.xpm
-EA	sprites/surprise.xpm
+NO	sprites/door.xpm
+SO	sprites/door.xpm
+WE	sprites/door.xpm
+EA	sprites/door.xpm
 
-#C julia
-#F julia
-
-C #AF3264
-F #32AF64
+C	125, 219, 227
+F	79, 91, 92
 
 1111
 10D1

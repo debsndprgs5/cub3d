@@ -1,13 +1,10 @@
 NO	sprites/surprise.xpm
-SO	sprites/surprise.xpm
+SO	sprites/surprise2.xpm
 WE	sprites/surprise.xpm
-EA	sprites/surprise.xpm
+EA	sprites/surprise2.xpm
 
-DC sprites/wall/screen_shot1.xpm
-DO sprites/wall/screen_shot3.xpm
-
-C	233,239,240
-F	2b9cb5
+C      125, 219, 227
+F      79, 91, 92
 
 
 11111111111                                       11111111111
