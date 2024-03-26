@@ -1,12 +1,10 @@
-#wall address :
-NO	sprites/surprise.xpm
-SO	sprites/surprise.xpm
-WE	sprites/surprise.xpm
-EA	sprites/surprise.xpm
+NO	sprites/pipe_wall.xpm
+SO	sprites/pipe_wall.xpm
+WE	sprites/pipe_wall.xpm
+EA	sprites/pipe_wall.xpm
 
-#ceiling in blue, floor in white 
-C	233,239,240
-F	2b9cb5
+C	125, 219, 227
+F	79, 91, 92
 
 DC	sprites/tac.xpm
 DO	sprites/blank.xpm
