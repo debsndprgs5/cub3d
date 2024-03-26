@@ -41,8 +41,8 @@ static void	ft_init_mlx(t_game *game)
 void	init_struct_utils(t_game *game, int x, int y, t_ppos *ppos)
 {
 	game->ppos = *ppos;
-	game->ppos.x = (double) x - 0.5;
-	game->ppos.y = (double) y - 0.5;
+	game->ppos.x = x + 0.5;
+	game->ppos.y = y + 0.5;
 	game->ymax = 0;
 	game->xmax = ft_strlen(game->map[0]);
 	while (game->map[game->ymax])
@@ -78,13 +78,13 @@ int	init_struct(t_game *game, char **config_file)
 
 double	get_iniplayerdir(t_game *game)
 {
-	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'W')
-		return (90);
-	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'E')
-		return (270);
-	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'S')
-		return (0);
-	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'N')
+	if (game->map[(int) floor(game->ppos.y)][(int) floor(game->ppos.x)] == 'W')
 		return (180);
+	if (game->map[(int) floor(game->ppos.y)][(int) floor(game->ppos.x)] == 'E')
+		return (0);
+	if (game->map[(int) floor(game->ppos.y)][(int) floor(game->ppos.x)] == 'S')
+		return (270);
+	if (game->map[(int) floor(game->ppos.y)][(int) floor(game->ppos.x)] == 'N')
+		return (90);
 	return (printerror(MATH_ERROR));
 }
