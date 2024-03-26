@@ -18,8 +18,6 @@ void	init_game(t_game *game)
 	mlx_mouse_hide(game->mlx_session, game->mlx_window);
 	mlx_hook(game->mlx_window, 6, 1L << 6, check_cursor, game);
 	toggle_mouse(game);
-	player_look(LOOK_LEFT, game);
-	player_look(LOOK_RIGHT, game);
 	lhookylhook(game);
 	exit_game(game);
 }

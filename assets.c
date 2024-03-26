@@ -41,5 +41,6 @@ int	init_asset(t_game *game)
 		i++;
 	}
 	free_paths(game->paths);
+	game->current = create_background(game);
 	return (1);
 }
