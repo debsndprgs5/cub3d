@@ -68,10 +68,6 @@ int	main(int ac, char **path)
 int	exit_game(t_game *game)
 {
 	freetab(game->map);
-	if (game->is_current == false)
-		mlx_destroy_image(game->mlx_session, game->current.mlx_img);
-	else
-		mlx_destroy_image(game->mlx_session, game->next.mlx_img);
 	mlx_destroy_window(game->mlx_session, game->mlx_window);
 	exit(0);
 }

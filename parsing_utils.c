@@ -110,7 +110,6 @@ int	param_loop(char *parse_line, int *i, t_game *game)
 		i ++;
 	else if (!is_good_char(parse_line) || !check_parse_line(parse_line))
 	{
-		free(parse_line);
 		return (printerror(ARGS_UNDEFINED));
 	}
 	else if (!check_asset_one(parse_line, game))

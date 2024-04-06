@@ -26,6 +26,8 @@ int	init_first_game(t_game *game)
 		i ++;
 	}
 	game->is_current = false;
+	game->ground_check = false;
+	game->sky_check = false;
 	return (1);
 }
 
@@ -71,7 +73,10 @@ int	init_struct(t_game *game, char **config_file)
 	init_struct_utils(game, x, y, &ppos);
 	ft_init_mlx(game);
 	if (!init_asset(game))
+	{
+		exit_game(game);
 		return (0);
+	}
 	return (1);
 }
 
@@ -82,8 +87,8 @@ double	get_iniplayerdir(t_game *game)
 	if (game->map[(int) floor(game->ppos.y)][(int) floor(game->ppos.x)] == 'E')
 		return (0);
 	if (game->map[(int) floor(game->ppos.y)][(int) floor(game->ppos.x)] == 'S')
-		return (270);
-	if (game->map[(int) floor(game->ppos.y)][(int) floor(game->ppos.x)] == 'N')
 		return (90);
+	if (game->map[(int) floor(game->ppos.y)][(int) floor(game->ppos.x)] == 'N')
+		return (270);
 	return (printerror(MATH_ERROR));
 }

@@ -35,7 +35,6 @@ int	init_asset(t_game *game)
 		if (game->assets[i].image.mlx_img == (void *)0)
 		{
 			free_paths(game->paths);
-			exit_game(game);
 			return (printerror(EMPTY_XPM));
 		}
 		i++;
