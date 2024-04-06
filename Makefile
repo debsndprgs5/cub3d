@@ -12,7 +12,7 @@
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 SRC = cube.c \
 	  map_reader.c \
@@ -41,7 +41,7 @@ SRC = cube.c \
 
 
 OBJ = $(SRC:.c=.o)
-NAME = Cub3D
+NAME = cub3D
 
 all: $(NAME)
 

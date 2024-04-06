@@ -16,15 +16,6 @@
 #include <string.h>
 #include <ctype.h>
 
-static const char	*g_defaultconfig[] = {
-	"NO ./Includes/default.xpm", //0
-	"SO ./Includes/default.xpm", //1
-	"WE ./Includes/default.xpm", //2
-	"EA ./Includes/default.xpm", //3
-	"F 220,100,55", //4
-	"C 225,30,0" //5
-};
-
 static int	findsplitpoint(char **map)
 {
 	int	i;
@@ -37,30 +28,6 @@ static int	findsplitpoint(char **map)
 		i++;
 	}
 	return (i);
-}
-
-static void	create_config_if_empty(char ***part1, char ***part2,
-	char **map, int splitline)
-{
-	int	i;
-	int	j;
-	int	lines_tot;
-
-	lines_tot = 0;
-	i = 0;
-	j = 0;
-	while (map[lines_tot])
-		lines_tot++;
-	printerror(INVALID_CONFIG);
-	*part1 = (char **) g_defaultconfig;
-	*part2 = malloc(sizeof(char *) * lines_tot + 1);
-	while (i < lines_tot)
-	{
-		(*part2)[j] = ft_strdup(map[i]);
-		i++;
-		j++;
-	}
-	(*part2)[lines_tot - splitline] = NULL;
 }
 
 static int	normal_splitter_behavior(char ***part1, char ***part2,
@@ -102,7 +69,7 @@ int	split_map(char **map, char ***part1, char ***part2)
 		lines_tot++;
 	splitline = findsplitpoint(map);
 	if (!splitline && !(splitline == lines_tot))
-		create_config_if_empty(part1, part2, map, splitline);
+		return (printerror(INVALID_CONFIG));
 	else if (splitline == lines_tot)
 		return (printerror(MAP_NOT_EXIST));
 	else

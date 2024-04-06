@@ -31,7 +31,7 @@ int	maincheck(char **path, t_game *game, char ***configfile, char ***parsedmap)
 		return (printerror(FILE_NOT_EXIST));
 	if (!split_map(map, configfile, parsedmap))
 	{
-		free(map);
+		freetab(map);
 		return (0);
 	}
 	freetab(map);

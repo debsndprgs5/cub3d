@@ -56,6 +56,7 @@ int	check_game(t_game *game)
 			return (0);
 		i ++;
 	}
+	printf("ground = %d\nsky = %d\n", (int)game->ground_check, (int)game->sky_check);
 	if (game->ground_check == false || game->sky_check == false)
 		return (0);
 	return (1);
