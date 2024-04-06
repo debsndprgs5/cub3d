@@ -1,5 +1,5 @@
 
-EA ./sprites/default.xpm
+EA test.xpm
 											       
 NO ./sprites/default.xpm
 
@@ -8,7 +8,7 @@ SO ./sprites/default.xpm
 		WE                             ./sprites/default.xpm                   
 
 
-F 255,255,255		
+F 0, 0, 10
 
 C 0,0,0
 

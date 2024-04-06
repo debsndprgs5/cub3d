@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_cast_player.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zfavere <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/25 17:04:06 by zfavere           #+#    #+#             */
+/*   Updated: 2024/03/25 17:04:08 by zfavere          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
-static void ray_wall_hit_trigger(t_ray *ray, t_game *game,
+static void	ray_wall_hit_trigger(t_ray *ray, t_game *game,
 	double *foundx, double *foundy)
 {
 	ray->hit = 1;
 	if (ray->side == 0)
 	{
 		ray->perpwalldist = (ray->sidedistx - ray->deltadistx);
-		if(ray->perpwalldist >= SPEED + 0.1)
+		if (ray->perpwalldist >= SPEED + 0.1)
 		{
 			*foundx = game->ppos.x + SPEED * ray->dx;
 			*foundy = game->ppos.y + SPEED * ray->dy;
@@ -16,7 +28,7 @@ static void ray_wall_hit_trigger(t_ray *ray, t_game *game,
 	else
 	{
 		ray->perpwalldist = (ray->sidedisty - ray->deltadisty);
-		if(ray->perpwalldist >= SPEED + 0.1)
+		if (ray->perpwalldist >= SPEED + 0.1)
 		{
 			*foundx = game->ppos.x + SPEED * ray->dx;
 			*foundy = game->ppos.y + SPEED * ray->dy;
@@ -24,16 +36,16 @@ static void ray_wall_hit_trigger(t_ray *ray, t_game *game,
 	}
 }
 
-static void calc_ray_steps(t_game *game, t_ray *ray)
+static void	calc_ray_steps(t_game *game, t_ray *ray)
 {
 	if (ray->dx == 0)
-	    ray->deltadistx = 1e30;
+		ray->deltadistx = 1e30;
 	else
-	    ray->deltadistx = fabs(1 / ray->dx);
+		ray->deltadistx = fabs(1 / ray->dx);
 	if (ray->dy == 0)
-	    ray->deltadisty = 1e30;
+		ray->deltadisty = 1e30;
 	else
-	    ray->deltadisty = fabs(1 / ray->dy);
+		ray->deltadisty = fabs(1 / ray->dy);
 	if (ray->dx < 0)
 	{
 		ray->stepx = -1;
@@ -42,12 +54,12 @@ static void calc_ray_steps(t_game *game, t_ray *ray)
 	else
 	{
 		ray->stepx = 1;
-		ray->sidedistx = ((int)game->ppos.x + 1.0 - game->ppos.x) * ray->deltadistx;
+		ray->sidedistx = ((int)game->ppos.x
+				+ 1.0 - game->ppos.x) * ray->deltadistx;
 	}
-	
 }
 
-static void init_ray(t_ray *ray, int angle, t_game *game)
+static void	init_ray(t_ray *ray, int angle, t_game *game)
 {
 	ray->dx = cos(deg_to_rad(angle));
 	ray->dy = sin(deg_to_rad(angle));
@@ -61,20 +73,22 @@ static void init_ray(t_ray *ray, int angle, t_game *game)
 	else
 	{
 		ray->stepy = 1;
-		ray->sidedisty = ((int)game->ppos.y + 1.0 - game->ppos.y) * ray->deltadisty;
+		ray->sidedisty = ((int)game->ppos.y
+				+ 1.0 - game->ppos.y) * ray->deltadisty;
 	}
 	ray->x0 = (int)game->ppos.x;
 	ray->y0 = (int)game->ppos.y;
 }
 
-int cast_ray_player(t_game *game, int angle, t_ppos *ray_end)
+int	cast_ray_player(t_game *game, int angle, t_ppos *ray_end)
 {
 	t_ray	ray;
-	
-	if(angle > 360)
+
+	if (angle > 360)
 		angle -= 360;
 	init_ray(&ray, angle, game);
-	while (ray.hit == 0 && ray.x0 >= 0 && ray.x0 < WIDTH && ray.y0 >= 0 && ray.y0 < HEIGHT)
+	while (ray.hit == 0 && ray.x0 >= 0
+		&& ray.x0 < WIDTH && ray.y0 >= 0 && ray.y0 < HEIGHT)
 	{
 		if (ray.sidedistx < ray.sidedisty)
 		{
@@ -91,5 +105,5 @@ int cast_ray_player(t_game *game, int angle, t_ppos *ray_end)
 		if (iswall(ray.x0, ray.y0, game->map))
 			ray_wall_hit_trigger(&ray, game, &ray_end->x, &ray_end->y);
 	}
-	return(0);
+	return (0);
 }

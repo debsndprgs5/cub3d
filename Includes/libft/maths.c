@@ -21,8 +21,7 @@ double	ft_abs(double val)
 
 double	ft_val_abs(double ref, double val)
 {
-
 	if (ref > val)
-		return(ref - val);
-	return(val - ref);
+		return (ref - val);
+	return (val - ref);
 }

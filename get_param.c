@@ -107,19 +107,9 @@ int	get_param(char **config_file, t_game *game)
 	while (config_file[i])
 	{
 		parse_line = clean_first_spaces(config_file[i], 0);
-		 if (! parse_line)
-			i ++;
-		else if (!is_good_char(parse_line))
-			return (printerror(ARGS_UNDEFINED));
-		else if (!check_asset_one(parse_line, game))
+		if (!param_loop(parse_line, &i, game))
 			return (0);
-		else if (!check_asset_two(parse_line, game))
-			return (0);
-		else if (!check_asset_three(parse_line, game))
-			return (0);
-		else
-			i ++;
-		free(parse_line);
+		i++;
 	}
 	if (!check_game(game))
 		return (printerror(MISSING_ARGS));

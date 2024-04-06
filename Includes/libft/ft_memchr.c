@@ -22,7 +22,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	tofind = (char)c;
 	str = (char *)s;
 	while (i < n)
-	{	
+	{
 		if (tofind == str[i])
 			return (((char *)str) + i);
 		i ++;

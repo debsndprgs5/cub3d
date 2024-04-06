@@ -42,7 +42,7 @@ int	error_path(int ref)
 20 = xpm empty
 */
 
-static const char	*errormsg[] = {
+static const char	*g_errormsg[] = {
 	"",
 	"More/Less than one W,S,E,N characters at once !",
 	"Map is not enclosed by walls",
@@ -71,8 +71,8 @@ int	printerror(t_ErrorCode err)
 	t_ErrorCode	code;
 
 	code = err;
-	if (code > 0 && code < sizeof(errormsg) / sizeof(errormsg[0]))
-		printf("\e[1;31mError: \033[0m\e[1;36m%s\033[0m\n", errormsg[code]);
+	if (code > 0 && code < sizeof(g_errormsg) / sizeof(g_errormsg[0]))
+		printf("\e[1;31mError: \033[0m\e[1;36m%s\033[0m\n", g_errormsg[code]);
 	else
 		printf("Unknown error code.\n");
 	return (0);

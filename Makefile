@@ -15,9 +15,9 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 
 SRC = cube.c \
-	  main.c \
 	  map_reader.c \
 	  map_splitter.c \
+	  map_splitter_utils.c \
 	  parsing.c \
 	  get_param.c \
 	  error_parsing.c \
@@ -29,6 +29,7 @@ SRC = cube.c \
 	  raycasting_loop.c \
 	  get_good_wall.c \
 	  player_move.c \
+	  player_move_utils.c \
 	  render_init.c \
 	  cursor_cam.c \
 	  get_textures.c \
@@ -40,7 +41,7 @@ SRC = cube.c \
 
 
 OBJ = $(SRC:.c=.o)
-NAME = cub3d
+NAME = Cub3D
 
 all: $(NAME)
 

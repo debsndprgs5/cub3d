@@ -44,10 +44,7 @@ static char	**allocdata(char *pathtofile)
 
 	line_count = linecount(pathtofile);
 	if (line_count <= 0)
-	{
-		printerror(FILE_NOT_EXIST);
 		return (NULL);
-	}
 	map = malloc(sizeof(char *) * line_count + 1);
 	if (map == NULL)
 	{
@@ -67,11 +64,10 @@ char	**readmap(char *pathtofile)
 
 	map = allocdata(pathtofile);
 	if (map == NULL)
-	{
-		freetab(map);
 		return (NULL);
-	}
 	fd = open(pathtofile, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
 	i = 0;
 	line = get_next_line(fd);
 	while (line)

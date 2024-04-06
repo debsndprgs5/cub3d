@@ -37,7 +37,7 @@ char	*cut_till_next_coma(char *parse_line, int start)
 	if (next_stop == 0 || next_stop == 1)
 		return (NULL);
 	new_str = ft_calloc(sizeof(char), (size_t)(next_stop - start + 2));
-	while (start <= next_stop)
+	while (start < next_stop)
 		new_str[i++] = parse_line[start++];
 	new_str[i] = '\0';
 	return (new_str);
@@ -47,9 +47,11 @@ int	check_color_line(char *parse_line)
 {
 	int	i;
 	int	check;
+	int	void_check;
 
 	i = 1;
 	check = 0;
+	void_check = 0;
 	while (parse_line[i])
 	{
 		if ((parse_line[i] < '0' || parse_line[i] > '9')
@@ -57,9 +59,11 @@ int	check_color_line(char *parse_line)
 			return (1);
 		if (parse_line[i] == ',')
 			check ++;
+		if (parse_line[i] >= '0' && parse_line[i] <= '9')
+			void_check ++;
 		i ++;
 	}
-	if (check != 2)
+	if (check != 2 || void_check < 3)
 		return (1);
 	return (0);
 }
@@ -76,27 +80,15 @@ int	is_good_rgb(char *str_to_int, int temp)
 
 int	get_color(char *parse_line, int *stack)
 {
-	int			i;
-	int			j;
-	char		*str_to_int;
-	int			temp;
+	t_dbl_int	index;
 	static int	count;
 
-	i = 1;
-	j = 0;
+	index.start = 1;
+	index.end = 0;
 	if (check_color_line(parse_line))
 		return (printerror(RGB_ARGS));
-	while (parse_line[i])
-	{
-		str_to_int = cut_till_next_coma(parse_line, i);
-		i = get_til_next_coma(parse_line, i);
-		temp = ft_atoi(str_to_int);
-		if (!is_good_rgb(str_to_int, temp))
-			return (printerror(RGB_RANGE));
-		stack[j] = temp;
-		free(str_to_int);
-		j++;
-	}
+	if (!color_loop(parse_line, index, stack))
+		return (0);
 	count ++;
 	if (count > 2)
 		return (printerror(DUP_ARGS));

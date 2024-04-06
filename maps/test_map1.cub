@@ -1,0 +1,24 @@
+
+EA ./sprites/default.xpm
+											       
+SO	./sprites/default.xpm
+
+NO ./sprites/default.xpm
+
+
+
+		WE                  ./sprites/default.xpm                   
+
+
+F 255,255,255		
+
+C 0,0,0
+
+
+11111
+10001
+10001
+10E01
+10001
+10001
+11111

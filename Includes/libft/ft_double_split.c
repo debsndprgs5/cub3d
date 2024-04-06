@@ -67,7 +67,7 @@ char	**ft_double_split(char const *s, char c, char d)
 		return (NULL);
 	while (i <= ft_strlen(s))
 	{
-		if (s[i] != c && s[i] != d  && clue < 0)
+		if (s[i] != c && s[i] != d && clue < 0)
 			clue = i;
 		else if ((s[i] == c || s[i] == d || i == ft_strlen(s)) && clue >= 0)
 		{
@@ -80,4 +80,3 @@ char	**ft_double_split(char const *s, char c, char d)
 	dest[j++] = NULL;
 	return (dest);
 }
-

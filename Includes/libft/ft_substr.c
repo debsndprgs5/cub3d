@@ -39,4 +39,4 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	dest[j] = '\0';
 	return (dest);
-}		
+}

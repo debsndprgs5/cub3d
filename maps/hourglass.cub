@@ -1,7 +1,7 @@
-NO  Includes/default.xpm
-SO  Includes/default.xpm
-EA  Includes/default.xpm
-WE  Includes/default.xpm
+NO  sprites/default.xpm
+SO  sprites/default.xpm
+EA  sprites/default.xpm
+WE  sprites/default.xpm
 
 C  50,50,50
 F  200,25,25

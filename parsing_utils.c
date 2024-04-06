@@ -59,3 +59,66 @@ void	get_format(char ***parsedmap)
 		i++;
 	}
 }
+
+void	get_player_pos(int *x, int *y, t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (game->map[i])
+	{
+		j = 0;
+		while (game->map[i][j])
+		{
+			if (game->map[i][j] == 'W' ||
+			game->map[i][j] == 'E' || game->map[i][j] == 'S' ||
+			game->map[i][j] == 'N')
+			{
+				(*y) = i;
+				(*x) = j;
+				break ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+int	check_parse_line(char *str)
+{
+	if (str[0] == 'N' || str[0] == 'E' || str[0] == 'W' || str[0] == 'S')
+	{
+		if (str[2] != ' ' && str[2] != '\t')
+			return (0);
+		else
+			return (1);
+	}
+	else if (str[0] == 'C' || str[0] == 'F')
+	{
+		if (str[1] != ' ' && str[0] != '\t')
+			return (0);
+		else
+			return (1);
+	}
+	return (1);
+}
+
+int	param_loop(char *parse_line, int *i, t_game *game)
+{
+	if (!parse_line)
+		i ++;
+	else if (!is_good_char(parse_line) || !check_parse_line(parse_line))
+	{
+		free(parse_line);
+		return (printerror(ARGS_UNDEFINED));
+	}
+	else if (!check_asset_one(parse_line, game))
+		return (0);
+	else if (!check_asset_two(parse_line, game))
+		return (0);
+	else if (!check_asset_three(parse_line, game))
+		return (0);
+	free(parse_line);
+	return (1);
+}

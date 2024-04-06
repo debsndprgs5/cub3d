@@ -12,14 +12,13 @@
 
 #include "cube.h"
 
-
-int init_first_game(t_game *game)
+int	init_first_game(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	game->paths = malloc(sizeof(char*) * 4);
-	if(!game->paths)
+	game->paths = malloc(sizeof(char *) * 4);
+	if (!game->paths)
 		return (printerror(MEM_FAIL));
 	while (i < 4)
 	{
@@ -30,44 +29,32 @@ int init_first_game(t_game *game)
 	return (1);
 }
 
-static void ft_init_mlx(t_game *game)
+static void	ft_init_mlx(t_game *game)
 {
 	game->mlx_session = mlx_init();
-	game->mlx_window = mlx_new_window(game->mlx_session, WIDTH, HEIGHT, "Cub3D");
-	game->current.mlx_img = mlx_new_image(game->mlx_session, WIDTH, HEIGHT);
-	game->next.mlx_img  = mlx_new_image(game->mlx_session, WIDTH, HEIGHT);
+	game->mlx_window = mlx_new_window(game->mlx_session,
+			WIDTH, HEIGHT, "Cub3D");
+	game->next.mlx_img = mlx_new_image(game->mlx_session, WIDTH, HEIGHT);
 }
 
-void get_player_pos(int *x, int *y, t_game *game)
+void	init_struct_utils(t_game *game, int x, int y, t_ppos *ppos)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (game->map[i])
-	{
-		j = 0;
-		while (game->map[i][j])
-		{
-			if (game->map[i][j] == 'W' ||
-			game->map[i][j] == 'E' || game->map[i][j] == 'S' ||
-			game->map[i][j] == 'N')
-			{
-				(*y) = i;
-				(*x) = j;
-				break;
-			}
-			j++;
-		}
-		i++;
-	}
+	game->ppos = *ppos;
+	game->ppos.x = x + 0.5;
+	game->ppos.y = y + 0.5;
+	game->ymax = 0;
+	game->xmax = ft_strlen(game->map[0]);
+	while (game->map[game->ymax])
+		game->ymax++;
+	game->ymax -= 1;
+	game->lookingdir = get_iniplayerdir(game);
 }
 
-int init_struct(t_game *game, char **config_file)
+int	init_struct(t_game *game, char **config_file)
 {
+	int			x;
+	int			y;
 	t_ppos		ppos;
-	int	x;
-	int	y;
 
 	x = 0;
 	y = 0;
@@ -81,30 +68,22 @@ int init_struct(t_game *game, char **config_file)
 		return (0);
 	}
 	get_player_pos(&x, &y, game);
-	game->ppos = ppos;
-	game->ppos.x = (double) x - 0.5;
-	game->ppos.y = (double) y - 0.5;
-	game->ymax = 0;
-	game->xmax = ft_strlen(game->map[0]);
-	while (game->map[game->ymax])
-		game->ymax++;
-	game->ymax -= 1;
-	game->lookingdir = get_iniplayerdir(game);
+	init_struct_utils(game, x, y, &ppos);
 	ft_init_mlx(game);
 	if (!init_asset(game))
 		return (0);
-	return(1);
+	return (1);
 }
 
 double	get_iniplayerdir(t_game *game)
 {
-	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'W')
-		return (90);
-	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'E')
-		return (270);
-	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'S')
-		return (0);
-	if (game->map[(int) ceil(game->ppos.y)][(int) ceil(game->ppos.x)] == 'N')
+	if (game->map[(int) floor(game->ppos.y)][(int) floor(game->ppos.x)] == 'W')
 		return (180);
+	if (game->map[(int) floor(game->ppos.y)][(int) floor(game->ppos.x)] == 'E')
+		return (0);
+	if (game->map[(int) floor(game->ppos.y)][(int) floor(game->ppos.x)] == 'S')
+		return (270);
+	if (game->map[(int) floor(game->ppos.y)][(int) floor(game->ppos.x)] == 'N')
+		return (90);
 	return (printerror(MATH_ERROR));
 }

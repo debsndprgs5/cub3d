@@ -12,7 +12,7 @@
 
 #include "cube.h"
 
-static int mini_check(char c)
+static int	mini_check(char c)
 {
 	if (ft_strchr("SNEW01", c))
 		return (1);
@@ -20,8 +20,7 @@ static int mini_check(char c)
 		return (0);
 }
 
-
-static int multi_check(int x, int y, char **map)
+static int	multi_check(int x, int y, char **map)
 {
 	int	maxcol;
 	int	maxrow;
@@ -34,14 +33,14 @@ static int multi_check(int x, int y, char **map)
 	if (y >= maxcol || y == 0 || x >= maxrow || x == 0)
 	{
 		printf("\e[1;36m--> On map cell \033[0m\033[32m%d;%d\033[0m\n", x, y);
-		return  (0);
+		return (0);
 	}
-	if ((!mini_check(map[y][x+1])) ||
-		(!mini_check(map[y][x-1])) ||
-		(!mini_check(map[y+1][x])) ||
-		(!mini_check(map[y-1][x])) ||
-		(map[y][x+1] == ' ' || map[y][x-1] == ' ' ||
-			map[y+1][x] == ' ' || map[y-1][x] == ' '))
+	if ((!mini_check(map[y][x + 1])) ||
+		(!mini_check(map[y][x - 1])) ||
+		(!mini_check(map[y + 1][x])) ||
+		(!mini_check(map[y - 1][x])) ||
+		(map[y][x + 1] == ' ' || map[y][x - 1] == ' ' ||
+			map[y + 1][x] == ' ' || map[y - 1][x] == ' '))
 	{
 		printf("\e[1;36m--> On map cell \033[0m\033[32m%d;%d\033[0m\n", x, y);
 		return (0);
@@ -49,7 +48,7 @@ static int multi_check(int x, int y, char **map)
 	return (1);
 }
 
-static int enclosed_check(char **map)
+static int	enclosed_check(char **map)
 {
 	int	i;
 	int	j;
@@ -74,7 +73,7 @@ static int enclosed_check(char **map)
 	return (1);
 }
 
-static int letter_check(char **map)
+static int	letter_check(char **map)
 {
 	int	i;
 	int	j;
@@ -99,7 +98,7 @@ static int letter_check(char **map)
 	return (1);
 }
 
-int map_check(char **map)
+int	map_check(char **map)
 {
 	int	i;
 	int	j;
@@ -112,8 +111,9 @@ int map_check(char **map)
 		{
 			if (!ft_strchr("SNEW01\n\t \0", map[i][j]))
 			{
-				printf("\e[1;36m--> On map cell \033[0m\033[32m%d;%d\033[0m\n", j, i);
-				return(printerror(13));
+				printf("\e[1;36m--> On map cell \033[0m\033[32m%d;%d\033[0m\n",
+					j, i);
+				return (printerror(13));
 			}
 			j++;
 		}

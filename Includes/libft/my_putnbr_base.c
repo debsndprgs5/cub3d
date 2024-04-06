@@ -32,7 +32,7 @@ int	my_putnbr_base(int nbr, char *base)
 }
 
 int	my_putnbr(int nb)
-{	
+{
 	int	len;
 
 	len = 0;

@@ -98,6 +98,7 @@ int		ft_str_is_numeric(char *str);
 double	ft_abs(double val);
 double	ft_val_abs(double ref, double val);
 char	*my_strjoin(char *all, char *line_read);
-int     ft_strcmp(char *s1, char *s2);
+int		ft_strcmp(char *s1, char *s2);
 char	**ft_double_split(char const *s, char c, char d);
+int		ft_cube_atoi(char *str, int *error);
 #endif  

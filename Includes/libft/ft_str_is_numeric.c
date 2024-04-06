@@ -21,7 +21,7 @@ int	ft_str_is_numeric(char *str)
 			i ++;
 		else
 			return (1);
-	}	
+	}
 	return (0);
 }
 
